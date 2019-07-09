@@ -46,7 +46,7 @@ public class MinimalBot {
 			
 	
 			// Debug Information ausgeben (optional möglich)
-			System.err.println("Ergebnis Vorrunde : " + lastActionsResult);
+			System.err.println("Ergebnis Vorrunde: " + lastActionsResult);
 
 
 			
