@@ -79,11 +79,12 @@ public class BotFabi {
 				break;
 			}
 
-			if (eastCellStatus.equals("FLOOR") || eastCellStatus.equals("FINISH " + playerId + " 0")) {
-				System.out.println("go east");
-			} else {
-				System.out.println("go south");
-			}
+			System.out.println("go east");
+//			if (eastCellStatus.equals("FLOOR") || eastCellStatus.equals("FINISH " + playerId + " 0")) {
+//				System.out.println("go east");
+//			} else {
+//				System.out.println("go south");
+//			}
 
 		}
 

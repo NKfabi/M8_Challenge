@@ -1,21 +1,26 @@
 package de.vitbund.vitmaze.players;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Landkarte {
 
 	private int xKord;
 	private int yKord;
 	private String[][] map;
 	private String ausgabe;
+	private List<Integer> xCur = new ArrayList<>();
+	private List<Integer> yCur = new ArrayList<>();
 
 	public Landkarte(int xKord, int yKord) {
 		this.xKord = xKord;
 		this.yKord = yKord;
 
 		map = new String[yKord][xKord];
-		
+
 		for (int y = 0; y < this.yKord; y++) {
 			for (int x = 0; x < this.xKord; x++) {
-				map[y][x] = " ?? ";
+				map[y][x] = " ? ";
 			}
 		}
 	}
@@ -32,84 +37,79 @@ public class Landkarte {
 			for (int x = 0; x < xKord; x++) {
 				ausgabe = ausgabe + map[y][x];
 			}
-		System.err.println(ausgabe);	
+			System.err.println(ausgabe);
 		}
-
 
 	}
 
 	public void merkeFeldNord(String direction, int y, int x, int id) {
-		if (direction.equals("WALL")) {
-			map[y-1][x] = " WW ";
-		}
-		else if (direction.equals("FLOOR")) {
-			map[y-1][x] = " FF ";
-		}
-		else if (direction.equals("FINISH " + id + " 0")) {
-			map[y-1][x] = " FI ";
-		}
-		else {
-			map[y-1][x] = " AS ";
+		if (map[y - 1][x].equals(" ? ")) {
+			if (direction.equals("WALL")) {
+				map[y - 1][x] = " # ";
+			} else if (direction.equals("FLOOR")) {
+				map[y - 1][x] = "   ";
+			} else if (direction.equals("FINISH " + id + " 0")) {
+				map[y - 1][x] = " F ";
+			} else {
+				map[y - 1][x] = " ! ";
+			}
 		}
 	}
-	
+
 	public void merkeFeldSued(String direction, int y, int x, int id) {
-		if (direction.equals("WALL")) {
-			map[y+1][x] = " WW ";
-		}
-		else if (direction.equals("FLOOR")) {
-			map[y+1][x] = " FF ";
-		}
-		else if (direction.equals("FINISH " + id + " 0")) {
-			map[y+1][x] = " FI ";
-		}
-		else {
-			map[y+1][x] = " AS ";
+		if (map[y + 1][x].equals(" ? ")) {
+			if (direction.equals("WALL")) {
+				map[y + 1][x] = " # ";
+			} else if (direction.equals("FLOOR")) {
+				map[y + 1][x] = "   ";
+			} else if (direction.equals("FINISH " + id + " 0")) {
+				map[y + 1][x] = " F ";
+			} else {
+				map[y + 1][x] = " ! ";
+			}
 		}
 	}
-	
+
 	public void merkeFeldWest(String direction, int y, int x, int id) {
-		if (direction.equals("WALL")) {
-			map[y][x-1] = " WW ";
-		}
-		else if (direction.equals("FLOOR")) {
-			map[y][x-1] = " FF ";
-		}
-		else if (direction.equals("FINISH " + id + " 0")) {
-			map[y][x-1] = " FI ";
-		}
-		else {
-			map[y][x-1] = " AS ";
+		if (map[y][x - 1].equals(" ? ")) {
+			if (direction.equals("WALL")) {
+				map[y][x - 1] = " # ";
+			} else if (direction.equals("FLOOR")) {
+				map[y][x - 1] = "   ";
+			} else if (direction.equals("FINISH " + id + " 0")) {
+				map[y][x - 1] = " F ";
+			} else {
+				map[y][x - 1] = " ! ";
+			}
 		}
 	}
-	
+
 	public void merkeFeldEast(String direction, int y, int x, int id) {
-		if (direction.equals("WALL")) {
-			map[y][x+1] = " WW ";
-		}
-		else if (direction.equals("FLOOR")) {
-			map[y][x+1] = " FF ";
-		}
-		else if (direction.equals("FINISH " + id + " 0")) {
-			map[y][x+1] = " FI ";
-		}
-		else {
-			map[y][x+1] = " AS ";
+		if (map[y][x + 1].equals(" ? ")) {
+			if (direction.equals("WALL")) {
+				map[y][x + 1] = " # ";
+			} else if (direction.equals("FLOOR")) {
+				map[y][x + 1] = "   ";
+			} else if (direction.equals("FINISH " + id + " 0")) {
+				map[y][x + 1] = " F ";
+			} else {
+				map[y][x + 1] = " ! ";
+			}
 		}
 	}
-	
-	
-	public void merkeFeldAktuell(int y, int x) {
-		map[y][x] = "FF";
+
+	public void merkeLetztesFeld(int y, int x) {
+		xCur.add(x);
+		yCur.add(y);
+
 	}
-	
+
 	/**
 	 * gibt gezeichnete Map aus
 	 * 
 	 */
 	public void mapAusgabe(int yKord, int xKord, String[][] map) {
-		
-		
+
 	}
 
 	/**
