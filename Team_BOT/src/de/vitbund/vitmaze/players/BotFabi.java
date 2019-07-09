@@ -27,6 +27,9 @@ public class BotFabi {
 		input.nextLine(); // Beenden der zweiten Zeile
 
 		Landkarte map = new Landkarte(sizeX, sizeY);
+
+		int x = startX;
+		int y = startY;
 		
 		// TURN (Wiederholung je Runde notwendig)
 		while (input.hasNext()) {
@@ -46,19 +49,42 @@ public class BotFabi {
 			System.err.println("Sueden: " + southCellStatus);
 			System.err.println("Westen: " + westCellStatus);
 
+//			if(getMap()[y][x] == null) {
+//			map.merkeFeldAktuell(y, x);
+//			}
+			map.merkeFeldEast(eastCellStatus, y, x, playerId);
+			map.merkeFeldNord(northCellStatus, y, x, playerId);
+			map.merkeFeldSued(southCellStatus, y, x, playerId);
+			map.merkeFeldWest(westCellStatus, y, x, playerId);
+			map.printMap();
 			
-			map.printMap(sizeY, sizeX);
+			//x und y aendern
+			if (lastActionsResult.equals("OK WEST")) {
+				x = x - 1;
+			}
+			else if (lastActionsResult.equals("OK EAST")) {
+				x = x + 1;
+			}
+			else if (lastActionsResult.equals("OK SOUTH")) {
+				y = y + 1;
+			}
+			else if (lastActionsResult.equals("OK NORTH")) {
+				y = y - 1;
+			}
 			
+
 			// Rundenaktion ausgeben
 			if (currentCellStatus.equals("FINISH " + playerId + " 0")) {
 				System.out.println("FINISH");
 				break;
 			}
 
-			if (eastCellStatus.equals("FLOOR")) {
+			if (eastCellStatus.equals("FLOOR") || eastCellStatus.equals("FINISH " + playerId + " 0")) {
 				System.out.println("go east");
-			} else
+			} else {
 				System.out.println("go south");
+			}
+
 		}
 
 		// Eingabe schliessen (letzte Aktion)
