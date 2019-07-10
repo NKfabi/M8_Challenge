@@ -143,4 +143,12 @@ public class Landkarte {
 	public void setMap(String[][] map) {
 		this.map = map;
 	}
+
+	public String getAusgabe() {
+		return ausgabe;
+	}
+
+	public void setAusgabe(String ausgabe) {
+		this.ausgabe = ausgabe;
+	}
 }
