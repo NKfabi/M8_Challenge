@@ -85,7 +85,7 @@ public class BotAnna {
 //			} else {
 //				System.out.println("go south");
 //			}
-
+			System.out.println("go east");
 		}
 
 		// Eingabe schliessen (letzte Aktion)
