@@ -55,7 +55,7 @@ public class Landkarte {
 	public void merkeFeldNord(String direction, int y, int x, int id) {
 		if (map[y - 1][x].equals(" ? ")) {
 			if (direction.equals("WALL")) {
-				map[y - 1][x] = " # ";
+				map[y - 1][x] = Feld.this.setGesehen(true);
 			} else if (direction.equals("FLOOR")) {
 				map[y - 1][x] = "   ";
 			} else if (direction.equals("FINISH " + id + " 0")) {
