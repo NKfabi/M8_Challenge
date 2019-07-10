@@ -41,23 +41,6 @@ public class BotAnna {
 			String southCellStatus = input.nextLine();
 			String westCellStatus = input.nextLine();
 
-			// Debug Information ausgeben (optional möglich)
-			System.err.println("Ergebnis Vorrunde: " + lastActionsResult);
-			System.err.println("aktueller Status: " + currentCellStatus);
-			System.err.println("Norden: " + northCellStatus);
-			System.err.println("Osten: " + eastCellStatus);
-			System.err.println("Sueden: " + southCellStatus);
-			System.err.println("Westen: " + westCellStatus);
-
-//			if(getMap()[y][x] == null) {
-//			map.merkeFeldAktuell(y, x);
-//			}
-			map.merkeFeldEast(eastCellStatus, y, x, playerId);
-			map.merkeFeldNord(northCellStatus, y, x, playerId);
-			map.merkeFeldSued(southCellStatus, y, x, playerId);
-			map.merkeFeldWest(westCellStatus, y, x, playerId);
-			map.printMap();
-			
 			//x und y aendern
 			if (lastActionsResult.equals("OK WEST")) {
 				x = x - 1;
@@ -72,20 +55,29 @@ public class BotAnna {
 				y = y - 1;
 			}
 			
+			map.merkeCurrentFeld(currentCellStatus, y, x, playerId);
+			map.merkeFeldEast(eastCellStatus, y, x, playerId);
+			map.merkeFeldNord(northCellStatus, y, x, playerId);
+			map.merkeFeldSued(southCellStatus, y, x, playerId);
+			map.merkeFeldWest(westCellStatus, y, x, playerId);
 
+			// Debug Information ausgeben (optional möglich)
+			System.err.println("Ergebnis Vorrunde: " + lastActionsResult);
+			System.err.println("aktueller Status: " + currentCellStatus);
+			System.err.println("Norden: " + northCellStatus);
+			System.err.println("Osten: " + eastCellStatus);
+			System.err.println("Sueden: " + southCellStatus);
+			System.err.println("Westen: " + westCellStatus);
+
+			map.printMap();
+			
 			// Rundenaktion ausgeben
 			if (currentCellStatus.equals("FINISH " + playerId + " 0")) {
-				System.out.println("FINISH");
-				break;
-			}
-
-			System.out.println("go east");
-//			if (eastCellStatus.equals("FLOOR") || eastCellStatus.equals("FINISH " + playerId + " 0")) {
-//				System.out.println("go east");
-//			} else {
-//				System.out.println("go south");
-//			}
-			System.out.println("go east");
+				System.out.println("finish");
+				break;}
+			else if (westCellStatus.equals("FLOOR")) {
+			System.out.println("go west");}
+			else {System.out.println("go south");}
 		}
 
 		// Eingabe schliessen (letzte Aktion)

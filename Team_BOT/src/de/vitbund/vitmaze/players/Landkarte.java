@@ -98,11 +98,10 @@ public class Landkarte {
 		}
 	}
 
-	public void merkeLetztesFeld(int y, int x) {
-		xCur.add(x);
-		yCur.add(y);
-
+	public void merkeCurrentFeld(String direction, int y, int x, int id) {
+			map[y][x] = " V ";
 	}
+
 
 	/**
 	 * gibt gezeichnete Map aus
