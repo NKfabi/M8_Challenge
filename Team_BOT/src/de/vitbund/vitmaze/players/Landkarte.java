@@ -7,7 +7,7 @@ public class Landkarte {
 
 	private int xKord;
 	private int yKord;
-	private String[][] map;
+	private Feld[][] map;
 	private String ausgabe;
 	private List<Integer> xCur = new ArrayList<>();
 	private List<Integer> yCur = new ArrayList<>();
@@ -16,11 +16,11 @@ public class Landkarte {
 		this.xKord = xKord;
 		this.yKord = yKord;
 
-		map = new String[yKord][xKord];
+		map = new Feld[yKord][xKord];
 
 		for (int y = 0; y < this.yKord; y++) {
 			for (int x = 0; x < this.xKord; x++) {
-				map[y][x] = " ? ";
+				map[y][x] = new Feld(y, x, null, false, false, 0);
 			}
 		}
 	}
@@ -42,6 +42,16 @@ public class Landkarte {
 
 	}
 
+	
+	/**
+	 * TODO 
+	 * Strings müssen durch Instanzen von Feld ersetzt werden
+	 * 
+	 * @param direction
+	 * @param y
+	 * @param x
+	 * @param id
+	 */
 	public void merkeFeldNord(String direction, int y, int x, int id) {
 		if (map[y - 1][x].equals(" ? ")) {
 			if (direction.equals("WALL")) {
@@ -56,6 +66,15 @@ public class Landkarte {
 		}
 	}
 
+	/**
+	 * TODO 
+	 * Strings müssen durch Instanzen von Feld ersetzt werden
+	 * 
+	 * @param direction
+	 * @param y
+	 * @param x
+	 * @param id
+	 */
 	public void merkeFeldSued(String direction, int y, int x, int id) {
 		if (map[y + 1][x].equals(" ? ")) {
 			if (direction.equals("WALL")) {
@@ -70,6 +89,15 @@ public class Landkarte {
 		}
 	}
 
+	/**
+	 * TODO 
+	 * Strings müssen durch Instanzen von Feld ersetzt werden
+	 * 
+	 * @param direction
+	 * @param y
+	 * @param x
+	 * @param id
+	 */
 	public void merkeFeldWest(String direction, int y, int x, int id) {
 		if (map[y][x - 1].equals(" ? ")) {
 			if (direction.equals("WALL")) {
@@ -84,6 +112,15 @@ public class Landkarte {
 		}
 	}
 
+	/**
+	 * TODO 
+	 * Strings müssen durch Instanzen von Feld ersetzt werden
+	 * 
+	 * @param direction
+	 * @param y
+	 * @param x
+	 * @param id
+	 */
 	public void merkeFeldEast(String direction, int y, int x, int id) {
 		if (map[y][x + 1].equals(" ? ")) {
 			if (direction.equals("WALL")) {
@@ -98,10 +135,17 @@ public class Landkarte {
 		}
 	}
 
-	public void merkeCurrentFeld(String direction, int y, int x, int id) {
-			map[y][x] = " V ";
-	}
+	
+	/**
+	 * TODO
+	 * @param y
+	 * @param x
+	 */
+	public void merkeLetztesFeld(int y, int x) {
+		xCur.add(x);
+		yCur.add(y);
 
+	}
 
 	/**
 	 * gibt gezeichnete Map aus
@@ -135,11 +179,21 @@ public class Landkarte {
 		this.yKord = yKord;
 	}
 
-	public String[][] getMap() {
+
+	public String getAusgabe() {
+		return ausgabe;
+	}
+
+	public void setAusgabe(String ausgabe) {
+		this.ausgabe = ausgabe;
+	}
+
+	public Feld[][] getMap() {
 		return map;
 	}
 
-	public void setMap(String[][] map) {
+	public void setMap(Feld[][] map) {
 		this.map = map;
 	}
 }
+
