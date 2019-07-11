@@ -7,7 +7,6 @@ public class Landkarte {
 
 	private int xKord;
 	private int yKord;
-//	private Landkarte[][] map;
 	private Feld[][] map;
 	private String ausgabe;
 	private List<Integer> xCur = new ArrayList<>();
