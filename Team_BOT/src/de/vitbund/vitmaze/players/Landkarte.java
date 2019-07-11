@@ -7,6 +7,7 @@ public class Landkarte {
 
 	private int xKord;
 	private int yKord;
+//	private Landkarte[][] map;
 	private Feld[][] map;
 	private String ausgabe;
 	private List<Integer> xCur = new ArrayList<>();
@@ -15,12 +16,14 @@ public class Landkarte {
 	public Landkarte(int xKord, int yKord) {
 		this.xKord = xKord;
 		this.yKord = yKord;
-
-		map = new Feld[yKord][xKord];
-
+//
+//		map = new Feld[yKord][xKord];
+		 
+		
 		for (int y = 0; y < this.yKord; y++) {
 			for (int x = 0; x < this.xKord; x++) {
-				map[y][x] = new Feld(y, x, null, false, false, 0);
+				map[y][x] = new Feld(" ? ", false, false, 0);
+		
 			}
 		}
 	}
@@ -35,7 +38,7 @@ public class Landkarte {
 		for (int y = 0; y < yKord; y++) {
 			ausgabe = "";
 			for (int x = 0; x < xKord; x++) {
-				ausgabe = ausgabe + map[y][x];
+				ausgabe = ausgabe + map[y][x].getTyp();
 			}
 			System.err.println(ausgabe);
 		}
@@ -53,15 +56,19 @@ public class Landkarte {
 	 * @param id
 	 */
 	public void merkeFeldNord(String direction, int y, int x, int id) {
-		if (map[y - 1][x].equals(" ? ")) {
+		if (map[y - 1][x].getTyp().equals(" ? ")) {
 			if (direction.equals("WALL")) {
-				map[y - 1][x] = Feld.this.setGesehen(true);
+				map[y - 1][x].setTyp(" # ");
+				map[y - 1][x].setGesehen(true);
 			} else if (direction.equals("FLOOR")) {
-				map[y - 1][x] = "   ";
+				map[y - 1][x].setTyp("   ");
+				map[y - 1][x].setGesehen(true);
 			} else if (direction.equals("FINISH " + id + " 0")) {
-				map[y - 1][x] = " F ";
+				map[y - 1][x].setTyp(" F ");
+				map[y - 1][x].setGesehen(true);
 			} else {
-				map[y - 1][x] = " ! ";
+				map[y - 1][x].setTyp(" ! ");
+				map[y - 1][x].setGesehen(true);
 			}
 		}
 	}
@@ -76,15 +83,19 @@ public class Landkarte {
 	 * @param id
 	 */
 	public void merkeFeldSued(String direction, int y, int x, int id) {
-		if (map[y + 1][x].equals(" ? ")) {
+		if (map[y + 1][x].getTyp().equals(" ? ")) {
 			if (direction.equals("WALL")) {
-				map[y + 1][x] = " # ";
+				map[y + 1][x].setTyp(" # ");
+				map[y + 1][x].setGesehen(true);
 			} else if (direction.equals("FLOOR")) {
-				map[y + 1][x] = "   ";
+				map[y + 1][x].setTyp("   ");
+				map[y + 1][x].setGesehen(true);
 			} else if (direction.equals("FINISH " + id + " 0")) {
-				map[y + 1][x] = " F ";
+				map[y + 1][x].setTyp(" F ");
+				map[y + 1][x].setGesehen(true);
 			} else {
-				map[y + 1][x] = " ! ";
+				map[y + 1][x].setTyp(" ! ");
+				map[y + 1][x].setGesehen(true);
 			}
 		}
 	}
@@ -99,15 +110,19 @@ public class Landkarte {
 	 * @param id
 	 */
 	public void merkeFeldWest(String direction, int y, int x, int id) {
-		if (map[y][x - 1].equals(" ? ")) {
+		if (map[y][x - 1].getTyp().equals(" ? ")) {
 			if (direction.equals("WALL")) {
-				map[y][x - 1] = " # ";
+				map[y][x - 1].setTyp(" # ");
+				map[y][x - 1].setGesehen(true);
 			} else if (direction.equals("FLOOR")) {
-				map[y][x - 1] = "   ";
+				map[y][x - 1].setTyp("   ");
+				map[y][x - 1].setGesehen(true);
 			} else if (direction.equals("FINISH " + id + " 0")) {
-				map[y][x - 1] = " F ";
+				map[y][x - 1].setTyp(" F ");
+				map[y][x - 1].setGesehen(true);
 			} else {
-				map[y][x - 1] = " ! ";
+				map[y][x - 1].setTyp(" ! ");
+				map[y][x - 1].setGesehen(true);
 			}
 		}
 	}
@@ -122,15 +137,19 @@ public class Landkarte {
 	 * @param id
 	 */
 	public void merkeFeldEast(String direction, int y, int x, int id) {
-		if (map[y][x + 1].equals(" ? ")) {
+		if (map[y][x + 1].getTyp().equals(" ? ")) {
 			if (direction.equals("WALL")) {
-				map[y][x + 1] = " # ";
+				map[y][x + 1].setTyp(" # ");
+				map[y][x + 1].setGesehen(true);
 			} else if (direction.equals("FLOOR")) {
-				map[y][x + 1] = "   ";
+				map[y][x + 1].setTyp("   ");
+				map[y][x + 1].setGesehen(true);
 			} else if (direction.equals("FINISH " + id + " 0")) {
-				map[y][x + 1] = " F ";
+				map[y][x + 1].setTyp(" F ");
+				map[y][x + 1].setGesehen(true);
 			} else {
-				map[y][x + 1] = " ! ";
+				map[y][x + 1].setTyp(" ! ");
+				map[y][x + 1].setGesehen(true);
 			}
 		}
 	}
@@ -151,17 +170,17 @@ public class Landkarte {
 	 * gibt gezeichnete Map aus
 	 * 
 	 */
-	public void mapAusgabe(int yKord, int xKord, String[][] map) {
-
-	}
+//	public void mapAusgabe(int yKord, int xKord, String[][] map) {
+//
+//	}
 
 	/**
 	 * Methode, um zu sehen was in 4 Feldern um den BOT liegt
 	 */
-	public void umsehen() {
-		// TODO
-
-	}
+//	public void umsehen() {
+//		// TODO
+//
+//	}
 
 	public int getxKord() {
 		return xKord;

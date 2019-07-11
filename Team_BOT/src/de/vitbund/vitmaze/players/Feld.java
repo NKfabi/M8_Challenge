@@ -2,17 +2,16 @@ package de.vitbund.vitmaze.players;
 
 public class Feld {
 
-	private int xWert;
-	private int yWert;
+//	private int xWert;
+//	private int yWert;
 	private String typ;
 	private boolean gesehen;
 	private boolean betreten;
 	private int zaehlerBetreten;
 	
-	public Feld(int yWert, int xWert, String typ, boolean gesehen, boolean betreten, int zaehlerBetreten) {
-		super();
-		this.yWert = yWert;
-		this.xWert = xWert;
+	public Feld(String typ, boolean gesehen, boolean betreten, int zaehlerBetreten) {
+//		this.yWert = yWert;
+//		this.xWert = xWert;
 		this.typ = typ;
 		this.gesehen = gesehen;
 		this.betreten = betreten;
@@ -55,24 +54,24 @@ public class Feld {
 	}
 
 
-	public int getxWert() {
-		return xWert;
-	}
-
-
-	public void setxWert(int xWert) {
-		this.xWert = xWert;
-	}
-
-
-	public int getyWert() {
-		return yWert;
-	}
-
-
-	public void setyWert(int yWert) {
-		this.yWert = yWert;
-	}
-	
+//	public int getxWert() {
+//		return xWert;
+//	}
+//
+//
+//	public void setxWert(int xWert) {
+//		this.xWert = xWert;
+//	}
+//
+//
+//	public int getyWert() {
+//		return yWert;
+//	}
+//
+//
+//	public void setyWert(int yWert) {
+//		this.yWert = yWert;
+//	}
+//	
 	
 }
