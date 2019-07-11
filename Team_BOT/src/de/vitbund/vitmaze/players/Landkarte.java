@@ -17,7 +17,7 @@ public class Landkarte {
 		this.xKord = xKord;
 		this.yKord = yKord;
 //
-		map = new Feld[yKord][xKord];
+//		map = new Feld[yKord][xKord];
 		 
 		
 		for (int y = 0; y < this.yKord; y++) {
