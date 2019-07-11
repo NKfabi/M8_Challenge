@@ -163,13 +163,13 @@ public class Landkarte {
 	public void sucheWeg(String position, String lastAction, int y, int x, int id) {
 		if (map[y][x].getTyp().equals(" F ")) {
 			System.out.println("finish");
-		} else if (map[y - 1][x].isBetreten() == false && map[y - 1][x].getTyp().equals("   ") || map[y - 1][x].getTyp().equals(" F ")) {
+		} else if (map[y - 1][x].isBetreten() == false && map[y - 1][x].getTyp().equals("   ") || map[y - 1][x].isBetreten() == false && map[y - 1][x].getTyp().equals(" F ")) {
 			System.out.println("go north");
-		} else if (map[y + 1][x].isBetreten() == false && map[y + 1][x].getTyp().equals("   ") || map[y - 1][x].getTyp().equals(" F ")) {
+		} else if (map[y + 1][x].isBetreten() == false && map[y + 1][x].getTyp().equals("   ") || map[y - 1][x].isBetreten() == false && map[y - 1][x].getTyp().equals(" F ")) {
 			System.out.println("go south");
-		} else if (map[y][x - 1].isBetreten() == false && map[y][x - 1].getTyp().equals("   ") || map[y - 1][x].getTyp().equals(" F ")) {
+		} else if (map[y][x - 1].isBetreten() == false && map[y][x - 1].getTyp().equals("   ") || map[y - 1][x].isBetreten() == false && map[y - 1][x].getTyp().equals(" F ")) {
 			System.out.println("go west");
-		} else if (map[y][x + 1].isBetreten() == false && map[y][x + 1].getTyp().equals("   ") || map[y - 1][x].getTyp().equals(" F ")) {
+		} else if (map[y][x + 1].isBetreten() == false && map[y][x + 1].getTyp().equals("   ") || map[y - 1][x].isBetreten() == false && map[y - 1][x].getTyp().equals(" F ")) {
 			System.out.println("go east");
 		}
 
