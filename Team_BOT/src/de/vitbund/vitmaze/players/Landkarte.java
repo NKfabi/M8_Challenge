@@ -128,9 +128,7 @@ public class Landkarte {
 	}
 
 	/**
-	 * TODO 
-	 * Strings müssen durch Instanzen von Feld ersetzt werden
-	 * 
+	 *
 	 * @param direction
 	 * @param y
 	 * @param x

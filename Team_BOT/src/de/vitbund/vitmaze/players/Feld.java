@@ -2,16 +2,12 @@ package de.vitbund.vitmaze.players;
 
 public class Feld {
 
-//	private int xWert;
-//	private int yWert;
 	private String typ;
 	private boolean gesehen;
 	private boolean betreten;
 	private int zaehlerBetreten;
 	
 	public Feld(String typ, boolean gesehen, boolean betreten, int zaehlerBetreten) {
-//		this.yWert = yWert;
-//		this.xWert = xWert;
 		this.typ = typ;
 		this.gesehen = gesehen;
 		this.betreten = betreten;
@@ -52,26 +48,5 @@ public class Feld {
 //		if 
 		
 	}
-
-
-//	public int getxWert() {
-//		return xWert;
-//	}
-//
-//
-//	public void setxWert(int xWert) {
-//		this.xWert = xWert;
-//	}
-//
-//
-//	public int getyWert() {
-//		return yWert;
-//	}
-//
-//
-//	public void setyWert(int yWert) {
-//		this.yWert = yWert;
-//	}
-//	
 	
 }
