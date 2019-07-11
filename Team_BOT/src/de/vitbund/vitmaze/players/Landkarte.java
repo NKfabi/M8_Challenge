@@ -17,12 +17,11 @@ public class Landkarte {
 		this.yKord = yKord;
 //
 		map = new Feld[yKord][xKord];
-		 
-		
+
 		for (int y = 0; y < this.yKord; y++) {
 			for (int x = 0; x < this.xKord; x++) {
 				map[y][x] = new Feld(" ? ", false, false, 0);
-		
+
 			}
 		}
 	}
@@ -44,10 +43,8 @@ public class Landkarte {
 
 	}
 
-	
 	/**
-	 * TODO 
-	 * Strings müssen durch Instanzen von Feld ersetzt werden
+	 * TODO Strings müssen durch Instanzen von Feld ersetzt werden
 	 * 
 	 * @param direction
 	 * @param y
@@ -73,8 +70,7 @@ public class Landkarte {
 	}
 
 	/**
-	 * TODO 
-	 * Strings müssen durch Instanzen von Feld ersetzt werden
+	 * TODO Strings müssen durch Instanzen von Feld ersetzt werden
 	 * 
 	 * @param direction
 	 * @param y
@@ -100,8 +96,7 @@ public class Landkarte {
 	}
 
 	/**
-	 * TODO 
-	 * Strings müssen durch Instanzen von Feld ersetzt werden
+	 * TODO Strings müssen durch Instanzen von Feld ersetzt werden
 	 * 
 	 * @param direction
 	 * @param y
@@ -151,9 +146,39 @@ public class Landkarte {
 		}
 	}
 
-	
+	public void merkeBetretenesFeld(String position, String lastAction, int y, int x, int id) {
+		if (lastAction.equals("OK") || lastAction.equals("OK NORTH") || lastAction.equals("OK EAST")
+				|| lastAction.equals("OK SOUTH") || lastAction.equals("OK WEST")) {
+			if (map[y][x].isBetreten() == true) {
+				map[y][x].setBetreten(true);
+				map[y][x].setTyp(" v ");
+				map[y][x].setZaehlerBetreten(+1);
+			} else {
+				map[y][x].setZaehlerBetreten(+1);
+				map[y][x].setTyp(" v ");
+			}
+		}
+	}
+
+	public void sucheWeg(String position, String lastAction, int y, int x, int id) {
+		if (map[y][x].getTyp().equals(" F ")) {
+			System.out.println("finish");
+		} else if (map[y - 1][x].isBetreten() == false && map[y - 1][x].getTyp().equals("   ") || map[y - 1][x].getTyp().equals(" F ")) {
+			System.out.println("go north");
+		} else if (map[y + 1][x].isBetreten() == false && map[y + 1][x].getTyp().equals("   ") || map[y - 1][x].getTyp().equals(" F ")) {
+			System.out.println("go south");
+		} else if (map[y][x - 1].isBetreten() == false && map[y][x - 1].getTyp().equals("   ") || map[y - 1][x].getTyp().equals(" F ")) {
+			System.out.println("go west");
+		} else if (map[y][x + 1].isBetreten() == false && map[y][x + 1].getTyp().equals("   ") || map[y - 1][x].getTyp().equals(" F ")) {
+			System.out.println("go east");
+		}
+
+		
+	}
+
 	/**
 	 * TODO
+	 * 
 	 * @param y
 	 * @param x
 	 */
@@ -194,7 +219,6 @@ public class Landkarte {
 	public void setyKord(int yKord) {
 		this.yKord = yKord;
 	}
-
 
 	public String getAusgabe() {
 		return ausgabe;

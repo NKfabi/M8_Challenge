@@ -67,6 +67,9 @@ public class BotFabi {
 			map.merkeFeldNord(northCellStatus, y, x, playerId);
 			map.merkeFeldSued(southCellStatus, y, x, playerId);
 			map.merkeFeldWest(westCellStatus, y, x, playerId);
+			map.merkeBetretenesFeld(currentCellStatus, lastActionsResult, y, x, playerId);
+			
+			map.sucheWeg(currentCellStatus, lastActionsResult, y, x, playerId);
 //			}
 			
 			
@@ -85,23 +88,24 @@ public class BotFabi {
 			
 
 			// Rundenaktion ausgeben
-			if (currentCellStatus.equals("FINISH " + playerId + " 0")) {
-				System.out.println("FINISH");
-				break;
-			}
 
-			if(lastActionsResult.equals("NOK BLOCKED") && westCellStatus.equals("WALL") || lastActionsResult.equals("OK") || lastActionsResult.equals("OK EAST")) {
-			System.out.println("go east");
-			}
-			else if (lastActionsResult.equals("NOK BLOCKED") && northCellStatus.equals("WALL") || lastActionsResult.equals("OK SOUTH")) {
-				System.out.println("go south");
-			}
-			else if (lastActionsResult.equals("NOK BLOCKED") && southCellStatus.equals("WALL") || lastActionsResult.equals("OK WEST") ) {
-				System.out.println("go west");
-			}
-			else if (lastActionsResult.equals("NOK BLOCKED") && westCellStatus.equals("WALL") || lastActionsResult.equals("OK NORTH")) {
-				System.out.println("go north");
-			}
+//			if (currentCellStatus.equals("FINISH " + playerId + " 0")) {
+//				System.out.println("FINISH");
+//				break;
+//			}
+//
+//			if(lastActionsResult.equals("NOK BLOCKED") && westCellStatus.equals("WALL") || lastActionsResult.equals("OK") || lastActionsResult.equals("OK EAST")) {
+//			System.out.println("go east");
+//			}
+//			else if (lastActionsResult.equals("NOK BLOCKED") && northCellStatus.equals("WALL") || lastActionsResult.equals("OK SOUTH")) {
+//				System.out.println("go south");
+//			}
+//			else if (lastActionsResult.equals("NOK BLOCKED") && southCellStatus.equals("WALL") || lastActionsResult.equals("OK WEST") ) {
+//				System.out.println("go west");
+//			}
+//			else if (lastActionsResult.equals("NOK BLOCKED") && westCellStatus.equals("WALL") || lastActionsResult.equals("OK NORTH")) {
+//				System.out.println("go north");
+//			}
 
 		}
 
