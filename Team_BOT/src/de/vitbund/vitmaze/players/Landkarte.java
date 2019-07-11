@@ -163,16 +163,19 @@ public class Landkarte {
 	}
 
 	public void merkeBetretenesFeld(String position, String lastAction, int y, int x, int id) {
-		if (lastAction.equals("OK") || lastAction.equals("OK NORTH") || lastAction.equals("OK EAST")
-				|| lastAction.equals("OK SOUTH") || lastAction.equals("OK WEST")) {
+//		if (lastAction.equals("OK") || lastAction.equals("OK NORTH") || lastAction.equals("OK EAST")
+//				|| lastAction.equals("OK SOUTH") || lastAction.equals("OK WEST")) {)
 			if (map[y][x].isBetreten() == false) {
 				map[y][x].setBetreten(true);
+				
 				map[y][x].setTyp(" v ");
 				map[y][x].setZaehlerBetreten(+1);
-			} else {
+			} else if (map[y][x].isBetreten() == true){
 				map[y][x].setZaehlerBetreten(+1);
+			}else if (map[y][x].isBetreten() == false && map[y][x].getTyp().equals(" F ")) {
+				map[y][x].setStatus("FINISH " + id + " 0");
 			}
-		}
+//		}
 	}
 
 //	public void sucheWeg(String position, String lastAction, int y, int x, int id) {
