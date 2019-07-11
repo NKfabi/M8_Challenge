@@ -26,13 +26,13 @@ public class BotFabi {
 		int startY = input.nextInt(); // Y-Koordinate der Startposition dieses Players
 		input.nextLine(); // Beenden der zweiten Zeile
 
-		//Instanz von Landkarte
+		// Instanz von Landkarte
 		Landkarte map = new Landkarte(sizeX, sizeY);
 
-		//Deklarieren und instanziieren von den x und y werten
+		// Deklarieren und instanziieren von den x und y werten
 		int x = startX;
 		int y = startY;
-		
+
 		// TURN (Wiederholung je Runde notwendig)
 		while (input.hasNext()) {
 			// Rundeninformationen auslesen
@@ -43,37 +43,67 @@ public class BotFabi {
 			String southCellStatus = input.nextLine();
 			String westCellStatus = input.nextLine();
 
-			
-		
-			
-			
-			//x und y aendern
+			// x und y aendern
+			if (lastActionsResult.equals("OK")) {
+				map.merkeFeldEast(eastCellStatus, y, x, playerId);
+				map.merkeFeldNord(northCellStatus, y, x, playerId);
+				map.merkeFeldSued(southCellStatus, y, x, playerId);
+				map.merkeFeldWest(westCellStatus, y, x, playerId);
+				map.merkeBetretenesFeld(currentCellStatus, lastActionsResult, y, x, playerId);
+				
+				map.sucheWeg(currentCellStatus, lastActionsResult, y, x, playerId);
+			}
 			if (lastActionsResult.equals("OK WEST")) {
 				x = x - 1;
-			}
-			else if (lastActionsResult.equals("OK EAST")) {
+				map.merkeFeldEast(eastCellStatus, y, x, playerId);
+				map.merkeFeldNord(northCellStatus, y, x, playerId);
+				map.merkeFeldSued(southCellStatus, y, x, playerId);
+				map.merkeFeldWest(westCellStatus, y, x, playerId);
+				map.merkeBetretenesFeld(currentCellStatus, lastActionsResult, y, x, playerId);
+				
+				map.sucheWeg(currentCellStatus, lastActionsResult, y, x, playerId);
+			} else if (lastActionsResult.equals("OK EAST")) {
 				x = x + 1;
-			}
-			else if (lastActionsResult.equals("OK SOUTH")) {
+				map.merkeFeldEast(eastCellStatus, y, x, playerId);
+				map.merkeFeldNord(northCellStatus, y, x, playerId);
+				map.merkeFeldSued(southCellStatus, y, x, playerId);
+				map.merkeFeldWest(westCellStatus, y, x, playerId);
+				map.merkeBetretenesFeld(currentCellStatus, lastActionsResult, y, x, playerId);
+				
+				map.sucheWeg(currentCellStatus, lastActionsResult, y, x, playerId);
+			} else if (lastActionsResult.equals("OK SOUTH")) {
 				y = y + 1;
-			}
-			else if (lastActionsResult.equals("OK NORTH")) {
+				map.merkeFeldEast(eastCellStatus, y, x, playerId);
+				map.merkeFeldNord(northCellStatus, y, x, playerId);
+				map.merkeFeldSued(southCellStatus, y, x, playerId);
+				map.merkeFeldWest(westCellStatus, y, x, playerId);
+				map.merkeBetretenesFeld(currentCellStatus, lastActionsResult, y, x, playerId);
+				
+				map.sucheWeg(currentCellStatus, lastActionsResult, y, x, playerId);
+			} else if (lastActionsResult.equals("OK NORTH")) {
 				y = y - 1;
+				map.merkeFeldEast(eastCellStatus, y, x, playerId);
+				map.merkeFeldNord(northCellStatus, y, x, playerId);
+				map.merkeFeldSued(southCellStatus, y, x, playerId);
+				map.merkeFeldWest(westCellStatus, y, x, playerId);
+				map.merkeBetretenesFeld(currentCellStatus, lastActionsResult, y, x, playerId);
+				
+				map.sucheWeg(currentCellStatus, lastActionsResult, y, x, playerId);
 			}
 			
 			
-			map.merkeFeldEast(eastCellStatus, y, x, playerId);
-			map.merkeFeldNord(northCellStatus, y, x, playerId);
-			map.merkeFeldSued(southCellStatus, y, x, playerId);
-			map.merkeFeldWest(westCellStatus, y, x, playerId);
-			map.merkeBetretenesFeld(currentCellStatus, lastActionsResult, y, x, playerId);
-			
+//			if (lastActionsResult.equals("OK")) {
+//				map.sucheWeg(currentCellStatus, lastActionsResult, y, x, playerId);
+//			} else if (lastActionsResult.equals("OK WEST")) {
+//				map.sucheWeg(currentCellStatus, lastActionsResult, y, x + 1, playerId);
+//			} else if (lastActionsResult.equals("OK EAST")) {
+//				map.sucheWeg(currentCellStatus, lastActionsResult, y, x - 1, playerId);
+//			} else if (lastActionsResult.equals("OK SOUTH")) {
+//				map.sucheWeg(currentCellStatus, lastActionsResult, y - 1, x, playerId);
+//			} else if (lastActionsResult.equals("OK NORTH")) {
+//				map.sucheWeg(currentCellStatus, lastActionsResult, y + 1, x, playerId);
+//			}
 
-			map.sucheWeg(currentCellStatus, lastActionsResult, y, x, playerId);
-
-			
-			
-			
 			// Debug Information ausgeben (optional möglich)
 			System.err.println("Ergebnis Vorrunde: " + lastActionsResult);
 			System.err.println("aktueller Status: " + currentCellStatus);
@@ -82,14 +112,9 @@ public class BotFabi {
 			System.err.println("Sueden: " + southCellStatus);
 			System.err.println("Westen: " + westCellStatus);
 
-
 			map.printMap();
 
-			
-
 			// Rundenaktion ausgeben
-			
-
 
 		}
 
