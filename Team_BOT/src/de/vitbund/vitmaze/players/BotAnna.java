@@ -55,7 +55,6 @@ public class BotAnna {
 				y = y - 1;
 			}
 			
-			map.merkeCurrentFeld(currentCellStatus, y, x, playerId);
 			map.merkeFeldEast(eastCellStatus, y, x, playerId);
 			map.merkeFeldNord(northCellStatus, y, x, playerId);
 			map.merkeFeldSued(southCellStatus, y, x, playerId);
