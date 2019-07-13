@@ -10,8 +10,8 @@ public class Map1337 {
 	private int yKord;
 	private Field1337[][] map;
 	private String ausgabe;
-	private List<Integer> xCur = new ArrayList<>();
-	private List<Integer> yCur = new ArrayList<>();
+	private List<String> moeglicheZuege = new ArrayList<>();
+
 
 	// Konstruktor
 	public Map1337(int xKord, int yKord) {
@@ -170,14 +170,14 @@ public class Map1337 {
 	 * 
 	 */
 	public void merkeBetretenesFeld(String position, String lastAction, int y, int x, int id) {
-		if (lastAction.equals("OK") || lastAction.equals("OK NORTH") || lastAction.equals("OK EAST")
-				|| lastAction.equals("OK SOUTH") || lastAction.equals("OK WEST")) {
-			if (map[y][x].isBetreten() == false) {
-				map[y][x].setBetreten(true);
-				map[y][x].setTyp(" v ");
-				map[y][x].setZaehlerBetreten(+1);
-			} else if (map[y][x].isBetreten() == true) {
-				map[y][x].setZaehlerBetreten(+1);
+		if (!lastAction.equals("NOK BLOCKED")) {
+			map[y][x].setBetreten(true);
+			map[y][x].setTyp(" v ");
+			map[y][x].setZaehlerBetreten(+1);
+			if (position.equals("FINISH " + id + " 0")) {
+				map[y][x].setStatus("FINISH " + id + " 0");
+			} else {
+				map[y][x].setStatus("aSB");
 			}
 		}
 	}
@@ -187,36 +187,23 @@ public class Map1337 {
 			System.out.println("finish");
 		}
 
-		else if (map[y - 1][x].isBetreten() == false && map[y - 1][x].getStatus().equals("FINISH " + id + " 0")) {
+		else if (map[y - 1][x].getStatus().equals("FINISH " + id + " 0")) {
 			System.out.println("go north");
-		} else if (map[y + 1][x].isBetreten() == false && map[y + 1][x].getStatus().equals("FINISH " + id + " 0")) {
+		} else if (map[y + 1][x].getStatus().equals("FINISH " + id + " 0")) {
 			System.out.println("go south");
-		} else if (map[y][x - 1].isBetreten() == false && map[y][x - 1].getStatus().equals("FINISH " + id + " 0")) {
+		} else if (map[y][x - 1].getStatus().equals("FINISH " + id + " 0")) {
 			System.out.println("go west");
-		} else if (map[y][x + 1].isBetreten() == false && map[y][x + 1].getStatus().equals("FINISH " + id + " 0")) {
+		} else if (map[y][x + 1].getStatus().equals("FINISH " + id + " 0")) {
 			System.out.println("go east");
 		}
 
-		else if (map[y - 1][x].isBetreten() == false && map[y - 1][x].getStatus().equals("FLOOR")) {
+		else if (map[y - 1][x].isBetreten() == false && !map[y - 1][x].getStatus().equals("WALL")) {
 			System.out.println("go north");
-		} else if (map[y + 1][x].isBetreten() == false && map[y + 1][x].getStatus().equals("FLOOR")) {
+		} else if (map[y + 1][x].isBetreten() == false && !map[y + 1][x].getStatus().equals("WALL")) {
 			System.out.println("go south");
-		} else if (map[y][x - 1].isBetreten() == false && map[y][x - 1].getStatus().equals("FLOOR")) {
+		} else if (map[y][x - 1].isBetreten() == false && !map[y][x - 1].getStatus().equals("WALL")) {
 			System.out.println("go west");
-		} else if (map[y][x + 1].isBetreten() == false && map[y][x + 1].getStatus().equals("FLOOR")) {
-			System.out.println("go east");
-		}
-
-		else if (map[y - 1][x].isBetreten() == false && map[y - 1][x].getStatus().equals("aSB")) {
-			System.out.println("go north");
-		}
-		else if (map[y + 1][x].isBetreten() == false && map[y + 1][x].getStatus().equals("aSB")) {
-			System.out.println("go south");
-		}
-		else if (map[y][x - 1].isBetreten() == false && map[y][x - 1].getStatus().equals("aSB")) {
-			System.out.println("go west");
-		}
-		else if (map[y][x + 1].isBetreten() == false && map[y][x + 1].getStatus().equals("aSB")) {
+		} else if (map[y][x + 1].isBetreten() == false && !map[y][x + 1].getStatus().equals("WALL")) {
 			System.out.println("go east");
 		}
 
@@ -229,49 +216,9 @@ public class Map1337 {
 		} else if (map[y][x + 1].getZaehlerBetreten() >= 1 && map[y][x + 1].getStatus().equals("FLOOR")) {
 			System.out.println("go east");
 		}
-
-		else if (map[y - 1][x].getZaehlerBetreten() >= 1 && map[y - 1][x].getStatus().equals("FINISH " + id + " 0")) {
-			System.out.println("go north");
-		} else if (map[y + 1][x].getZaehlerBetreten() >= 1 && map[y + 1][x].getStatus().equals("FINISH " + id + " 0")) {
-			System.out.println("go south");
-		} else if (map[y][x - 1].getZaehlerBetreten() >= 1 && map[y][x - 1].getStatus().equals("FINISH " + id + " 0")) {
-			System.out.println("go west");
-		} else if (map[y][x + 1].getZaehlerBetreten() >= 1 && map[y][x + 1].getStatus().equals("FINISH " + id + " 0")) {
-			System.out.println("go east");
-		}
 	}
 
-//	&& map[y - 1][x].getyWert() != yCur.get(a) && map[y - 1][x].getxWert() != xCur.get(b)
-//	&& map[y + 1][x].getyWert() != yCur.get(a) && map[y + 1][x].getxWert() != xCur.get(b)
-//	&& map[y][x - 1].getyWert() != yCur.get(a) && map[y][x - 1].getxWert() != xCur.get(b)
-//	&& map[y][x - 1].getyWert() != yCur.get(a) && map[y][x + 1].getxWert() != xCur.get(b)
-
-	/**
-	 * merkt sich das letzte betretene Feld
-	 * 
-	 * @param y
-	 * @param x
-	 */
-//	public int merkeLetztesFeld(String position, String lastAction,int a, int b, int y, int x,  int id ) {
-//		if (lastAction.equals("OK NORTH")) {
-//			yCur.add(a, y-1);
-//			xCur.add(b, x);
-//		}else if (lastAction.equals("OK SOUTH")) {
-//			yCur.add(a, y+1);
-//			xCur.add(b, x);
-//		}else if (lastAction.equals("OK EAST")) {
-//			yCur.add(a, y);
-//			xCur.add(b, x-1);
-//		}else if (lastAction.equals("OK WEST")) {
-//			yCur.add(a, y);
-//			xCur.add(b, x+1);
-//			
-//		}
-//		
-//		return yCur.get(a) + xCur.get(b);
-//		
-//
-//	}
+	
 
 	// getter und setter
 	public int getxKord() {
