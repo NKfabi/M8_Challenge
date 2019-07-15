@@ -43,22 +43,18 @@ public class BotBlyat {
 			String eastCellStatus = input.nextLine();
 			String southCellStatus = input.nextLine();
 			String westCellStatus = input.nextLine();
-
-			System.err.println("fuck this shit");
 			
 			map.botPosition(lastActionsResult);
+			
 			map.updateUmfeld(currentCellStatus, lastActionsResult, northCellStatus, eastCellStatus, southCellStatus,
 					westCellStatus);
 			
 			map.printMap();
 			
 			map.sucheWeg();
-			
-//			for (String zuege : map.getMoeglicheZuege()) {
-//				System.err.println(zuege);
-//			}
-			
-			map.berechneWeg();
+
+			String naechsterZug = map.berechneWeg();
+
 			
 			
 
@@ -69,7 +65,9 @@ public class BotBlyat {
 			System.err.println("Osten: " + eastCellStatus);
 			System.err.println("Sueden: " + southCellStatus);
 			System.err.println("Westen: " + westCellStatus);
-
+			
+			// Zugausgabe
+			System.out.println(naechsterZug);
 			
 
 		}
