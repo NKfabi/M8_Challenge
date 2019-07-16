@@ -2,7 +2,7 @@ package de.vitbund.vitmaze.players;
 
 import java.util.Scanner;
 
-public class BotMichi {
+public class BotLvl1{
 
 	/**
 	 * Hauptmethode zum Ausführen des Bots
@@ -26,11 +26,14 @@ public class BotMichi {
 		int startY = input.nextInt(); // Y-Koordinate der Startposition dieses Players
 		input.nextLine(); // Beenden der zweiten Zeile
 
-		Landkarte map = new Landkarte(sizeX, sizeY);
+		// Instanz von Landkarte
+		MapLvl1 map = new MapLvl1(sizeX, sizeY);
 
-		int x = startX;
-		int y = startY;
-		
+		// Deklarieren und instanziieren von den x und y werten
+		map.setPosX(startX);
+		map.setPosY(startY);
+		map.setPlayerId(playerId);
+
 		// TURN (Wiederholung je Runde notwendig)
 		while (input.hasNext()) {
 			// Rundeninformationen auslesen
@@ -41,6 +44,20 @@ public class BotMichi {
 			String southCellStatus = input.nextLine();
 			String westCellStatus = input.nextLine();
 
+			map.botPosition(lastActionsResult);
+
+			map.updateUmfeld(currentCellStatus, lastActionsResult, northCellStatus, eastCellStatus, southCellStatus,
+					westCellStatus);
+
+			map.printMap();
+
+			map.sucheWeg();
+
+			String naechsterZug = map.berechneWeg();
+
+
+
+
 			// Debug Information ausgeben (optional möglich)
 			System.err.println("Ergebnis Vorrunde: " + lastActionsResult);
 			System.err.println("aktueller Status: " + currentCellStatus);
@@ -49,42 +66,9 @@ public class BotMichi {
 			System.err.println("Sueden: " + southCellStatus);
 			System.err.println("Westen: " + westCellStatus);
 
-//			if(getMap()[y][x] == null) {
-//			map.merkeFeldAktuell(y, x);
-//			}
-			map.merkeFeldEast(eastCellStatus, y, x, playerId);
-			map.merkeFeldNord(northCellStatus, y, x, playerId);
-			map.merkeFeldSued(southCellStatus, y, x, playerId);
-			map.merkeFeldWest(westCellStatus, y, x, playerId);
-			map.printMap();
-			
-			//x und y aendern
-			if (lastActionsResult.equals("OK WEST")) {
-				x = x - 1;
-			}
-			else if (lastActionsResult.equals("OK EAST")) {
-				x = x + 1;
-			}
-			else if (lastActionsResult.equals("OK SOUTH")) {
-				y = y + 1;
-			}
-			else if (lastActionsResult.equals("OK NORTH")) {
-				y = y - 1;
-			}
-			
+			// Zugausgabe
+			System.out.println(naechsterZug);
 
-			// Rundenaktion ausgeben
-			if (currentCellStatus.equals("FINISH " + playerId + " 0")) {
-				System.out.println("FINISH");
-				break;
-			}
-
-			System.out.println("go east");
-//			if (eastCellStatus.equals("FLOOR") || eastCellStatus.equals("FINISH " + playerId + " 0")) {
-//				System.out.println("go east");
-//			} else {
-//				System.out.println("go south");
-//			}
 
 		}
 
