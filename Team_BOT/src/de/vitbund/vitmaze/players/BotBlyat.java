@@ -46,6 +46,8 @@ public class BotBlyat {
 			
 			map.botPosition(lastActionsResult);
 			
+			map.formOrder(lastActionsResult);
+			
 			map.updateUmfeld(currentCellStatus, lastActionsResult, northCellStatus, eastCellStatus, southCellStatus,
 					westCellStatus);
 			
