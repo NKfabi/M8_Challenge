@@ -2,7 +2,7 @@ package de.vitbund.vitmaze.players;
 
 import java.util.Scanner;
 
-public class BotLvl1{
+public class BotFormulare{
 
 	/**
 	 * Hauptmethode zum Ausführen des Bots
