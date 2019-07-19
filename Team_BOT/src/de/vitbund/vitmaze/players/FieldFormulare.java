@@ -9,16 +9,19 @@ public class FieldFormulare {
 	private String status;
 	private boolean gesehen;
 	private int zaehlerBetreten;
+	private int kosten;
 
 	
 	
 	//Konstruktor
-	public FieldFormulare(int xWert, int yWert, String status, boolean gesehen, int zaehlerBetreten) {
+	public FieldFormulare(int xWert, int yWert, String status, boolean gesehen, int zaehlerBetreten, int kosten) {
 		this.xWert = xWert;
 		this.yWert = yWert;
 		this.status = status;
 		this.gesehen = gesehen;
 		this.zaehlerBetreten = zaehlerBetreten;
+		this.kosten = kosten;
+		
 		
 	}
 	
@@ -58,6 +61,18 @@ public class FieldFormulare {
 	}
 	public void setZaehlerBetreten(int zaehlerBetreten) {
 		this.zaehlerBetreten = zaehlerBetreten;
+	}
+
+
+
+	public int getKosten() {
+		return kosten;
+	}
+
+
+
+	public void setKosten(int kosten) {
+		this.kosten = kosten;
 	}
 
 

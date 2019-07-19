@@ -25,7 +25,7 @@ public class MapFormulare {
 
 		for (int y = 0; y < this.sizeY; y++) {
 			for (int x = 0; x < this.sizeX; x++) {
-				map[y][x] = new FieldFormulare(y, x, null, false, 0);
+				map[y][x] = new FieldFormulare(y, x, null, false, 0, 4242);
 
 			}
 		}
@@ -37,6 +37,28 @@ public class MapFormulare {
 	 * @param x
 	 * @param y
 	 */
+//	public void printMap() {
+//		for (int y = 0; y < sizeY; y++) {
+//			for (int x = 0; x < sizeX; x++) {
+//				if (map[y][x].getStatus() == null) {
+//					System.err.print(" ? ");
+//				} else if (map[y][x].getStatus().equals("FINISH " + playerId + " " + getFormFinal())) {
+//					System.err.print(" F ");
+//				} else if (map[y][x].getStatus().equals("FORM " + playerId + " " + formCount)) {
+//					System.err.print(" " + formCount + " ");
+//				} else if (map[y][x].getStatus().equals("FLOOR")) {
+//					System.err.print("   ");
+//				} else if (map[y][x].getStatus().equals("WALL")) {
+//					System.err.print(" # ");
+//				} else {
+//					System.err.print(" ! ");
+//				}
+//			}
+//			System.err.println();
+//		}
+//
+//	}
+
 	public void printMap() {
 		for (int y = 0; y < sizeY; y++) {
 			for (int x = 0; x < sizeX; x++) {
@@ -47,7 +69,7 @@ public class MapFormulare {
 				} else if (map[y][x].getStatus().equals("FORM " + playerId + " " + formCount)) {
 					System.err.print(" " + formCount + " ");
 				} else if (map[y][x].getStatus().equals("FLOOR")) {
-					System.err.print("   ");
+					System.err.print(map[y][x].getKosten());
 				} else if (map[y][x].getStatus().equals("WALL")) {
 					System.err.print(" # ");
 				} else {
@@ -81,6 +103,81 @@ public class MapFormulare {
 		}
 
 		moeglicheZuege = moeglicheZuegeNew;
+	}
+
+	public void berechneKosten(String lastAction) {
+		if (lastAction.equals("OK")) {
+			map[posY][posX].setKosten(0);
+//			if (!map[posY + 1][posX].getStatus().equals("WALL") && map[posY + 1][posX].getKosten() < 4242) {
+//				map[posY + 1][posX].setKosten(map[posY][posX].getKosten() + 1);
+//			}
+//			if (!map[posY][posX - 1].getStatus().equals("WALL") && map[posY][posX - 1].getKosten() < 4242) {
+//				map[posY][posX - 1].setKosten(map[posY][posX].getKosten() + 1);
+//			}
+//			if (!map[posY - 1][posX].getStatus().equals("WALL") && map[posY - 1][posX].getKosten() < 4242) {
+//				map[posY - 1][posX].setKosten(map[posY][posX].getKosten() + 1);
+//			}
+//			if (!map[posY][posX + 1].getStatus().equals("WALL") && map[posY][posX + 1].getKosten() < 4242) {
+//				map[posY][posX + 1].setKosten(map[posY][posX].getKosten() + 1);
+//			}
+		} else if (lastAction.equals("OK NORTH")) {
+			map[posY][posX].setKosten(map[posY + 1][posX].getKosten() + 1);
+//			if (!map[posY + 1][posX].getStatus().equals("WALL") && map[posY + 1][posX].getKosten() < 4242) {
+//				map[posY + 1][posX].setKosten(map[posY][posX].getKosten() + 1);
+//			}
+//			if (!map[posY][posX - 1].getStatus().equals("WALL") && map[posY][posX - 1].getKosten() < 4242) {
+//				map[posY][posX - 1].setKosten(map[posY][posX].getKosten() + 1);
+//			}
+//			if (!map[posY - 1][posX].getStatus().equals("WALL") && map[posY - 1][posX].getKosten() < 4242) {
+//				map[posY - 1][posX].setKosten(map[posY][posX].getKosten() + 1);
+//			}
+//			if (!map[posY][posX + 1].getStatus().equals("WALL") && map[posY][posX + 1].getKosten() < 4242) {
+//				map[posY][posX + 1].setKosten(map[posY][posX].getKosten() + 1);
+//			}
+		} else if (lastAction.equals("OK SOUTH")) {
+			map[posY][posX].setKosten(map[posY - 1][posX].getKosten() + 1);
+//			if (!map[posY + 1][posX].getStatus().equals("WALL") && map[posY + 1][posX].getKosten() < 4242) {
+//				map[posY + 1][posX].setKosten(map[posY][posX].getKosten() + 1);
+//			}
+//			if (!map[posY][posX - 1].getStatus().equals("WALL") && map[posY][posX - 1].getKosten() < 4242) {
+//				map[posY][posX - 1].setKosten(map[posY][posX].getKosten() + 1);
+//			}
+//			if (!map[posY - 1][posX].getStatus().equals("WALL") && map[posY - 1][posX].getKosten() < 4242) {
+//				map[posY - 1][posX].setKosten(map[posY][posX].getKosten() + 1);
+//			}
+//			if (!map[posY][posX + 1].getStatus().equals("WALL") && map[posY][posX + 1].getKosten() < 4242) {
+//				map[posY][posX + 1].setKosten(map[posY][posX].getKosten() + 1);
+//			}
+		} else if (lastAction.equals("OK WEST")) {
+			map[posY][posX].setKosten(map[posY][posX + 1].getKosten() + 1);
+//			if (!map[posY + 1][posX].getStatus().equals("WALL") && map[posY + 1][posX].getKosten() < 4242) {
+//				map[posY + 1][posX].setKosten(map[posY][posX].getKosten() + 1);
+//			}
+//			if (!map[posY][posX - 1].getStatus().equals("WALL") && map[posY][posX - 1].getKosten() < 4242) {
+//				map[posY][posX - 1].setKosten(map[posY][posX].getKosten() + 1);
+//			}
+//			if (!map[posY - 1][posX].getStatus().equals("WALL") && map[posY - 1][posX].getKosten() < 4242) {
+//				map[posY - 1][posX].setKosten(map[posY][posX].getKosten() + 1);
+//			}
+//			if (!map[posY][posX + 1].getStatus().equals("WALL") && map[posY][posX + 1].getKosten() < 4242) {
+//				map[posY][posX + 1].setKosten(map[posY][posX].getKosten() + 1);
+//			}
+		} else if (lastAction.equals("OK EAST")) {
+			map[posY][posX].setKosten(map[posY][posX - 1].getKosten() + 1);
+//			if (!map[posY + 1][posX].getStatus().equals("WALL") && map[posY + 1][posX].getKosten() < 4242) {
+//				map[posY + 1][posX].setKosten(map[posY][posX].getKosten() + 1);
+//			}
+//			if (!map[posY][posX - 1].getStatus().equals("WALL") && map[posY][posX - 1].getKosten() < 4242) {
+//				map[posY][posX - 1].setKosten(map[posY][posX].getKosten() + 1);
+//			}
+//			if (!map[posY - 1][posX].getStatus().equals("WALL") && map[posY - 1][posX].getKosten() < 4242) {
+//				map[posY - 1][posX].setKosten(map[posY][posX].getKosten() + 1);
+//			}
+//			if (!map[posY][posX + 1].getStatus().equals("WALL") && map[posY][posX + 1].getKosten() < 4242) {
+//				map[posY][posX + 1].setKosten(map[posY][posX].getKosten() + 1);
+//			}
+		}
+
 	}
 
 	/**
@@ -200,56 +297,75 @@ public class MapFormulare {
 
 		System.err.println("Anzahl Formulare: " + getFormFinal());
 		System.err.println("Formularcounter: " + getFormCount());
-		System.err.println(formCount+1);
-		
+		System.err.println(formCount + 1);
+
 		String niedrigsterZug = "";
 
+		if (getFormFinal() != 0 && getFormCount() > getFormFinal()
+				&& map[posY][posX].getStatus().equals("FINISH " + playerId + " " + formFinal)) {
+			niedrigsterZug = "finish";
+		} else if (getFormFinal() != 0 && getFormCount() > getFormFinal()
+				&& map[posY + 1][posX].getStatus().equals("FINISH " + playerId + " " + formFinal)) {
+			niedrigsterZug = "go south";
+		} else if (getFormFinal() != 0 && getFormCount() > getFormFinal()
+				&& map[posY][posX - 1].getStatus().equals("FINISH " + playerId + " " + formFinal)) {
+			niedrigsterZug = "go west";
+		} else if (getFormFinal() != 0 && getFormCount() > getFormFinal()
+				&& map[posY - 1][posX].getStatus().equals("FINISH " + playerId + " " + formFinal)) {
+			niedrigsterZug = "go north";
+		} else if (getFormFinal() != 0 && getFormCount() > getFormFinal()
+				&& map[posY][posX + 1].getStatus().equals("FINISH " + playerId + " " + formFinal)) {
+			niedrigsterZug = "go east";
+		}
 
-			if (getFormFinal() != 0 && getFormCount() > getFormFinal() && map[posY][posX].getStatus().equals("FINISH " + playerId + " " + formFinal)) {
-				niedrigsterZug = "finish";
-			}
+		else if (map[posY][posX].getStatus().equals("FORM " + playerId + " " + formCount)) {
+			niedrigsterZug = "take";
+		} else if (map[posY + 1][posX].getStatus().equals("FORM " + playerId + " " + formCount)) {
+			niedrigsterZug = "go south";
+		} else if (map[posY][posX - 1].getStatus().equals("FORM " + playerId + " " + formCount)) {
+			niedrigsterZug = "go west";
+		} else if (map[posY - 1][posX].getStatus().equals("FORM " + playerId + " " + formCount)) {
+			niedrigsterZug = "go north";
+		} else if (map[posY][posX + 1].getStatus().equals("FORM " + playerId + " " + formCount)) {
+			niedrigsterZug = "go east";
+		} else {
+			int niedrigsteAnzahl = 999;
 
+			niedrigsterZug = moeglicheZuege.get(0);
 
-			else if (map[posY][posX].getStatus().equals("FORM " + playerId + " " + formCount)) {
-				niedrigsterZug = "take";
-			} else {
-				int niedrigsteAnzahl = 999;
+			for (String zug : moeglicheZuege) {
+				switch (zug) {
 
-				niedrigsterZug = moeglicheZuege.get(0);
-
-				for (String zug : moeglicheZuege) {
-					switch (zug) {
-
-					case "go south":
-						if (map[posY + 1][posX].getZaehlerBetreten() < niedrigsteAnzahl) {
-							niedrigsterZug = "go south";
-							niedrigsteAnzahl = map[posY + 1][posX].getZaehlerBetreten();
-						}
-						break;
-
-					case "go west":
-						if (map[posY][posX - 1].getZaehlerBetreten() < niedrigsteAnzahl) {
-							niedrigsterZug = "go west";
-							niedrigsteAnzahl = map[posY][posX - 1].getZaehlerBetreten();
-						}
-						break;
-
-					case "go north":
-						if (map[posY - 1][posX].getZaehlerBetreten() < niedrigsteAnzahl) {
-							niedrigsterZug = "go north";
-							niedrigsteAnzahl = map[posY - 1][posX].getZaehlerBetreten();
-						}
-						break;
-
-					case "go east":
-						if (map[posY][posX + 1].getZaehlerBetreten() < niedrigsteAnzahl) {
-							niedrigsterZug = "go east";
-							niedrigsteAnzahl = map[posY][posX + 1].getZaehlerBetreten();
-						}
-						break;
+				case "go south":
+					if (map[posY + 1][posX].getZaehlerBetreten() < niedrigsteAnzahl) {
+						niedrigsterZug = "go south";
+						niedrigsteAnzahl = map[posY + 1][posX].getZaehlerBetreten();
 					}
+					break;
+
+				case "go west":
+					if (map[posY][posX - 1].getZaehlerBetreten() < niedrigsteAnzahl) {
+						niedrigsterZug = "go west";
+						niedrigsteAnzahl = map[posY][posX - 1].getZaehlerBetreten();
+					}
+					break;
+
+				case "go north":
+					if (map[posY - 1][posX].getZaehlerBetreten() < niedrigsteAnzahl) {
+						niedrigsterZug = "go north";
+						niedrigsteAnzahl = map[posY - 1][posX].getZaehlerBetreten();
+					}
+					break;
+
+				case "go east":
+					if (map[posY][posX + 1].getZaehlerBetreten() < niedrigsteAnzahl) {
+						niedrigsterZug = "go east";
+						niedrigsteAnzahl = map[posY][posX + 1].getZaehlerBetreten();
+					}
+					break;
 				}
 			}
+		}
 		return niedrigsterZug;
 
 	}

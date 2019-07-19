@@ -51,6 +51,8 @@ public class BotFormulare {
 			map.updateUmfeld(currentCellStatus, lastActionsResult, northCellStatus, eastCellStatus, southCellStatus,
 					westCellStatus);
 			
+//			map.berechneKosten(lastActionsResult);
+			
 			map.printMap();
 			
 			map.sucheWeg();

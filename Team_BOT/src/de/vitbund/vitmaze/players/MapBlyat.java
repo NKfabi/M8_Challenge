@@ -11,7 +11,7 @@ public class MapBlyat {
 	private int posX = 0;
 	private int posY = 0;
 	private int playerId;
-	private int formCount = 0;
+	private int formCount = 1;
 	private int formFinal;
 	private FieldBlyat[][] map;
 	private List<String> moeglicheZuege = new ArrayList<>();
@@ -42,10 +42,10 @@ public class MapBlyat {
 			for (int x = 0; x < sizeX; x++) {
 				if (map[y][x].getStatus() == null) {
 					System.err.print(" ? ");
-				} else if (map[y][x].getStatus().equals("FINISH " + playerId + formFinal)) {
+				} else if (map[y][x].getStatus().equals("FINISH " + playerId + " " + getFormFinal())) {
 					System.err.print(" F ");
-				} else if (map[y][x].getStatus().equals("FORM " + playerId + formCount)) {
-					System.err.print(" 0 ");
+				} else if (map[y][x].getStatus().equals("FORM " + playerId + " " + getFormCount())) {
+					System.err.print(" " + getFormCount() + " ");
 				} else if (map[y][x].getStatus().equals("FLOOR")) {
 					System.err.print("   ");
 				} else if (map[y][x].getStatus().equals("WALL")) {
@@ -103,12 +103,12 @@ public class MapBlyat {
 	}
 
 	public void formOrder(String lastAction) {
-		if(lastAction.equals("OK FORM")) {
+		if (lastAction.equals("OK FORM")) {
 			formCount += 1;
 		}
-		
+
 	}
-	
+
 	/**
 	 * updatet das Umfeld des Bots also die 4 umliegenden Felder
 	 * 
@@ -127,62 +127,49 @@ public class MapBlyat {
 		map[posY][posX].setGesehen(true);
 		map[posY][posX].setZaehlerBetreten(map[posY][posX].getZaehlerBetreten() + 1);
 
-		if (currentPosition.contains("FINISH " + playerId)) {
-			String[] parts = currentPosition.split(" ", 3);
-			int a = Integer.parseInt(parts[2]);
-
-			if (currentPosition.equals("FINISH " + playerId + " " + a)) {
-				setFormFinal(a);
-			}
-		}
-
 		// Norden
 		map[posY - 1][posX].setStatus(northStatus);
 		map[posY - 1][posX].setGesehen(true);
 
-		if (northStatus.contains("FINISH " + playerId)) {
-			String[] parts1 = currentPosition.split(" ", 3);
-			int a1 = Integer.parseInt(parts1[2]);
-
-			if (northStatus.equals("FINISH " + playerId + " " + a1)) {
-				setFormFinal(a1);
-			}
-		}
 		// Sueden
 		map[posY + 1][posX].setStatus(southStatus);
 		map[posY + 1][posX].setGesehen(true);
-
-		if (southStatus.contains("FINISH " + playerId)) {
-			String[] parts2 = currentPosition.split(" ", 3);
-			int a2 = Integer.parseInt(parts2[2]);
-			if (southStatus.equals("FINISH " + playerId + " " + a2)) {
-				setFormFinal(a2);
-			}
-		}
 
 		// Westen
 		map[posY][posX - 1].setStatus(westStatus);
 		map[posY][posX - 1].setGesehen(true);
 
-		if (westStatus.contains("FINISH " + playerId)) {
-			String[] parts3 = currentPosition.split(" ", 3);
-			int a3 = Integer.parseInt(parts3[2]);
-			if (westStatus.equals("FINISH " + playerId + " " + a3)) {
-				setFormFinal(a3);
-			}
-		}
 		// Osten
 		map[posY][posX + 1].setStatus(eastStatus);
 		map[posY][posX + 1].setGesehen(true);
 
-		if (eastStatus.contains("FINISH " + playerId)) {
-			String[] parts4 = currentPosition.split(" ", 3);
-			int a4 = Integer.parseInt(parts4[2]);
-
-			if (eastStatus.equals("FINISH " + playerId + " " + a4)) {
+		if (currentPosition.substring(0, 8).equals("FINISH " + playerId)) {
+			String[] parts = currentPosition.split(" ", 3);
+			int a = Integer.parseInt(parts[2]);
+			System.err.println(a);
+				setFormFinal(a);
+		} else if (northStatus.substring(0, 8).equals("FINISH " + playerId)) {
+			String[] parts = northStatus.split(" ", 3);
+			int a = Integer.parseInt(parts[2]);
+			System.err.println(a);
+				setFormFinal(a);
+		} else if (southStatus.substring(0, 8).equals("FINISH " + playerId)) {
+			String[] parts = southStatus.split(" ", 3);
+			int a = Integer.parseInt(parts[2]);
+			System.err.println(a);
+				setFormFinal(a);
+		} else if (westStatus.equals("FINISH " + playerId)) {
+			String[] parts = westStatus.split(" ", 3);
+			int a = Integer.parseInt(parts[2]);
+			System.err.println(a);
+				setFormFinal(a);
+		} else if (eastStatus.equals("FINISH " + playerId)) {
+			String[] parts = eastStatus.split(" ", 3);
+			int a4 = Integer.parseInt(parts[2]);
+			System.err.println(a4);
 				setFormFinal(a4);
-			}
 		}
+
 	}
 
 	/**
@@ -194,22 +181,33 @@ public class MapBlyat {
 
 		String niedrigsterZug = "";
 
-		if (map[posY][posX].getStatus().equals("FINISH " + playerId + getFormFinal())
+		System.err.println("Anzahl Forms: " + formFinal);
+		System.err.println("Formcounter: " + formCount);
+		
+		if (map[posY][posX].getStatus().equals("FINISH " + playerId + " " + getFormFinal())
 				&& getFormCount() == getFormFinal()) {
 			niedrigsterZug = "finish";
-		} else if (map[posY][posX].getStatus().equals("FORM " + playerId + getFormCount())) {
+		} else if (map[posY][posX].getStatus().equals("FORM " + playerId + " " + getFormCount())) {
 			niedrigsterZug = "take";
-		} else if (map[posY + 1][posX].getStatus().equals("FINISH " + playerId + getFormFinal())
+		} else if (map[posY + 1][posX].getStatus().equals("FINISH " + playerId + " " + getFormFinal())
 				&& getFormCount() == getFormFinal()) {
 			niedrigsterZug = "go south";
-		} else if (map[posY][posX - 1].getStatus().equals("FINISH " + playerId + getFormFinal())
+		} else if (map[posY][posX - 1].getStatus().equals("FINISH " + playerId + " " + getFormFinal())
 				&& getFormCount() == getFormFinal()) {
 			niedrigsterZug = "go west";
-		} else if (map[posY - 1][posX].getStatus().equals("FINISH " + playerId + getFormFinal())
+		} else if (map[posY - 1][posX].getStatus().equals("FINISH " + playerId + " " + getFormFinal())
 				&& getFormCount() == getFormFinal()) {
 			niedrigsterZug = "go north";
-		} else if (map[posY][posX + 1].getStatus().equals("FINISH " + playerId + getFormFinal())
+		} else if (map[posY][posX + 1].getStatus().equals("FINISH " + playerId +" " +  getFormFinal())
 				&& getFormCount() == getFormFinal()) {
+			niedrigsterZug = "go east";
+		} else if (map[posY + 1][posX].getStatus().equals("FORM " + playerId + " " + getFormCount())) {
+			niedrigsterZug = "go south";
+		} else if (map[posY][posX - 1].getStatus().equals("FORM " + playerId + " " + getFormCount())) {
+			niedrigsterZug = "go west";
+		} else if (map[posY - 1][posX].getStatus().equals("FORM " + playerId + " " + getFormCount())) {
+			niedrigsterZug = "go north";
+		} else if (map[posY][posX + 1].getStatus().equals("FORM " + playerId + " " + getFormCount())) {
 			niedrigsterZug = "go east";
 		} else {
 			int niedrigsteAnzahl = 999;
