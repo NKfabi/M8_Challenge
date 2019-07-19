@@ -11,7 +11,9 @@ public class MapFormulare {
 	private int posX = 0;
 	private int posY = 0;
 	private int playerId;
-	private FieldLvl1[][] map;
+	private int formCount = 1;
+	private int formFinal;
+	private FieldFormulare[][] map;
 	private List<String> moeglicheZuege = new ArrayList<>();
 
 	// Konstruktor
@@ -19,11 +21,11 @@ public class MapFormulare {
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
 
-		map = new FieldLvl1[sizeY][sizeX];
+		map = new FieldFormulare[sizeY][sizeX];
 
 		for (int y = 0; y < this.sizeY; y++) {
 			for (int x = 0; x < this.sizeX; x++) {
-				map[y][x] = new FieldLvl1(y, x, null, false, false, 0);
+				map[y][x] = new FieldFormulare(y, x, null, false, 0);
 
 			}
 		}
@@ -40,8 +42,10 @@ public class MapFormulare {
 			for (int x = 0; x < sizeX; x++) {
 				if (map[y][x].getStatus() == null) {
 					System.err.print(" ? ");
-				} else if (map[y][x].getStatus().equals("FINISH " + playerId + " 0")) {
+				} else if (map[y][x].getStatus().equals("FINISH " + playerId + " " + getFormFinal())) {
 					System.err.print(" F ");
+				} else if (map[y][x].getStatus().equals("FORM " + playerId + " " + formCount)) {
+					System.err.print(" " + formCount + " ");
 				} else if (map[y][x].getStatus().equals("FLOOR")) {
 					System.err.print("   ");
 				} else if (map[y][x].getStatus().equals("WALL")) {
@@ -63,36 +67,18 @@ public class MapFormulare {
 
 		List<String> moeglicheZuegeNew = new ArrayList<String>();
 
-//		if (map[posY][posX].getStatus().equals("FINISH " + playerId + " 0")) {
-//			System.out.println("finish");
-//		}
-
-//		if (map[posY + 1][posX].getStatus().equals("FINISH " + playerId + " 0")) {
-//			System.out.println("go south");
-//		}
-//		if (map[posY][posX - 1].getStatus().equals("FINISH " + playerId + " 0")) {
-//			System.out.println("go west");
-//		}
-//		if (map[posY - 1][posX].getStatus().equals("FINISH " + playerId + " 0")) {
-//			System.out.println("go north");
-//		}
-//		if (map[posY][posX + 1].getStatus().equals("FINISH " + playerId + " 0")) {
-//			System.out.println("go east");
-//		}
-			if (!map[posY + 1][posX].getStatus().equals("WALL")) {
-				moeglicheZuegeNew.add("go south");
-			}
-			if (!map[posY][posX - 1].getStatus().equals("WALL")) {
-				moeglicheZuegeNew.add("go west");
-			}
-			if (!map[posY - 1][posX].getStatus().equals("WALL")) {
-				moeglicheZuegeNew.add("go north");
-			}
-			if (!map[posY][posX + 1].getStatus().equals("WALL")) {
-				moeglicheZuegeNew.add("go east");
-			}
-			
-
+		if (!map[posY + 1][posX].getStatus().equals("WALL")) {
+			moeglicheZuegeNew.add("go south");
+		}
+		if (!map[posY][posX - 1].getStatus().equals("WALL")) {
+			moeglicheZuegeNew.add("go west");
+		}
+		if (!map[posY - 1][posX].getStatus().equals("WALL")) {
+			moeglicheZuegeNew.add("go north");
+		}
+		if (!map[posY][posX + 1].getStatus().equals("WALL")) {
+			moeglicheZuegeNew.add("go east");
+		}
 
 		moeglicheZuege = moeglicheZuegeNew;
 	}
@@ -116,6 +102,13 @@ public class MapFormulare {
 
 	}
 
+	public void formOrder(String lastAction) {
+		if (lastAction.equals("OK FORM")) {
+			setFormCount(getFormCount() + 1);
+		}
+
+	}
+
 	/**
 	 * updatet das Umfeld des Bots also die 4 umliegenden Felder
 	 * 
@@ -129,6 +122,8 @@ public class MapFormulare {
 	 */
 	public void updateUmfeld(String currentPosition, String lastPosition, String northStatus, String eastStatus,
 			String southStatus, String westStatus) {
+
+		String test;
 		// aktuelles Feld
 		map[posY][posX].setStatus(currentPosition);
 		map[posY][posX].setGesehen(true);
@@ -150,6 +145,50 @@ public class MapFormulare {
 		map[posY][posX + 1].setStatus(eastStatus);
 		map[posY][posX + 1].setGesehen(true);
 
+		if (formFinal == 0) {
+			if (currentPosition.length() > 8) {
+				test = currentPosition.substring(0, 8);
+
+				if (test.equals("FINISH " + playerId)) {
+					String[] parts = currentPosition.split(" ", 3);
+					int a = Integer.parseInt(parts[2]);
+					setFormFinal(a);
+				}
+			} else if (northStatus.length() > 8) {
+				test = northStatus.substring(0, 8);
+
+				if (test.equals("FINISH " + playerId)) {
+					String[] parts = northStatus.split(" ", 3);
+					int a = Integer.parseInt(parts[2]);
+					setFormFinal(a);
+				}
+			} else if (southStatus.length() > 8) {
+				test = southStatus.substring(0, 8);
+
+				if (test.equals("FINISH " + playerId)) {
+					String[] parts = southStatus.split(" ", 3);
+					int a = Integer.parseInt(parts[2]);
+					setFormFinal(a);
+				}
+			} else if (westStatus.length() > 8) {
+				test = westStatus.substring(0, 8);
+
+				if (test.equals("FINISH " + playerId)) {
+					String[] parts = westStatus.split(" ", 3);
+					int a = Integer.parseInt(parts[2]);
+					setFormFinal(a);
+				}
+			} else if (eastStatus.length() > 8) {
+				test = eastStatus.substring(0, 8);
+
+				if (test.equals("FINISH " + playerId)) {
+					String[] parts = eastStatus.split(" ", 3);
+					int a = Integer.parseInt(parts[2]);
+					setFormFinal(a);
+				}
+			}
+		}
+
 	}
 
 	/**
@@ -158,64 +197,59 @@ public class MapFormulare {
 	 * 
 	 */
 	public String berechneWeg() {
+
+		System.err.println("Anzahl Formulare: " + getFormFinal());
+		System.err.println("Formularcounter: " + getFormCount());
+		System.err.println(formCount+1);
 		
 		String niedrigsterZug = "";
-		
-		if (map[posY][posX].getStatus().equals("FINISH " + playerId + " 0")) {
-			niedrigsterZug = "finish";
-		}
-		else if (map[posY + 1][posX].getStatus().equals("FINISH " + playerId + " 0")) {
-			niedrigsterZug = "go south";
-		}
-		else if (map[posY][posX - 1].getStatus().equals("FINISH " + playerId + " 0")) {
-			niedrigsterZug = "go west";
-		}
-		else if (map[posY - 1][posX].getStatus().equals("FINISH " + playerId + " 0")) {
-			niedrigsterZug = "go north";
-		}
-		else if (map[posY][posX + 1].getStatus().equals("FINISH " + playerId + " 0")) {
-			niedrigsterZug = "go east";
-		}
-		else {
-		int niedrigsteAnzahl = 999;
 
-		niedrigsterZug = moeglicheZuege.get(0);
 
-		for (String zug : moeglicheZuege) {
-			switch (zug) {
-
-			case "go south":
-				if (map[posY + 1][posX].getZaehlerBetreten() < niedrigsteAnzahl) {
-					niedrigsterZug = "go south";
-					niedrigsteAnzahl = map[posY + 1][posX].getZaehlerBetreten();
-				}
-				break;
-
-			case "go west":
-				if (map[posY][posX - 1].getZaehlerBetreten() < niedrigsteAnzahl) {
-					niedrigsterZug = "go west";
-					niedrigsteAnzahl = map[posY][posX - 1].getZaehlerBetreten();
-				}
-				break;
-
-			case "go north":
-				if (map[posY - 1][posX].getZaehlerBetreten() < niedrigsteAnzahl) {
-					niedrigsterZug = "go north";
-					niedrigsteAnzahl = map[posY - 1][posX].getZaehlerBetreten();
-				}
-				break;
-
-			case "go east":
-				if (map[posY][posX + 1].getZaehlerBetreten() < niedrigsteAnzahl) {
-					niedrigsterZug = "go east";
-					niedrigsteAnzahl = map[posY][posX + 1].getZaehlerBetreten();
-				}
-				break;
-
+			if (getFormFinal() != 0 && getFormCount() > getFormFinal() && map[posY][posX].getStatus().equals("FINISH " + playerId + " " + formFinal)) {
+				niedrigsterZug = "finish";
 			}
-		}
-		}
 
+
+			else if (map[posY][posX].getStatus().equals("FORM " + playerId + " " + formCount)) {
+				niedrigsterZug = "take";
+			} else {
+				int niedrigsteAnzahl = 999;
+
+				niedrigsterZug = moeglicheZuege.get(0);
+
+				for (String zug : moeglicheZuege) {
+					switch (zug) {
+
+					case "go south":
+						if (map[posY + 1][posX].getZaehlerBetreten() < niedrigsteAnzahl) {
+							niedrigsterZug = "go south";
+							niedrigsteAnzahl = map[posY + 1][posX].getZaehlerBetreten();
+						}
+						break;
+
+					case "go west":
+						if (map[posY][posX - 1].getZaehlerBetreten() < niedrigsteAnzahl) {
+							niedrigsterZug = "go west";
+							niedrigsteAnzahl = map[posY][posX - 1].getZaehlerBetreten();
+						}
+						break;
+
+					case "go north":
+						if (map[posY - 1][posX].getZaehlerBetreten() < niedrigsteAnzahl) {
+							niedrigsterZug = "go north";
+							niedrigsteAnzahl = map[posY - 1][posX].getZaehlerBetreten();
+						}
+						break;
+
+					case "go east":
+						if (map[posY][posX + 1].getZaehlerBetreten() < niedrigsteAnzahl) {
+							niedrigsterZug = "go east";
+							niedrigsteAnzahl = map[posY][posX + 1].getZaehlerBetreten();
+						}
+						break;
+					}
+				}
+			}
 		return niedrigsterZug;
 
 	}
@@ -261,11 +295,11 @@ public class MapFormulare {
 		this.playerId = playerId;
 	}
 
-	public FieldLvl1[][] getMap() {
+	public FieldFormulare[][] getMap() {
 		return map;
 	}
 
-	public void setMap(FieldLvl1[][] map) {
+	public void setMap(FieldFormulare[][] map) {
 		this.map = map;
 	}
 
@@ -275,6 +309,22 @@ public class MapFormulare {
 
 	public void setMoeglicheZuege(List<String> moeglicheZuege) {
 		this.moeglicheZuege = moeglicheZuege;
+	}
+
+	public int getFormCount() {
+		return formCount;
+	}
+
+	public void setFormCount(int formCount) {
+		this.formCount = formCount;
+	}
+
+	public int getFormFinal() {
+		return formFinal;
+	}
+
+	public void setFormFinal(int formFinal) {
+		this.formFinal = formFinal;
 	}
 
 }

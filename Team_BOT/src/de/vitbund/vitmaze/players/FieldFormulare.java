@@ -1,6 +1,6 @@
 package de.vitbund.vitmaze.players;
 
-public class FieldLvl1 {
+public class FieldFormulare {
 
 	
 	//Attribute
@@ -13,7 +13,7 @@ public class FieldLvl1 {
 	
 	
 	//Konstruktor
-	public FieldLvl1(int xWert, int yWert, String status, boolean gesehen, boolean betreten, int zaehlerBetreten) {
+	public FieldFormulare(int xWert, int yWert, String status, boolean gesehen, boolean betreten, int zaehlerBetreten) {
 		this.xWert = xWert;
 		this.yWert = yWert;
 		this.status = status;
