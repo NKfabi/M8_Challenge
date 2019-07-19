@@ -3,7 +3,7 @@ package de.vitbund.vitmaze.players;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapLvl1 {
+public class MapFormulare {
 
 	// Attribute
 	private int sizeX;
@@ -15,7 +15,7 @@ public class MapLvl1 {
 	private List<String> moeglicheZuege = new ArrayList<>();
 
 	// Konstruktor
-	public MapLvl1(int sizeX, int sizeY) {
+	public MapFormulare(int sizeX, int sizeY) {
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
 
