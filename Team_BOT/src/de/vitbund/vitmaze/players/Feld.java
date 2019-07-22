@@ -2,41 +2,30 @@ package de.vitbund.vitmaze.players;
 
 public class Feld {
 
-	private int xWert;
-	private int yWert;
-	private String typ;
+
+	
+	//Attribute
 	private String status;
 	private boolean gesehen;
-	private boolean betreten;
 	private int zaehlerBetreten;
-	
-	public Feld(String typ, String status, boolean gesehen, boolean betreten, int zaehlerBetreten) {
-		this.typ = typ;
+
+	//Konstruktor
+	public Feld(String status,
+			boolean gesehen, int zaehlerBetreten) {
 		this.status = status;
 		this.gesehen = gesehen;
-		this.betreten = betreten;
 		this.zaehlerBetreten = zaehlerBetreten;
 	}
 	
 	
-
-	public String getTyp() {
-		return typ;
-	}
-	public void setTyp(String typ) {
-		this.typ = typ;
-	}
-	
+	//getter und setter
 	
 	public String getStatus() {
 		return status;
 	}
-
-
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
 
 	public boolean isGesehen() {
 		return gesehen;
@@ -44,12 +33,7 @@ public class Feld {
 	public void setGesehen(boolean gesehen) {
 		this.gesehen = gesehen;
 	}
-	public boolean isBetreten() {
-		return betreten;
-	}
-	public void setBetreten(boolean betreten) {
-		this.betreten = betreten;
-	}
+	
 	public int getZaehlerBetreten() {
 		return zaehlerBetreten;
 	}
@@ -57,13 +41,4 @@ public class Feld {
 		this.zaehlerBetreten = zaehlerBetreten;
 	}
 
-	
-	public void feldBetreten() {
-		/**
-		 * TODO
-		 */
-//		if 
-		
-	}
-	
 }

@@ -10,11 +10,6 @@ public class FluffyUnicorn {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Automatisch generierter Methodenstub
-
-
-
-
 			// Scanner zum Auslesen der Standardeingabe, welche Initialisierungs- und
 			// Rundendaten liefert
 			Scanner input = new Scanner(System.in);
@@ -31,7 +26,7 @@ public class FluffyUnicorn {
 			int startY = input.nextInt(); // Y-Koordinate der Startposition dieses Players
 			input.nextLine(); // Beenden der zweiten Zeile
 			
-			MapLvl2 map = new MapLvl2(sizeX, sizeY);
+			Karte map = new Karte(sizeX, sizeY);
 			
 			map.setPosX(startX);
 			map.setPosY(startY);
@@ -48,7 +43,6 @@ public class FluffyUnicorn {
 				String southCellStatus = input.nextLine();
 				String westCellStatus = input.nextLine();
 
-				
 				map.botPosition(lastActionsResult);
 				
 				map.formOrder(lastActionsResult);
@@ -56,13 +50,12 @@ public class FluffyUnicorn {
 				map.updateUmfeld(currentCellStatus, lastActionsResult, northCellStatus, eastCellStatus, southCellStatus,
 						westCellStatus);
 				
-//				map.berechneKosten(lastActionsResult);
-				
+				map.leseFormulareGesamt(currentCellStatus, lastActionsResult, northCellStatus, eastCellStatus, southCellStatus, westCellStatus);
+
 				map.printMap();
 				
-				map.sucheWeg();
 
-				String naechsterZug = map.berechneWeg();
+				String naechsterZug = map.berechneWeg(level);
 
 				// Debug Information ausgeben (optional möglich)
 				System.err.println("Ergebnis Vorrunde: " + lastActionsResult);
