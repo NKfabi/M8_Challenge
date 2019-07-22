@@ -56,7 +56,7 @@ public class BotFormulare {
 			
 			map.sucheWeg();
 
-			String naechsterZug = map.berechneWeg();
+			String naechsterZug = map.berechneWeg(level);
 
 			// Debug Information ausgeben (optional möglich)
 			System.err.println("Ergebnis Vorrunde: " + lastActionsResult);
