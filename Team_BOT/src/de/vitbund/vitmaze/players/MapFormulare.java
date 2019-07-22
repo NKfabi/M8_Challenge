@@ -37,28 +37,6 @@ public class MapFormulare {
 	 * @param x
 	 * @param y
 	 */
-//	public void printMap() {
-//		for (int y = 0; y < sizeY; y++) {
-//			for (int x = 0; x < sizeX; x++) {
-//				if (map[y][x].getStatus() == null) {
-//					System.err.print(" ? ");
-//				} else if (map[y][x].getStatus().equals("FINISH " + playerId + " " + getFormFinal())) {
-//					System.err.print(" F ");
-//				} else if (map[y][x].getStatus().equals("FORM " + playerId + " " + formCount)) {
-//					System.err.print(" " + formCount + " ");
-//				} else if (map[y][x].getStatus().equals("FLOOR")) {
-//					System.err.print("   ");
-//				} else if (map[y][x].getStatus().equals("WALL")) {
-//					System.err.print(" # ");
-//				} else {
-//					System.err.print(" ! ");
-//				}
-//			}
-//			System.err.println();
-//		}
-//
-//	}
-
 	public void printMap() {
 		for (int y = 0; y < sizeY; y++) {
 			for (int x = 0; x < sizeX; x++) {
@@ -69,7 +47,7 @@ public class MapFormulare {
 				} else if (map[y][x].getStatus().equals("FORM " + playerId + " " + formCount)) {
 					System.err.print(" " + formCount + " ");
 				} else if (map[y][x].getStatus().equals("FLOOR")) {
-					System.err.print(map[y][x].getKosten());
+					System.err.print("   ");
 				} else if (map[y][x].getStatus().equals("WALL")) {
 					System.err.print(" # ");
 				} else {
@@ -80,6 +58,8 @@ public class MapFormulare {
 		}
 
 	}
+
+
 
 	/**
 	 * sucht den Weg in dem es moegliche Zuege in eine Liste schreibt
@@ -187,6 +167,14 @@ public class MapFormulare {
 	 */
 	public void botPosition(String lastAction) {
 		if (lastAction.equals("OK")) {
+		} else if (lastAction.equals("OK WEST") && posX == 0) {
+			setPosX(getSizeX() - 1);
+		} else if (lastAction.equals("OK EAST") && posX == sizeX - 1) {
+			setPosX(0);
+		} else if (lastAction.equals("OK SOUTH") && posY == sizeY - 1) {
+			setPosY(0);
+		} else if (lastAction.equals("OK NORTH") && posY == 0) {
+			setPosY(getSizeY() - 1);
 		} else if (lastAction.equals("OK WEST")) {
 			posX -= 1;
 		} else if (lastAction.equals("OK EAST")) {
