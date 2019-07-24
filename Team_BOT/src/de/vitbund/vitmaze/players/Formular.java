@@ -34,7 +34,7 @@ public class Formular {
 				test = currentPosition.substring(0, 8);
 
 				if (test.equals("FINISH " + playerId)) {
-					String[] parts = currentPosition.split(" ", 3);
+					String[] parts = currentPosition.split(" ", 4);
 					int a = Integer.parseInt(parts[2]);
 					setFormulareGesamt(a);
 				}
@@ -42,7 +42,7 @@ public class Formular {
 				test = northStatus.substring(0, 8);
 
 				if (test.equals("FINISH " + playerId)) {
-					String[] parts = northStatus.split(" ", 3);
+					String[] parts = northStatus.split(" ", 4);
 					int a = Integer.parseInt(parts[2]);
 					setFormulareGesamt(a);
 				}
@@ -50,7 +50,7 @@ public class Formular {
 				test = southStatus.substring(0, 8);
 
 				if (test.equals("FINISH " + playerId)) {
-					String[] parts = southStatus.split(" ", 3);
+					String[] parts = southStatus.split(" ", 4);
 					int a = Integer.parseInt(parts[2]);
 					setFormulareGesamt(a);
 				}
@@ -58,7 +58,7 @@ public class Formular {
 				test = westStatus.substring(0, 8);
 
 				if (test.equals("FINISH " + playerId)) {
-					String[] parts = westStatus.split(" ", 3);
+					String[] parts = westStatus.split(" ", 4);
 					int a = Integer.parseInt(parts[2]);
 					setFormulareGesamt(a);
 				}
@@ -66,7 +66,7 @@ public class Formular {
 				test = eastStatus.substring(0, 8);
 
 				if (test.equals("FINISH " + playerId)) {
-					String[] parts = eastStatus.split(" ", 3);
+					String[] parts = eastStatus.split(" ", 4);
 					int a = Integer.parseInt(parts[2]);
 					setFormulareGesamt(a);
 				}
