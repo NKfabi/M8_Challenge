@@ -36,9 +36,6 @@ public class FluffyUnicorn {
 
 			// TURN (Wiederholung je Runde notwendig)
 			while (true) {
-				
-//				System.err.println("Form gesamt: " + form.getFormulareGesamt());
-//				System.err.println("Formzaehler: " + form.getFormularZaehler());
 				// Rundeninformationen auslesen
 				String lastActionsResult = input.nextLine();
 				String currentCellStatus = input.nextLine();

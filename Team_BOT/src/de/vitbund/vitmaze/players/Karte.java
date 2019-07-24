@@ -11,8 +11,6 @@ public class Karte {
 	private int posX;
 	private int posY;
 	private int playerId;
-//	private int formularZaehler = 1;
-//	private int formulareGesamt;
 	private Feld[][] map;
 	private List<String> moeglicheZuege = new ArrayList<>();
 	private Formular form;
@@ -79,64 +77,6 @@ public class Karte {
 
 	}
 
-//	public void formOrder(String lastAction) {
-//		if (lastAction.equals("OK FORM")) {
-//			setFormularZaehler(getFormularZaehler() + 1);
-//		}
-//
-//	}
-//
-//	
-//	
-//	public void leseFormulareGesamt(String currentPosition, String lastPosition, String northStatus, String eastStatus,
-//			String southStatus, String westStatus) {
-//
-//		String test;
-//
-//		if (formulareGesamt == 0) {
-//			if (currentPosition.length() > 8) {
-//				test = currentPosition.substring(0, 8);
-//
-//				if (test.equals("FINISH " + playerId)) {
-//					String[] parts = currentPosition.split(" ", 3);
-//					int a = Integer.parseInt(parts[2]);
-//					setFormulareGesamt(a);
-//				}
-//			} else if (northStatus.length() > 8) {
-//				test = northStatus.substring(0, 8);
-//
-//				if (test.equals("FINISH " + playerId)) {
-//					String[] parts = northStatus.split(" ", 3);
-//					int a = Integer.parseInt(parts[2]);
-//					setFormulareGesamt(a);
-//				}
-//			} else if (southStatus.length() > 8) {
-//				test = southStatus.substring(0, 8);
-//
-//				if (test.equals("FINISH " + playerId)) {
-//					String[] parts = southStatus.split(" ", 3);
-//					int a = Integer.parseInt(parts[2]);
-//					setFormulareGesamt(a);
-//				}
-//			} else if (westStatus.length() > 8) {
-//				test = westStatus.substring(0, 8);
-//
-//				if (test.equals("FINISH " + playerId)) {
-//					String[] parts = westStatus.split(" ", 3);
-//					int a = Integer.parseInt(parts[2]);
-//					setFormulareGesamt(a);
-//				}
-//			} else if (eastStatus.length() > 8) {
-//				test = eastStatus.substring(0, 8);
-//
-//				if (test.equals("FINISH " + playerId)) {
-//					String[] parts = eastStatus.split(" ", 3);
-//					int a = Integer.parseInt(parts[2]);
-//					setFormulareGesamt(a);
-//				}
-//			}
-//		}
-//	}
 
 	/**
 	 * updatet das Umfeld des Bots also die 4 umliegenden Felder
@@ -173,6 +113,7 @@ public class Karte {
 		map[posY][posX + 1].setGesehen(true);
 	}
 
+	
 	/**
 	 * berechnet den Weg des Bots und laesst in die Richtung, auf den Feldern auf
 	 * denen er am wenigsten stand, gehen
@@ -364,23 +305,7 @@ public class Karte {
 	public void setPlayerId(int playerId) {
 		this.playerId = playerId;
 	}
-
-//	public int getFormularZaehler() {
-//		return formularZaehler;
-//	}
-//
-//	public void setFormularZaehler(int formularZaehler) {
-//		this.formularZaehler = formularZaehler;
-//	}
-//
-//	public int getFormulareGesamt() {
-//		return formulareGesamt;
-//	}
-//
-//	public void setFormulareGesamt(int formulareGesamt) {
-//		this.formulareGesamt = formulareGesamt;
-//	}
-
+	
 	public Feld[][] getMap() {
 		return map;
 	}
