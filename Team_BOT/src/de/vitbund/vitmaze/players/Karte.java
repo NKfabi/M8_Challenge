@@ -15,6 +15,7 @@ public class Karte {
 	private Feld[][] grenzen;
 	private List<String> moeglicheZuege = new ArrayList<>();
 	private Formular form;
+	private Sheet sheets;
 
 	// Konstruktor
 
@@ -76,13 +77,15 @@ public class Karte {
 				if (map[y][x].getStatus() == null) {
 					System.err.print(" ? ");
 				} else if (map[y][x].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
-					System.err.print(" F ");
+					System.err.print(" Z ");
 				} else if (map[y][x].getStatus().equals("FORM " + playerId + " " + form.getFormularZaehler())) {
-					System.err.print(" " + form.getFormularZaehler() + " ");
+					System.err.print(" F ");
 				} else if (map[y][x].getStatus().equals("FLOOR")) {
 					System.err.print("   ");
 				} else if (map[y][x].getStatus().equals("WALL")) {
-					System.err.print(" # ");
+					System.err.print(" W ");
+				} else if (map[y][x].getStatus().equals("SHEET")) {
+					System.err.print(" S ");
 				} else {
 					System.err.print(" ! ");
 				}
@@ -192,7 +195,7 @@ public class Karte {
 	 * denen er am wenigsten stand, gehen
 	 * 
 	 */
-	public String berechneWeg(int level, Formular form) {
+	public String berechneWeg(int level, Formular form, Sheet sheets) {
 
 		String niedrigsterZug = "";
 
@@ -267,7 +270,9 @@ public class Karte {
 
 		default:
 
-			if (form.getFormulareGesamt() != 0 && form.getFormularZaehler() > form.getFormulareGesamt()
+			if (map[posY][posX].getStatus().equals("SHEET")) {
+				System.out.println("take");
+			} else if (form.getFormulareGesamt() != 0 && form.getFormularZaehler() > form.getFormulareGesamt()
 					&& map[posY][posX].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "finish";
 			} else if (form.getFormulareGesamt() != 0 && form.getFormularZaehler() > form.getFormulareGesamt()
@@ -408,6 +413,14 @@ public class Karte {
 
 	public void setGrenzen(Feld[][] grenzen) {
 		this.grenzen = grenzen;
+	}
+
+	public Sheet getSheets() {
+		return sheets;
+	}
+
+	public void setSheets(Sheet sheets) {
+		this.sheets = sheets;
 	}
 
 }

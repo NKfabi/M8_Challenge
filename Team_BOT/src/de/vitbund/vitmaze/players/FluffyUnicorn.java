@@ -28,6 +28,7 @@ public class FluffyUnicorn {
 			
 			Karte map = new Karte(sizeX, sizeY);
 			Formular form = new Formular(playerId);
+			Sheet sheets = new Sheet();
 			
 			map.setPosX(startX);
 			map.setPosY(startY);
@@ -35,7 +36,7 @@ public class FluffyUnicorn {
 
 
 			// TURN (Wiederholung je Runde notwendig)
-			while (input.hasNext()) {
+			while (true) {
 				// Rundeninformationen auslesen
 				String lastActionsResult = input.nextLine();
 				String currentCellStatus = input.nextLine();
@@ -48,6 +49,8 @@ public class FluffyUnicorn {
 				
 				form.formOrder(lastActionsResult);
 				
+				sheets.sheetStack(lastActionsResult);
+				
 				map.updateUmfeld(currentCellStatus, lastActionsResult, northCellStatus, eastCellStatus, southCellStatus,
 						westCellStatus);
 				
@@ -57,7 +60,7 @@ public class FluffyUnicorn {
 //				map.printGrenzen();
 				
 
-				String naechsterZug = map.berechneWeg(level, form);
+				String naechsterZug = map.berechneWeg(level, form, sheets);
 
 				// Debug Information ausgeben (optional möglich)
 				System.err.println("Ergebnis Vorrunde: " + lastActionsResult);
@@ -73,7 +76,7 @@ public class FluffyUnicorn {
 			}
 
 			// Eingabe schliessen (letzte Aktion)
-			input.close();
+//			input.close();
 		}
 
 
