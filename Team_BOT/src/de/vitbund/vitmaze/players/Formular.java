@@ -10,9 +10,7 @@ public class Formular {
 	public Formular() {}
 	
 	
-	public Formular(int formularZaehler, int formulareGesamt, int playerId) {
-		this.formularZaehler = formularZaehler;
-		this.formulareGesamt = formulareGesamt;
+	public Formular(int playerId) {
 		this.playerId = playerId;
 	}
 	

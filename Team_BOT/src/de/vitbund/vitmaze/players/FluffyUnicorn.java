@@ -27,7 +27,7 @@ public class FluffyUnicorn {
 			input.nextLine(); // Beenden der zweiten Zeile
 			
 			Karte map = new Karte(sizeX, sizeY);
-			Formular form = new Formular();
+			Formular form = new Formular(playerId);
 			
 			map.setPosX(startX);
 			map.setPosY(startY);
@@ -35,7 +35,7 @@ public class FluffyUnicorn {
 
 
 			// TURN (Wiederholung je Runde notwendig)
-			while (input.hasNext()) {
+			while (true) {
 				
 //				System.err.println("Form gesamt: " + form.getFormulareGesamt());
 //				System.err.println("Formzaehler: " + form.getFormularZaehler());
@@ -75,7 +75,7 @@ public class FluffyUnicorn {
 			}
 
 			// Eingabe schliessen (letzte Aktion)
-			input.close();
+//			input.close();
 		}
 
 
