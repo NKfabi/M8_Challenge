@@ -35,7 +35,7 @@ public class FluffyUnicorn {
 
 
 			// TURN (Wiederholung je Runde notwendig)
-			while (true) {
+			while (input.hasNext()) {
 				// Rundeninformationen auslesen
 				String lastActionsResult = input.nextLine();
 				String currentCellStatus = input.nextLine();
@@ -54,6 +54,7 @@ public class FluffyUnicorn {
 				form.leseFormulareGesamt(currentCellStatus, lastActionsResult, northCellStatus, eastCellStatus, southCellStatus, westCellStatus);
 
 				map.printMap(form);
+//				map.printGrenzen();
 				
 
 				String naechsterZug = map.berechneWeg(level, form);
@@ -72,7 +73,7 @@ public class FluffyUnicorn {
 			}
 
 			// Eingabe schliessen (letzte Aktion)
-//			input.close();
+			input.close();
 		}
 
 

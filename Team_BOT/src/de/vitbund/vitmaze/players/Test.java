@@ -20,6 +20,8 @@ public class Test {
 		Formular form = new Formular();
 		
 		System.out.println(form.getFormularZaehler());
+		
+
 	}
 
 }

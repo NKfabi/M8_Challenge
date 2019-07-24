@@ -12,6 +12,7 @@ public class Karte {
 	private int posY;
 	private int playerId;
 	private Feld[][] map;
+	private Feld[][] grenzen;
 	private List<String> moeglicheZuege = new ArrayList<>();
 	private Formular form;
 
@@ -22,12 +23,45 @@ public class Karte {
 		this.sizeY = sizeY;
 
 		this.map = new Feld[sizeY][sizeX];
+		this.grenzen = new Feld[sizeY][sizeX];
 
 		for (int y = 0; y < this.sizeY; y++) {
 			for (int x = 0; x < this.sizeX; x++) {
 				map[y][x] = new Feld(null, false, 0);
 			}
 		}
+
+//		int n = 0;
+//		while (n == 0) {
+//			for (int x = 0; x < this.sizeX; x++) {
+//				grenzen[n][x] = new Feld(null, false, 0);
+//			}
+//			n++;
+//		}
+//
+//		int s = sizeY - 1;
+//		while (s == sizeY - 1) {
+//			for (int x = 0; x < this.sizeX; x++) {
+//				grenzen[s][x] = new Feld(null, false, 0);
+//			}
+//			s++;
+//		}
+//
+//		int w = 0;
+//		while (w == 0) {
+//			for (int y = 0; y < this.sizeY; y++) {
+//				grenzen[y][w] = new Feld(null, false, 0);
+//			}
+//			w++;
+//		}
+//
+//		int e = sizeX - 1;
+//		while (e == sizeX - 1) {
+//			for (int y = 0; y < this.sizeY; y++) {
+//				grenzen[y][e] = new Feld(null, false, 0);
+//			}
+//			e++;
+//		}
 	}
 
 	/**
@@ -58,6 +92,47 @@ public class Karte {
 
 	}
 
+//	public void printGrenzen() {
+//		int n = 0;
+//		int s = sizeY - 1;
+//		int w = 0;
+//		int e = sizeX - 1;
+//		
+//		while (n == 0 && s == sizeY - 1 && w == 0 && e == sizeX - 1) {
+//			for (int x = 0; x < this.sizeX; x++) {
+//				if (grenzen[n][x].getStatus() == null) {
+//					System.err.print(" ? ");
+//				}
+//			}
+//			n++;
+//			System.err.println();
+//			for (int x = 0; x < this.sizeX; x++) {
+//				if (grenzen[s][x].getStatus() == null) {
+//					System.err.print(" ? ");
+//				}
+//			}
+//			s++;
+//			System.err.println();
+//			for (int y = 0; y < this.sizeY; y++) {
+//				if (grenzen[y][w].getStatus() == null) {
+//					System.err.print(" ? ");
+//				}
+//			}
+//			w++;
+//			
+//			System.err.println();
+//			for (int y = 0; y < this.sizeY; y++) {
+//				if (grenzen[y][e].getStatus() == null) {
+//					System.err.print(" ? ");
+//				}
+//			}
+//			e++;
+//			
+//			System.err.println();
+//		}
+//
+//	}
+
 	/**
 	 * updatet die Spielerposition je nach letztem Zug
 	 * 
@@ -76,7 +151,6 @@ public class Karte {
 		}
 
 	}
-
 
 	/**
 	 * updatet das Umfeld des Bots also die 4 umliegenden Felder
@@ -113,7 +187,6 @@ public class Karte {
 		map[posY][posX + 1].setGesehen(true);
 	}
 
-	
 	/**
 	 * berechnet den Weg des Bots und laesst in die Richtung, auf den Feldern auf
 	 * denen er am wenigsten stand, gehen
@@ -193,8 +266,7 @@ public class Karte {
 			return niedrigsterZug;
 
 		default:
-			System.err.println("Forms gesamt: " + form.getFormulareGesamt());
-			System.err.println("Formzaehler: " + form.getFormularZaehler());
+
 			if (form.getFormulareGesamt() != 0 && form.getFormularZaehler() > form.getFormulareGesamt()
 					&& map[posY][posX].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "finish";
@@ -305,7 +377,7 @@ public class Karte {
 	public void setPlayerId(int playerId) {
 		this.playerId = playerId;
 	}
-	
+
 	public Feld[][] getMap() {
 		return map;
 	}
@@ -328,6 +400,14 @@ public class Karte {
 
 	public void setForm(Formular form) {
 		this.form = form;
+	}
+
+	public Feld[][] getGrenzen() {
+		return grenzen;
+	}
+
+	public void setGrenzen(Feld[][] grenzen) {
+		this.grenzen = grenzen;
 	}
 
 }

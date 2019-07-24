@@ -72,8 +72,7 @@ public class Formular {
 				}
 			}
 		}
-		
-		System.err.println(getFormulareGesamt());
+
 		return getFormulareGesamt();
 	}
 	
