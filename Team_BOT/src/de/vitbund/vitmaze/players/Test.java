@@ -16,6 +16,10 @@ public class Test {
 		System.out.println(test.substring(0, 8));
 		
 		System.out.println(playerId+1);
+		
+		Formular form = new Formular();
+		
+		System.out.println(form.getFormularZaehler());
 	}
 
 }

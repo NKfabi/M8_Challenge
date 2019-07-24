@@ -11,10 +11,11 @@ public class Karte {
 	private int posX;
 	private int posY;
 	private int playerId;
-	private int formularZaehler = 1;
-	private int formulareGesamt;
+//	private int formularZaehler = 1;
+//	private int formulareGesamt;
 	private Feld[][] map;
 	private List<String> moeglicheZuege = new ArrayList<>();
+	private Formular form;
 
 	// Konstruktor
 
@@ -37,15 +38,15 @@ public class Karte {
 	 * @param x
 	 * @param y
 	 */
-	public void printMap() {
+	public void printMap(Formular form) {
 		for (int y = 0; y < sizeY; y++) {
 			for (int x = 0; x < sizeX; x++) {
 				if (map[y][x].getStatus() == null) {
 					System.err.print(" ? ");
-				} else if (map[y][x].getStatus().equals("FINISH " + playerId + " " + getFormulareGesamt())) {
+				} else if (map[y][x].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 					System.err.print(" F ");
-				} else if (map[y][x].getStatus().equals("FORM " + playerId + " " + formularZaehler)) {
-					System.err.print(" " + formularZaehler + " ");
+				} else if (map[y][x].getStatus().equals("FORM " + playerId + " " + form.getFormularZaehler())) {
+					System.err.print(" " + form.getFormularZaehler() + " ");
 				} else if (map[y][x].getStatus().equals("FLOOR")) {
 					System.err.print("   ");
 				} else if (map[y][x].getStatus().equals("WALL")) {
@@ -59,32 +60,6 @@ public class Karte {
 
 	}
 
-	/**
-	 * sucht den Weg in dem es moegliche Zuege in eine Liste schreibt
-	 * 
-	 */
-//	public void sucheWeg() {
-//
-//		List<String> moeglicheZuegeNew = new ArrayList<String>();
-//
-//		if (!map[posY + 1][posX].getStatus().equals("WALL")) {
-//			moeglicheZuegeNew.add("go south");
-//		}
-//		if (!map[posY][posX - 1].getStatus().equals("WALL")) {
-//			moeglicheZuegeNew.add("go west");
-//		}
-//		if (!map[posY - 1][posX].getStatus().equals("WALL")) {
-//			moeglicheZuegeNew.add("go north");
-//		}
-//		if (!map[posY][posX + 1].getStatus().equals("WALL")) {
-//			moeglicheZuegeNew.add("go east");
-//		}
-//
-//		moeglicheZuege = moeglicheZuegeNew;
-//	}
-
-	
-	
 	/**
 	 * updatet die Spielerposition je nach letztem Zug
 	 * 
@@ -104,69 +79,65 @@ public class Karte {
 
 	}
 
-	
-	
-	public void formOrder(String lastAction) {
-		if (lastAction.equals("OK FORM")) {
-			setFormularZaehler(getFormularZaehler() + 1);
-		}
+//	public void formOrder(String lastAction) {
+//		if (lastAction.equals("OK FORM")) {
+//			setFormularZaehler(getFormularZaehler() + 1);
+//		}
+//
+//	}
+//
+//	
+//	
+//	public void leseFormulareGesamt(String currentPosition, String lastPosition, String northStatus, String eastStatus,
+//			String southStatus, String westStatus) {
+//
+//		String test;
+//
+//		if (formulareGesamt == 0) {
+//			if (currentPosition.length() > 8) {
+//				test = currentPosition.substring(0, 8);
+//
+//				if (test.equals("FINISH " + playerId)) {
+//					String[] parts = currentPosition.split(" ", 3);
+//					int a = Integer.parseInt(parts[2]);
+//					setFormulareGesamt(a);
+//				}
+//			} else if (northStatus.length() > 8) {
+//				test = northStatus.substring(0, 8);
+//
+//				if (test.equals("FINISH " + playerId)) {
+//					String[] parts = northStatus.split(" ", 3);
+//					int a = Integer.parseInt(parts[2]);
+//					setFormulareGesamt(a);
+//				}
+//			} else if (southStatus.length() > 8) {
+//				test = southStatus.substring(0, 8);
+//
+//				if (test.equals("FINISH " + playerId)) {
+//					String[] parts = southStatus.split(" ", 3);
+//					int a = Integer.parseInt(parts[2]);
+//					setFormulareGesamt(a);
+//				}
+//			} else if (westStatus.length() > 8) {
+//				test = westStatus.substring(0, 8);
+//
+//				if (test.equals("FINISH " + playerId)) {
+//					String[] parts = westStatus.split(" ", 3);
+//					int a = Integer.parseInt(parts[2]);
+//					setFormulareGesamt(a);
+//				}
+//			} else if (eastStatus.length() > 8) {
+//				test = eastStatus.substring(0, 8);
+//
+//				if (test.equals("FINISH " + playerId)) {
+//					String[] parts = eastStatus.split(" ", 3);
+//					int a = Integer.parseInt(parts[2]);
+//					setFormulareGesamt(a);
+//				}
+//			}
+//		}
+//	}
 
-	}
-
-	
-	
-	public void leseFormulareGesamt(String currentPosition, String lastPosition, String northStatus, String eastStatus,
-			String southStatus, String westStatus) {
-
-		String test;
-
-		if (formulareGesamt == 0) {
-			if (currentPosition.length() > 8) {
-				test = currentPosition.substring(0, 8);
-
-				if (test.equals("FINISH " + playerId)) {
-					String[] parts = currentPosition.split(" ", 3);
-					int a = Integer.parseInt(parts[2]);
-					setFormulareGesamt(a);
-				}
-			} else if (northStatus.length() > 8) {
-				test = northStatus.substring(0, 8);
-
-				if (test.equals("FINISH " + playerId)) {
-					String[] parts = northStatus.split(" ", 3);
-					int a = Integer.parseInt(parts[2]);
-					setFormulareGesamt(a);
-				}
-			} else if (southStatus.length() > 8) {
-				test = southStatus.substring(0, 8);
-
-				if (test.equals("FINISH " + playerId)) {
-					String[] parts = southStatus.split(" ", 3);
-					int a = Integer.parseInt(parts[2]);
-					setFormulareGesamt(a);
-				}
-			} else if (westStatus.length() > 8) {
-				test = westStatus.substring(0, 8);
-
-				if (test.equals("FINISH " + playerId)) {
-					String[] parts = westStatus.split(" ", 3);
-					int a = Integer.parseInt(parts[2]);
-					setFormulareGesamt(a);
-				}
-			} else if (eastStatus.length() > 8) {
-				test = eastStatus.substring(0, 8);
-
-				if (test.equals("FINISH " + playerId)) {
-					String[] parts = eastStatus.split(" ", 3);
-					int a = Integer.parseInt(parts[2]);
-					setFormulareGesamt(a);
-				}
-			}
-		}
-	}
-
-	
-	
 	/**
 	 * updatet das Umfeld des Bots also die 4 umliegenden Felder
 	 * 
@@ -207,7 +178,7 @@ public class Karte {
 	 * denen er am wenigsten stand, gehen
 	 * 
 	 */
-	public String berechneWeg(int level) {
+	public String berechneWeg(int level, Formular form) {
 
 		String niedrigsterZug = "";
 
@@ -230,20 +201,15 @@ public class Karte {
 
 		switch (level) {
 		case 1:
-			if (getFormulareGesamt() != 0 && getFormularZaehler() > getFormulareGesamt()
-					&& map[posY][posX].getStatus().equals("FINISH " + playerId + " " + formulareGesamt)) {
+			if (map[posY][posX].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "finish";
-			} else if (getFormulareGesamt() != 0 && getFormularZaehler() > getFormulareGesamt()
-					&& map[posY + 1][posX].getStatus().equals("FINISH " + playerId + " " + formulareGesamt)) {
+			} else if (map[posY + 1][posX].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "go south";
-			} else if (getFormulareGesamt() != 0 && getFormularZaehler() > getFormulareGesamt()
-					&& map[posY][posX - 1].getStatus().equals("FINISH " + playerId + " " + formulareGesamt)) {
+			} else if (map[posY][posX - 1].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "go west";
-			} else if (getFormulareGesamt() != 0 && getFormularZaehler() > getFormulareGesamt()
-					&& map[posY - 1][posX].getStatus().equals("FINISH " + playerId + " " + formulareGesamt)) {
+			} else if (map[posY - 1][posX].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "go north";
-			} else if (getFormulareGesamt() != 0 && getFormularZaehler() > getFormulareGesamt()
-					&& map[posY][posX + 1].getStatus().equals("FINISH " + playerId + " " + formulareGesamt)) {
+			} else if (map[posY][posX + 1].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "go east";
 			} else {
 				int niedrigsteAnzahl = 999;
@@ -286,32 +252,34 @@ public class Karte {
 			return niedrigsterZug;
 
 		default:
-			if (getFormulareGesamt() != 0 && getFormularZaehler() > getFormulareGesamt()
-					&& map[posY][posX].getStatus().equals("FINISH " + playerId + " " + formulareGesamt)) {
+			System.err.println("Forms gesamt: " + form.getFormulareGesamt());
+			System.err.println("Formzaehler: " + form.getFormularZaehler());
+			if (form.getFormulareGesamt() != 0 && form.getFormularZaehler() > form.getFormulareGesamt()
+					&& map[posY][posX].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "finish";
-			} else if (getFormulareGesamt() != 0 && getFormularZaehler() > getFormulareGesamt()
-					&& map[posY + 1][posX].getStatus().equals("FINISH " + playerId + " " + formulareGesamt)) {
+			} else if (form.getFormulareGesamt() != 0 && form.getFormularZaehler() > form.getFormulareGesamt()
+					&& map[posY + 1][posX].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "go south";
-			} else if (getFormulareGesamt() != 0 && getFormularZaehler() > getFormulareGesamt()
-					&& map[posY][posX - 1].getStatus().equals("FINISH " + playerId + " " + formulareGesamt)) {
+			} else if (form.getFormulareGesamt() != 0 && form.getFormularZaehler() > form.getFormulareGesamt()
+					&& map[posY][posX - 1].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "go west";
-			} else if (getFormulareGesamt() != 0 && getFormularZaehler() > getFormulareGesamt()
-					&& map[posY - 1][posX].getStatus().equals("FINISH " + playerId + " " + formulareGesamt)) {
+			} else if (form.getFormulareGesamt() != 0 && form.getFormularZaehler() > form.getFormulareGesamt()
+					&& map[posY - 1][posX].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "go north";
-			} else if (getFormulareGesamt() != 0 && getFormularZaehler() > getFormulareGesamt()
-					&& map[posY][posX + 1].getStatus().equals("FINISH " + playerId + " " + formulareGesamt)) {
+			} else if (form.getFormulareGesamt() != 0 && form.getFormularZaehler() > form.getFormulareGesamt()
+					&& map[posY][posX + 1].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "go east";
 			}
 
-			else if (map[posY][posX].getStatus().equals("FORM " + playerId + " " + formularZaehler)) {
+			else if (map[posY][posX].getStatus().equals("FORM " + playerId + " " + form.getFormularZaehler())) {
 				niedrigsterZug = "take";
-			} else if (map[posY + 1][posX].getStatus().equals("FORM " + playerId + " " + formularZaehler)) {
+			} else if (map[posY + 1][posX].getStatus().equals("FORM " + playerId + " " + form.getFormularZaehler())) {
 				niedrigsterZug = "go south";
-			} else if (map[posY][posX - 1].getStatus().equals("FORM " + playerId + " " + formularZaehler)) {
+			} else if (map[posY][posX - 1].getStatus().equals("FORM " + playerId + " " + form.getFormularZaehler())) {
 				niedrigsterZug = "go west";
-			} else if (map[posY - 1][posX].getStatus().equals("FORM " + playerId + " " + formularZaehler)) {
+			} else if (map[posY - 1][posX].getStatus().equals("FORM " + playerId + " " + form.getFormularZaehler())) {
 				niedrigsterZug = "go north";
-			} else if (map[posY][posX + 1].getStatus().equals("FORM " + playerId + " " + formularZaehler)) {
+			} else if (map[posY][posX + 1].getStatus().equals("FORM " + playerId + " " + form.getFormularZaehler())) {
 				niedrigsterZug = "go east";
 			} else {
 				int niedrigsteAnzahl = 999;
@@ -356,7 +324,6 @@ public class Karte {
 
 	}
 
-	
 	// getter und setter
 	public int getSizeX() {
 		return sizeX;
@@ -398,21 +365,21 @@ public class Karte {
 		this.playerId = playerId;
 	}
 
-	public int getFormularZaehler() {
-		return formularZaehler;
-	}
-
-	public void setFormularZaehler(int formularZaehler) {
-		this.formularZaehler = formularZaehler;
-	}
-
-	public int getFormulareGesamt() {
-		return formulareGesamt;
-	}
-
-	public void setFormulareGesamt(int formulareGesamt) {
-		this.formulareGesamt = formulareGesamt;
-	}
+//	public int getFormularZaehler() {
+//		return formularZaehler;
+//	}
+//
+//	public void setFormularZaehler(int formularZaehler) {
+//		this.formularZaehler = formularZaehler;
+//	}
+//
+//	public int getFormulareGesamt() {
+//		return formulareGesamt;
+//	}
+//
+//	public void setFormulareGesamt(int formulareGesamt) {
+//		this.formulareGesamt = formulareGesamt;
+//	}
 
 	public Feld[][] getMap() {
 		return map;
@@ -430,6 +397,12 @@ public class Karte {
 		this.moeglicheZuege = moeglicheZuege;
 	}
 
+	public Formular getForm() {
+		return form;
+	}
 
+	public void setForm(Formular form) {
+		this.form = form;
+	}
 
 }
