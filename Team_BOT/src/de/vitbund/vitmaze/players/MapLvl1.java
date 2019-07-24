@@ -3,7 +3,7 @@ package de.vitbund.vitmaze.players;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapFormulare {
+public class MapLvl1 {
 
 	// Attribute
 	private int sizeX;
@@ -13,19 +13,19 @@ public class MapFormulare {
 	private int playerId;
 	private int formCount = 1;
 	private int formFinal;
-	private FieldFormulare[][] map;
+	private FieldLvl1[][] map;
 	private List<String> moeglicheZuege = new ArrayList<>();
 
 	// Konstruktor
-	public MapFormulare(int sizeX, int sizeY) {
+	public MapLvl1(int sizeX, int sizeY) {
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
 
-		map = new FieldFormulare[sizeY][sizeX];
+		map = new FieldLvl1[sizeY][sizeX];
 
 		for (int y = 0; y < this.sizeY; y++) {
 			for (int x = 0; x < this.sizeX; x++) {
-				map[y][x] = new FieldFormulare(y, x, null, false, 0);
+				map[y][x] = new FieldLvl1(y, x, null, false, 0);
 
 			}
 		}
@@ -295,11 +295,11 @@ public class MapFormulare {
 		this.playerId = playerId;
 	}
 
-	public FieldFormulare[][] getMap() {
+	public FieldLvl1[][] getMap() {
 		return map;
 	}
 
-	public void setMap(FieldFormulare[][] map) {
+	public void setMap(FieldLvl1[][] map) {
 		this.map = map;
 	}
 

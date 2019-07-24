@@ -2,7 +2,7 @@ package de.vitbund.vitmaze.players;
 
 import java.util.Scanner;
 
-public class BotFormulare {
+public class BotLvl1 {
 
 	/**
 	 * Hauptmethode zum Ausführen des Bots
@@ -25,13 +25,14 @@ public class BotFormulare {
 		int startX = input.nextInt(); // X-Koordinate der Startposition dieses Player
 		int startY = input.nextInt(); // Y-Koordinate der Startposition dieses Players
 		input.nextLine(); // Beenden der zweiten Zeile
-		
-		MapFormulare map = new MapFormulare(sizeX, sizeY);
-		
+
+		// Instanz von Landkarte
+		MapLvl1 map = new MapLvl1(sizeX, sizeY);
+
+		// Deklarieren und instanziieren von den x und y werten
 		map.setPosX(startX);
 		map.setPosY(startY);
 		map.setPlayerId(playerId);
-
 
 		// TURN (Wiederholung je Runde notwendig)
 		while (input.hasNext()) {
@@ -42,11 +43,8 @@ public class BotFormulare {
 			String eastCellStatus = input.nextLine();
 			String southCellStatus = input.nextLine();
 			String westCellStatus = input.nextLine();
-
 			
 			map.botPosition(lastActionsResult);
-			
-			map.formOrder(lastActionsResult);
 			
 			map.updateUmfeld(currentCellStatus, lastActionsResult, northCellStatus, eastCellStatus, southCellStatus,
 					westCellStatus);
@@ -56,6 +54,9 @@ public class BotFormulare {
 			map.sucheWeg();
 
 			String naechsterZug = map.berechneWeg();
+
+			
+			
 
 			// Debug Information ausgeben (optional möglich)
 			System.err.println("Ergebnis Vorrunde: " + lastActionsResult);
@@ -67,6 +68,7 @@ public class BotFormulare {
 			
 			// Zugausgabe
 			System.out.println(naechsterZug);
+			
 
 		}
 
@@ -75,3 +77,4 @@ public class BotFormulare {
 	}
 
 }
+
