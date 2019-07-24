@@ -31,37 +31,37 @@ public class Karte {
 			}
 		}
 
-//		int n = 0;
-//		while (n == 0) {
-//			for (int x = 0; x < this.sizeX; x++) {
-//				grenzen[n][x] = new Feld(null, false, 0);
-//			}
-//			n++;
-//		}
-//
-//		int s = sizeY - 1;
-//		while (s == sizeY - 1) {
-//			for (int x = 0; x < this.sizeX; x++) {
-//				grenzen[s][x] = new Feld(null, false, 0);
-//			}
-//			s++;
-//		}
-//
-//		int w = 0;
-//		while (w == 0) {
-//			for (int y = 0; y < this.sizeY; y++) {
-//				grenzen[y][w] = new Feld(null, false, 0);
-//			}
-//			w++;
-//		}
-//
-//		int e = sizeX - 1;
-//		while (e == sizeX - 1) {
-//			for (int y = 0; y < this.sizeY; y++) {
-//				grenzen[y][e] = new Feld(null, false, 0);
-//			}
-//			e++;
-//		}
+		int n = 0;
+		while (n == 0) {
+			for (int x = 0; x < this.sizeX; x++) {
+				grenzen[n][x] = new Feld(null, false, 0);
+			}
+			n++;
+		}
+
+		int s = sizeY - 1;
+		while (s == sizeY - 1) {
+			for (int x = 0; x < this.sizeX; x++) {
+				grenzen[s][x] = new Feld(null, false, 0);
+			}
+			s++;
+		}
+
+		int w = 0;
+		while (w == 0) {
+			for (int y = 0; y < this.sizeY; y++) {
+				grenzen[y][w] = new Feld(null, false, 0);
+			}
+			w++;
+		}
+
+		int e = sizeX - 1;
+		while (e == sizeX - 1) {
+			for (int y = 0; y < this.sizeY; y++) {
+				grenzen[y][e] = new Feld(null, false, 0);
+			}
+			e++;
+		}
 	}
 
 	/**
