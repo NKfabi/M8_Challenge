@@ -65,7 +65,7 @@ public class FluffyUnicorn {
 				form.leseFormulareGesamt(currentCellStatus, lastActionsResult, northCellStatus, eastCellStatus, southCellStatus, westCellStatus);
 
 				map.printMap(form);
-//				map.printGrenzen();
+
 				
 
 				String naechsterZug = map.berechneWeg(level, form, sheets);
