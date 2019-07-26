@@ -32,37 +32,37 @@ public class Karte {
 			}
 		}
 
-		int n = 0;
-		while (n == 0) {
-			for (int x = 0; x < this.sizeX; x++) {
-				grenzen[n][x] = new Feld(null, false, 0);
-			}
-			n++;
-		}
-
-		int s = sizeY - 1;
-		while (s == sizeY - 1) {
-			for (int x = 0; x < this.sizeX; x++) {
-				grenzen[s][x] = new Feld(null, false, 0);
-			}
-			s++;
-		}
-
-		int w = 0;
-		while (w == 0) {
-			for (int y = 0; y < this.sizeY; y++) {
-				grenzen[y][w] = new Feld(null, false, 0);
-			}
-			w++;
-		}
-
-		int e = sizeX - 1;
-		while (e == sizeX - 1) {
-			for (int y = 0; y < this.sizeY; y++) {
-				grenzen[y][e] = new Feld(null, false, 0);
-			}
-			e++;
-		}
+//		int n = 0;
+//		while (n == 0) {
+//			for (int x = 0; x < this.sizeX; x++) {
+//				grenzen[n][x] = new Feld(null, false, 0);
+//			}
+//			n++;
+//		}
+//
+//		int s = sizeY - 1;
+//		while (s == sizeY - 1) {
+//			for (int x = 0; x < this.sizeX; x++) {
+//				grenzen[s][x] = new Feld(null, false, 0);
+//			}
+//			s++;
+//		}
+//
+//		int w = 0;
+//		while (w == 0) {
+//			for (int y = 0; y < this.sizeY; y++) {
+//				grenzen[y][w] = new Feld(null, false, 0);
+//			}
+//			w++;
+//		}
+//
+//		int e = sizeX - 1;
+//		while (e == sizeX - 1) {
+//			for (int y = 0; y < this.sizeY; y++) {
+//				grenzen[y][e] = new Feld(null, false, 0);
+//			}
+//			e++;
+//		}
 	}
 
 	/**
@@ -143,6 +143,14 @@ public class Karte {
 	 */
 	public void botPosition(String lastAction) {
 		if (lastAction.equals("OK")) {
+		} else if (lastAction.equals("OK WEST") && posX == 0) {
+			posX = sizeX - 1;
+		} else if (lastAction.equals("OK EAST") && posX == sizeX - 1) {
+			posX = 0;
+		} else if (lastAction.equals("OK SOUTH") && posY == sizeY - 1) {
+			posY = 0;
+		} else if (lastAction.equals("OK NORTH") && posY == 0) {
+			posY = sizeY - 1;
 		} else if (lastAction.equals("OK WEST")) {
 			posX -= 1;
 		} else if (lastAction.equals("OK EAST")) {
@@ -155,6 +163,37 @@ public class Karte {
 
 	}
 
+	public int pruefeGrenze() {
+		int zahl = 0;
+		//Norden
+		if(posY == 0) {
+			zahl = sizeY -1;
+
+		} else {
+			zahl = posY - 1;
+		}
+		//Sueden
+		if(posY == sizeY - 1) {
+			zahl = 0;
+		} else {
+			zahl = posY + 1;
+		}
+		//Westen
+		if(posX == 0) {
+			zahl = sizeX - 1;
+		} else {
+			zahl = posX - 1;
+		}
+		//Osten
+		if(posX == sizeX - 1) {
+			zahl = 0;
+		} else {
+			zahl = posX + 1;
+		}
+		return zahl;
+	}
+	
+	
 	/**
 	 * updatet das Umfeld des Bots also die 4 umliegenden Felder
 	 * 
@@ -173,21 +212,25 @@ public class Karte {
 		map[posY][posX].setGesehen(true);
 		map[posY][posX].setZaehlerBetreten(map[posY][posX].getZaehlerBetreten() + 1);
 
-		// Norden
-		map[posY - 1][posX].setStatus(northStatus);
-		map[posY - 1][posX].setGesehen(true);
+	
+			// Norden
+			map[pruefeGrenze()][posX].setStatus(northStatus);
+			map[pruefeGrenze()][posX].setGesehen(true);
+	
+	
+			// Sueden
+			map[pruefeGrenze()][posX].setStatus(southStatus);
+			map[pruefeGrenze()][posX].setGesehen(true);
 
-		// Sueden
-		map[posY + 1][posX].setStatus(southStatus);
-		map[posY + 1][posX].setGesehen(true);
+			// Westen
+			map[posY][pruefeGrenze()].setStatus(westStatus);
+			map[posY][pruefeGrenze()].setGesehen(true);
 
-		// Westen
-		map[posY][posX - 1].setStatus(westStatus);
-		map[posY][posX - 1].setGesehen(true);
+	
+			// Osten
+			map[posY][pruefeGrenze()].setStatus(eastStatus);
+			map[posY][pruefeGrenze()].setGesehen(true);
 
-		// Osten
-		map[posY][posX + 1].setStatus(eastStatus);
-		map[posY][posX + 1].setGesehen(true);
 	}
 
 	/**
@@ -201,18 +244,43 @@ public class Karte {
 
 		List<String> moeglicheZuegeNew = new ArrayList<String>();
 
-		if (!map[posY + 1][posX].getStatus().equals("WALL")) {
+		if (!map[posY][posX].getStatus().equals("WALL") && posY == sizeY - 1
+				&& !map[pruefeGrenze()][posX].getStatus().equals("WALL")) {
 			moeglicheZuegeNew.add("go south");
-		}
-		if (!map[posY][posX - 1].getStatus().equals("WALL")) {
+		} 
+//			else {
+//			if (!map[posY + 1][posX].getStatus().equals("WALL")) {
+//				moeglicheZuegeNew.add("go south");
+//			}
+//		}
+		if (!map[posY][posX].getStatus().equals("WALL") && posX == 0
+				&& !map[posY][pruefeGrenze()].getStatus().equals("WALL")) {
 			moeglicheZuegeNew.add("go west");
-		}
-		if (!map[posY - 1][posX].getStatus().equals("WALL")) {
+		} 
+//		else {
+//			if (!map[posY][posX - 1].getStatus().equals("WALL")) {
+//				moeglicheZuegeNew.add("go west");
+//			}
+//		}
+		if (!map[posY][posX].getStatus().equals("WALL") && posY == 0
+				&& !map[pruefeGrenze()][posX].getStatus().equals("WALL")) {
 			moeglicheZuegeNew.add("go north");
-		}
-		if (!map[posY][posX + 1].getStatus().equals("WALL")) {
+		} 
+//		else {
+//			if (!map[posY - 1][posX].getStatus().equals("WALL")) {
+//				moeglicheZuegeNew.add("go north");
+//			}
+//		}
+		if (!map[posY][posX].getStatus().equals("WALL") && posX == sizeX - 1
+				&& !map[posY][pruefeGrenze()].getStatus().equals("WALL")) {
 			moeglicheZuegeNew.add("go east");
-		}
+		} 
+//		else {
+//			if (!map[posY][posX + 1].getStatus().equals("WALL")) {
+//				moeglicheZuegeNew.add("go east");
+//			}
+//
+//		}
 
 		moeglicheZuege = moeglicheZuegeNew;
 
@@ -220,13 +288,13 @@ public class Karte {
 		case 1:
 			if (map[posY][posX].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "finish";
-			} else if (map[posY + 1][posX].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
+			} else if (map[pruefeGrenze()][posX].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "go south";
-			} else if (map[posY][posX - 1].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
+			} else if (map[posY][pruefeGrenze()].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "go west";
-			} else if (map[posY - 1][posX].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
+			} else if (map[pruefeGrenze()][posX].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "go north";
-			} else if (map[posY][posX + 1].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
+			} else if (map[posY][pruefeGrenze()].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "go east";
 			} else {
 				int niedrigsteAnzahl = 999;
@@ -237,30 +305,30 @@ public class Karte {
 					switch (zug) {
 
 					case "go south":
-						if (map[posY + 1][posX].getZaehlerBetreten() < niedrigsteAnzahl) {
+						if (map[pruefeGrenze()][posX].getZaehlerBetreten() < niedrigsteAnzahl) {
 							niedrigsterZug = "go south";
-							niedrigsteAnzahl = map[posY + 1][posX].getZaehlerBetreten();
+							niedrigsteAnzahl = map[pruefeGrenze()][posX].getZaehlerBetreten();
 						}
 						break;
 
 					case "go west":
-						if (map[posY][posX - 1].getZaehlerBetreten() < niedrigsteAnzahl) {
+						if (map[posY][pruefeGrenze()].getZaehlerBetreten() < niedrigsteAnzahl) {
 							niedrigsterZug = "go west";
-							niedrigsteAnzahl = map[posY][posX - 1].getZaehlerBetreten();
+							niedrigsteAnzahl = map[posY][pruefeGrenze()].getZaehlerBetreten();
 						}
 						break;
 
 					case "go north":
-						if (map[posY - 1][posX].getZaehlerBetreten() < niedrigsteAnzahl) {
+						if (map[pruefeGrenze()][posX].getZaehlerBetreten() < niedrigsteAnzahl) {
 							niedrigsterZug = "go north";
-							niedrigsteAnzahl = map[posY - 1][posX].getZaehlerBetreten();
+							niedrigsteAnzahl = map[pruefeGrenze()][posX].getZaehlerBetreten();
 						}
 						break;
 
 					case "go east":
-						if (map[posY][posX + 1].getZaehlerBetreten() < niedrigsteAnzahl) {
+						if (map[posY][pruefeGrenze()].getZaehlerBetreten() < niedrigsteAnzahl) {
 							niedrigsterZug = "go east";
-							niedrigsteAnzahl = map[posY][posX + 1].getZaehlerBetreten();
+							niedrigsteAnzahl = map[posY][pruefeGrenze()].getZaehlerBetreten();
 						}
 						break;
 					}
@@ -270,34 +338,34 @@ public class Karte {
 
 		default:
 
-			if (map[posY][posX].getStatus().equals("SHEET")) {
-				System.out.println("take");
+			if (map[posY][posX].getStatus().contains("SHEET")) {
+				niedrigsterZug = "take";
 			} else if (form.getFormulareGesamt() != 0 && form.getFormularZaehler() > form.getFormulareGesamt()
 					&& map[posY][posX].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "finish";
 			} else if (form.getFormulareGesamt() != 0 && form.getFormularZaehler() > form.getFormulareGesamt()
-					&& map[posY + 1][posX].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
+					&& map[pruefeGrenze()][posX].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "go south";
 			} else if (form.getFormulareGesamt() != 0 && form.getFormularZaehler() > form.getFormulareGesamt()
-					&& map[posY][posX - 1].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
+					&& map[posY][pruefeGrenze()].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "go west";
 			} else if (form.getFormulareGesamt() != 0 && form.getFormularZaehler() > form.getFormulareGesamt()
-					&& map[posY - 1][posX].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
+					&& map[pruefeGrenze()][posX].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "go north";
 			} else if (form.getFormulareGesamt() != 0 && form.getFormularZaehler() > form.getFormulareGesamt()
-					&& map[posY][posX + 1].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
+					&& map[posY][pruefeGrenze()].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "go east";
 			}
 
 			else if (map[posY][posX].getStatus().equals("FORM " + playerId + " " + form.getFormularZaehler())) {
 				niedrigsterZug = "take";
-			} else if (map[posY + 1][posX].getStatus().equals("FORM " + playerId + " " + form.getFormularZaehler())) {
+			} else if (map[pruefeGrenze()][posX].getStatus().equals("FORM " + playerId + " " + form.getFormularZaehler())) {
 				niedrigsterZug = "go south";
-			} else if (map[posY][posX - 1].getStatus().equals("FORM " + playerId + " " + form.getFormularZaehler())) {
+			} else if (map[posY][pruefeGrenze()].getStatus().equals("FORM " + playerId + " " + form.getFormularZaehler())) {
 				niedrigsterZug = "go west";
-			} else if (map[posY - 1][posX].getStatus().equals("FORM " + playerId + " " + form.getFormularZaehler())) {
+			} else if (map[pruefeGrenze()][posX].getStatus().equals("FORM " + playerId + " " + form.getFormularZaehler())) {
 				niedrigsterZug = "go north";
-			} else if (map[posY][posX + 1].getStatus().equals("FORM " + playerId + " " + form.getFormularZaehler())) {
+			} else if (map[posY][pruefeGrenze()].getStatus().equals("FORM " + playerId + " " + form.getFormularZaehler())) {
 				niedrigsterZug = "go east";
 			} else {
 				int niedrigsteAnzahl = 999;
@@ -308,30 +376,30 @@ public class Karte {
 					switch (zug) {
 
 					case "go south":
-						if (map[posY + 1][posX].getZaehlerBetreten() < niedrigsteAnzahl) {
+						if (map[pruefeGrenze()][posX].getZaehlerBetreten() < niedrigsteAnzahl) {
 							niedrigsterZug = "go south";
-							niedrigsteAnzahl = map[posY + 1][posX].getZaehlerBetreten();
+							niedrigsteAnzahl = map[pruefeGrenze()][posX].getZaehlerBetreten();
 						}
 						break;
 
 					case "go west":
-						if (map[posY][posX - 1].getZaehlerBetreten() < niedrigsteAnzahl) {
+						if (map[posY][pruefeGrenze()].getZaehlerBetreten() < niedrigsteAnzahl) {
 							niedrigsterZug = "go west";
-							niedrigsteAnzahl = map[posY][posX - 1].getZaehlerBetreten();
+							niedrigsteAnzahl = map[posY][pruefeGrenze()].getZaehlerBetreten();
 						}
 						break;
 
 					case "go north":
-						if (map[posY - 1][posX].getZaehlerBetreten() < niedrigsteAnzahl) {
+						if (map[pruefeGrenze()][posX].getZaehlerBetreten() < niedrigsteAnzahl) {
 							niedrigsterZug = "go north";
-							niedrigsteAnzahl = map[posY - 1][posX].getZaehlerBetreten();
+							niedrigsteAnzahl = map[pruefeGrenze()][posX].getZaehlerBetreten();
 						}
 						break;
 
 					case "go east":
-						if (map[posY][posX + 1].getZaehlerBetreten() < niedrigsteAnzahl) {
+						if (map[posY][pruefeGrenze()].getZaehlerBetreten() < niedrigsteAnzahl) {
 							niedrigsterZug = "go east";
-							niedrigsteAnzahl = map[posY][posX + 1].getZaehlerBetreten();
+							niedrigsteAnzahl = map[posY][pruefeGrenze()].getZaehlerBetreten();
 						}
 						break;
 					}

@@ -24,11 +24,16 @@ public class FluffyUnicorn {
 			int playerId = input.nextInt(); // id dieses Players / Bots
 			int startX = input.nextInt(); // X-Koordinate der Startposition dieses Player
 			int startY = input.nextInt(); // Y-Koordinate der Startposition dieses Players
+			int sheet = 0;
+			if (level == 5) {
+				sheet = input.nextInt();
+				
+			}
 			input.nextLine(); // Beenden der zweiten Zeile
 			
 			Karte map = new Karte(sizeX, sizeY);
 			Formular form = new Formular(playerId);
-			Sheet sheets = new Sheet();
+			Sheet sheets = new Sheet(sheet);
 			
 			map.setPosX(startX);
 			map.setPosY(startY);
@@ -44,12 +49,15 @@ public class FluffyUnicorn {
 				String eastCellStatus = input.nextLine();
 				String southCellStatus = input.nextLine();
 				String westCellStatus = input.nextLine();
+				
+				sheets.sheetStack(lastActionsResult);
 
 				map.botPosition(lastActionsResult);
 				
+				
 				form.formOrder(lastActionsResult);
 				
-				sheets.sheetStack(lastActionsResult);
+				
 				
 				map.updateUmfeld(currentCellStatus, lastActionsResult, northCellStatus, eastCellStatus, southCellStatus,
 						westCellStatus);
