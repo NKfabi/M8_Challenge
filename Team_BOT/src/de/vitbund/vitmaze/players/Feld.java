@@ -1,15 +1,31 @@
 package de.vitbund.vitmaze.players;
 
+/*
+  * Klasse Feld als Teil der Karte
+  * 
+  *  @author Fabian Riede
+  */
+
 public class Feld {
 
-
-	
-	//Attribute
+	/*
+	 * Attribute:
+	 * 
+	 * status fuer den Status des Feldes, ob es eine Wand, ein Gang, o.ae. ist
+	 * gesehen dient dazu um dem Bot zu sagen, ob er das Feld schon mal gesehen hat
+	 * und der zaehlerBetreten sagt dem Bot wie oft er das Feld betreten hat
+	 */
 	private String status;
 	private boolean gesehen;
 	private int zaehlerBetreten;
-
-	//Konstruktor
+	
+	/**
+	 * Konstruktor
+	 * 
+	 * @param status
+	 * @param gesehen
+	 * @param zaehlerBetreten
+	 */
 	public Feld(String status,
 			boolean gesehen, int zaehlerBetreten) {
 		this.status = status;
@@ -18,8 +34,9 @@ public class Feld {
 	}
 	
 	
-	//getter und setter
-	
+	/*
+	 * Getter und Setter
+	 */
 	public String getStatus() {
 		return status;
 	}

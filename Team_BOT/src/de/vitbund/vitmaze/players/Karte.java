@@ -3,9 +3,25 @@ package de.vitbund.vitmaze.players;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasse Karte mit Methoden, um den Weg zu berechnen, das Umfeld zu updaten, die Spielerposition zu updaten, ueber Grenzen hinaus zu laufen und die Karte mit Sys.err auszugeben
+ * Wir haben uns gegen das Kicken entschieden, weil es einen unnoetigen Zug kostet und diesen moechten wir nicht verschwenden
+ * Auch gegen das Ausweichen haben wir uns entschieden, da es ggf. zu grossen Umwegen kommen koennte (in kleinen Maps) und ggf. noch mehr Zuege kosten wuerde,also das Gespraech ueber sich ergehen zu lassen
+ *   
+ * @author Fabian Riede
+ *
+ */
 public class Karte {
 
-	// Attribute
+	/**
+	 * Attribute:
+	 * 
+	 * sizeX und sizeY geben die Informationen wie gross das Maze ist
+	 * durch posX und posY wird die Startposition des Bots bekanntgegeben und die PlayerId
+	 * das Feld-Array map wird gebraucht um die Map mit Feldern zu befuellen
+	 * in der String Array-List werden die moeglichen Zuege des Bots zwischengespeichert 
+	 * und Sheet speichert die Anzahl der sheets
+	 */
 	private int sizeX;
 	private int sizeY;
 	private int posX;
@@ -16,8 +32,16 @@ public class Karte {
 	private Formular form;
 	private Sheet sheets;
 
-	// Konstruktor
-
+	/**
+	 * Konstruktor
+	 * 
+	 * 
+	 * @param sizeX
+	 * @param sizeY
+	 * 
+	 * generiert in der for-Schleife Feldinstanzen mit Standardwerten fuer die Map
+	 * die Array-Position entspricht den Koordinaten der Map
+	 */
 	public Karte(int sizeX, int sizeY) {
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
@@ -33,7 +57,9 @@ public class Karte {
 	}
 
 	/**
-	 * Methode zeichnet Map auf Basis der Groesse des Labyrinths
+	 * Methode zeichnet Map auf Basis der Groesse des Labyrinths und beschriftet unbekannte Felder mit einem " ? "
+	 * an der Stelle Finish (Sachbearbeiter) wird ein Z für Ziel eingesetzt, 
+	 * fuer Formulare wird ein "F" eingefuegt, fuer einen Gang "  ", fuer eine Wand " W ", fuer ein Sheet " S " und fuer Gegner ein " ! "
 	 * 
 	 * @param x
 	 * @param y
@@ -89,6 +115,12 @@ public class Karte {
 
 	}
 
+	/**
+	 * hier werden die Grenzen im Norden ueberprueft um zu schauen, ob eine Wand das Maze abgrenzt oder nicht, 
+	 * wenn nicht soll der Bot von oben nach unten springen
+	 * 
+	 * @return
+	 */
 	public int pruefeGrenzeNorden() {
 		int zahl = 0;
 
@@ -102,6 +134,12 @@ public class Karte {
 		return zahl;
 	}
 
+	/**
+	 * hier werden die Grenzen im Sueden ueberprueft um zu schauen, ob eine Wand das Maze abgrenzt oder nicht, 
+	 * wenn nicht soll der Bot von unten nach oben springen
+	 * 
+	 * @return
+	 */
 	public int pruefeGrenzeSueden() {
 		int zahl = 0;
 
@@ -115,6 +153,12 @@ public class Karte {
 		return zahl;
 	}
 
+	/**
+	 * hier werden die Grenzen im Westen ueberprueft um zu schauen, ob eine Wand das Maze abgrenzt oder nicht, 
+	 * wenn nicht soll der Bot von links nach rechts springen
+	 * 
+	 * @return
+	 */
 	public int pruefeGrenzeWesten() {
 		int zahl = 0;
 
@@ -128,6 +172,12 @@ public class Karte {
 		return zahl;
 	}
 
+	/**
+	 * hier werden die Grenzen im Osten ueberprueft um zu schauen, ob eine Wand das Maze abgrenzt oder nicht, 
+	 * wenn nicht soll der Bot von rechts nach links springen
+	 * 
+	 * @return
+	 */
 	public int pruefeGrenzeOsten() {
 		int zahl = 0;
 
@@ -142,7 +192,8 @@ public class Karte {
 	}
 
 	/**
-	 * updatet das Umfeld des Bots also die 4 umliegenden Felder
+	 * updatet das Umfeld des Bots, also die 4 umliegenden Felder und das Feld auf dem er steht
+	 * bei den X- bzw. Y-Werten, wo sich der Wert, je nach Richtung aendert, wird die jeweilige Methode der Grenzpruefung aufgerufen 
 	 * 
 	 * @param currentPosition
 	 * @param lastPosition
@@ -150,7 +201,6 @@ public class Karte {
 	 * @param eastStatus
 	 * @param southStatus
 	 * @param westStatus
-	 * @param playerId
 	 */
 	public void updateUmfeld(String currentPosition, String lastPosition, String northStatus, String eastStatus,
 			String southStatus, String westStatus) {
@@ -178,9 +228,19 @@ public class Karte {
 	}
 
 	/**
-	 * berechnet den Weg des Bots und laesst in die Richtung, auf den Feldern auf
-	 * denen er am wenigsten stand, gehen
+	 * berechnet den Weg des Bots und gibt ihm das Feld mit dem niedrigsten Wert fuer zaehlerBetreten wieder aus
+	 * Des Weiteren schaut der Bot, dass er zunaechst in Felder geht, in denen ein " ? " in den umliegenden Feldern liegt und dass er natuerlich nicht in
+	 * eine Wand laeuft :-)
+	 * Ausserdem wird eine Fallunterscheidung der Level getroffen anhand des Switch Case, weil der Bot je nach Level unterschiedliche Funktionen/Aktionen hat, die er ausfuehren darf bzw. muss 
 	 * 
+	 * Wir haben uns gezielt dagegen entschieden den Bot kicken zu lassen und den Gegnern auszuweichen, wir sind offen fuer Gespraeche mit anderen Bots 
+	 * (Kaffeepausen sind sehr wichtig!) und kicken moechten wir auch nicht fuer mehr Naechstenliebe :-)
+	 * 
+	 * 
+	 * @param level
+	 * @param form
+	 * @param sheets
+	 * @return
 	 */
 	public String berechneWeg(int level, Formular form, Sheet sheets) {
 
@@ -344,7 +404,11 @@ public class Karte {
 
 	}
 
-	// getter und setter
+	/**
+	 * Getter und Setter
+	 * 
+	 * 
+	 */
 	public int getSizeX() {
 		return sizeX;
 	}
