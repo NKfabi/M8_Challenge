@@ -229,8 +229,7 @@ public class Karte {
 
 	/**
 	 * berechnet den Weg des Bots und gibt ihm das Feld mit dem niedrigsten Wert fuer zaehlerBetreten wieder aus
-	 * Des Weiteren schaut der Bot, dass er zunaechst in Felder geht, in denen ein " ? " in den umliegenden Feldern liegt und dass er natuerlich nicht in
-	 * eine Wand laeuft :-)
+	 * Des Weiteren schaut der Bot, dass er natuerlich nicht in eine Wand laeuft :-)
 	 * Ausserdem wird eine Fallunterscheidung der Level getroffen anhand des Switch Case, weil der Bot je nach Level unterschiedliche Funktionen/Aktionen hat, die er ausfuehren darf bzw. muss 
 	 * 
 	 * Wir haben uns gezielt dagegen entschieden den Bot kicken zu lassen und den Gegnern auszuweichen, wir sind offen fuer Gespraeche mit anderen Bots 
