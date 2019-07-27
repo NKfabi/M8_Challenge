@@ -1,21 +1,46 @@
 package de.vitbund.vitmaze.players;
 
+
+/**
+ * 
+ * Klasse Formular 
+ * 
+ * @author Fabian Riede
+ *
+ */
 public class Formular {
 
+	
+	/**
+	 * Attribute
+	 * 
+	 */
 	private int formularZaehler = 1;
 	private int formulareGesamt;
 	private int playerId;
 	
 	
+	/**
+	 * Standardkonstruktor
+	 * 
+	 */
 	public Formular() {}
 	
-	
+	/**
+	 * Konstruktor
+	 * 
+	 * @param playerId
+	 */
 	public Formular(int playerId) {
 		this.playerId = playerId;
 	}
 	
 	
-	
+	/**
+	 * Methode für Reihenfolge der Formulare
+	 * 
+	 * @param lastAction
+	 */
 	public void formOrder(String lastAction) {
 		if (lastAction.equals("OK FORM")) {
 			setFormularZaehler(getFormularZaehler() + 1);
@@ -24,6 +49,17 @@ public class Formular {
 	}
 	
 	
+	/**
+	 * Methode für das Auslesen der Gesamtformulare vom Sachbearbeiter
+	 * 
+	 * @param currentPosition
+	 * @param lastPosition
+	 * @param northStatus
+	 * @param eastStatus
+	 * @param southStatus
+	 * @param westStatus
+	 * @return
+	 */
 	public int leseFormulareGesamt(String currentPosition, String lastPosition, String northStatus, String eastStatus,
 			String southStatus, String westStatus) {
 
@@ -78,6 +114,11 @@ public class Formular {
 	
 	
 	
+	/**
+	 * Getter und Setter 
+	 * 
+	 * 
+	 */
 	public int getFormularZaehler() {
 		return formularZaehler;
 	}

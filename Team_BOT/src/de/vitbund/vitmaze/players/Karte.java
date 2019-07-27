@@ -3,9 +3,18 @@ package de.vitbund.vitmaze.players;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasse Karte mit saemtlichen Berechnungen ...
+ * 
+ * @author Fabian Riede
+ *
+ */
 public class Karte {
 
-	// Attribute
+	/**
+	 * Attribute
+	 * 
+	 */
 	private int sizeX;
 	private int sizeY;
 	private int posX;
@@ -16,8 +25,13 @@ public class Karte {
 	private Formular form;
 	private Sheet sheets;
 
-	// Konstruktor
-
+	/**
+	 * Konstruktor
+	 * 
+	 * 
+	 * @param sizeX
+	 * @param sizeY
+	 */
 	public Karte(int sizeX, int sizeY) {
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
@@ -89,6 +103,11 @@ public class Karte {
 
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public int pruefeGrenzeNorden() {
 		int zahl = 0;
 
@@ -102,6 +121,11 @@ public class Karte {
 		return zahl;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public int pruefeGrenzeSueden() {
 		int zahl = 0;
 
@@ -115,6 +139,11 @@ public class Karte {
 		return zahl;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public int pruefeGrenzeWesten() {
 		int zahl = 0;
 
@@ -128,6 +157,11 @@ public class Karte {
 		return zahl;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public int pruefeGrenzeOsten() {
 		int zahl = 0;
 
@@ -150,7 +184,6 @@ public class Karte {
 	 * @param eastStatus
 	 * @param southStatus
 	 * @param westStatus
-	 * @param playerId
 	 */
 	public void updateUmfeld(String currentPosition, String lastPosition, String northStatus, String eastStatus,
 			String southStatus, String westStatus) {
@@ -181,6 +214,10 @@ public class Karte {
 	 * berechnet den Weg des Bots und laesst in die Richtung, auf den Feldern auf
 	 * denen er am wenigsten stand, gehen
 	 * 
+	 * @param level
+	 * @param form
+	 * @param sheets
+	 * @return
 	 */
 	public String berechneWeg(int level, Formular form, Sheet sheets) {
 
@@ -344,7 +381,11 @@ public class Karte {
 
 	}
 
-	// getter und setter
+	/**
+	 * Getter und Setter
+	 * 
+	 * 
+	 */
 	public int getSizeX() {
 		return sizeX;
 	}

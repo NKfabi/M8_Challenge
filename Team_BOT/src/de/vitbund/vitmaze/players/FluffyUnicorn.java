@@ -4,32 +4,69 @@ import java.util.Scanner;
 
 public class FluffyUnicorn {
 
-	/**
-	 * Hauptmethode zum Ausführen des Bots
-	 * 
-	 * @param args
-	 */
+/**
+ * Hauptmethode zum Ausfuehren des Bots
+ * 
+ * @param args
+ */
 	public static void main(String[] args) {
-			// Scanner zum Auslesen der Standardeingabe, welche Initialisierungs- und
-			// Rundendaten liefert
+			/**
+			 * Scanner zum Auslesen der Standardeingabe, welche Initialisierungs- und
+			 * Rundendaten liefert
+			 * 
+			 */
 			Scanner input = new Scanner(System.in);
 
-			// INIT - Auslesen der Initialdaten
-			// 1. Zeile: Maze Infos
-			int sizeX = input.nextInt(); // X-Groesse des Spielfeldes (Breite)
-			int sizeY = input.nextInt(); // Y-Groesse des Spielfeldes (Hoehe)
-			int level = input.nextInt(); // Level des Matches
-			input.nextLine(); // Beenden der ersten Zeile
-			// 2. Zeile: Player Infos
-			int playerId = input.nextInt(); // id dieses Players / Bots
-			int startX = input.nextInt(); // X-Koordinate der Startposition dieses Player
-			int startY = input.nextInt(); // Y-Koordinate der Startposition dieses Players
+			/**
+			 * INIT - Auslesen der Initialdaten
+			 * 1. Zeile: Maze Infos
+			 *
+			 *
+			 * X-Groesse des Spielfeldes (Breite)
+			 */
+			int sizeX = input.nextInt();
+			/**
+			 * Y-Groesse des Spielfeldes (Hoehe)
+			 */
+			int sizeY = input.nextInt();
+			/**
+			 * Level des Matches
+			 */
+			int level = input.nextInt();
+			/**
+			 * Beenden der ersten Zeile
+			 */
+			input.nextLine();
+			/**
+			 * 2. Zeile: Player Infos
+			 *
+			 * 
+			 * id dieses Players / Bots
+			 */
+			int playerId = input.nextInt();
+			/**
+			 * X-Koordinate der Startposition dieses Player
+			 */
+			int startX = input.nextInt();
+			/**
+			 * Y-Koordinate der Startposition dieses Players
+			 */
+			int startY = input.nextInt();
+			/**
+			 * Anzahl der Sheets, die der Bot traegt
+			 */
 			int sheet = 0;
+			/**
+			 * Bedingung, um ab Lvl 5 Sheets aufzuheben
+			 */
 			if (level == 5) {
 				sheet = input.nextInt();
 				
 			}
-			input.nextLine(); // Beenden der zweiten Zeile
+			/**
+			 * Beenden der zweiten Zeile
+			 */
+			input.nextLine();
 			
 			Karte map = new Karte(sizeX, sizeY);
 			Formular form = new Formular(playerId);
@@ -53,20 +90,15 @@ public class FluffyUnicorn {
 				sheets.sheetStack(lastActionsResult);
 
 				map.botPosition(lastActionsResult);
-				
-				
+			
 				form.formOrder(lastActionsResult);
-				
-				
-				
+					
 				map.updateUmfeld(currentCellStatus, lastActionsResult, northCellStatus, eastCellStatus, southCellStatus,
 						westCellStatus);
 				
 				form.leseFormulareGesamt(currentCellStatus, lastActionsResult, northCellStatus, eastCellStatus, southCellStatus, westCellStatus);
 
 				map.printMap(form);
-
-				
 
 				String naechsterZug = map.berechneWeg(level, form, sheets);
 
@@ -82,9 +114,6 @@ public class FluffyUnicorn {
 				System.out.println(naechsterZug);
 
 			}
-
-			// Eingabe schliessen (letzte Aktion)
-//			input.close();
 		}
 
 
