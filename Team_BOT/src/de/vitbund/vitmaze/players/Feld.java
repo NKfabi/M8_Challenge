@@ -1,45 +1,44 @@
 package de.vitbund.vitmaze.players;
 
-/*
-  * Klasse Feld als Teil der Karte
-  * 
-  *  @author Fabian Riede
-  */
-
+/**
+ * Klasse Feld als Teil der Karte
+ * @author Fabian Riede
+ *
+ */
 public class Feld {
 
-	/*
-	 * Attribute:
-	 * 
+	/**
 	 * status fuer den Status des Feldes, ob es eine Wand, ein Gang, o.ae. ist
-	 * gesehen dient dazu um dem Bot zu sagen, ob er das Feld schon mal gesehen hat
-	 * und der zaehlerBetreten sagt dem Bot wie oft er das Feld betreten hat
 	 */
 	private String status;
-	private boolean gesehen;
-	private int zaehlerBetreten;
-	
 	/**
-	 * Konstruktor
-	 * 
-	 * @param status
-	 * @param gesehen
-	 * @param zaehlerBetreten
+	 * gesehen dient dazu um dem Bot zu sagen, ob er das Feld schon mal gesehen hat
 	 */
-	public Feld(String status,
-			boolean gesehen, int zaehlerBetreten) {
+	private boolean gesehen;
+	/**
+	 * zaehlerBetreten sagt dem Bot wie oft er das Feld betreten hat
+	 */
+	private int zaehlerBetreten;
+
+	/**
+	 * Konstruktor mit Uebergabeparametern status, gesehen und zaehlerbetreten
+	 * 
+	 * @param status          - uebergibt den Parameter Status
+	 * @param gesehen         - uebergibt den Parameter gesehen
+	 * @param zaehlerBetreten - uebergibt den Parameter zaehlerbetreten
+	 */
+	public Feld(String status, boolean gesehen, int zaehlerBetreten) {
 		this.status = status;
 		this.gesehen = gesehen;
 		this.zaehlerBetreten = zaehlerBetreten;
 	}
-	
-	
-	/*
-	 * Getter und Setter
-	 */
+
+	// getter und setter
+
 	public String getStatus() {
 		return status;
 	}
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
@@ -47,13 +46,15 @@ public class Feld {
 	public boolean isGesehen() {
 		return gesehen;
 	}
+
 	public void setGesehen(boolean gesehen) {
 		this.gesehen = gesehen;
 	}
-	
+
 	public int getZaehlerBetreten() {
 		return zaehlerBetreten;
 	}
+
 	public void setZaehlerBetreten(int zaehlerBetreten) {
 		this.zaehlerBetreten = zaehlerBetreten;
 	}

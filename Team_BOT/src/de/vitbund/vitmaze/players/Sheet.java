@@ -2,8 +2,7 @@ package de.vitbund.vitmaze.players;
 
 
 /**
- * 
- * Klasse Sheet
+ * Klasse Sheet, um sheets zu zaehlen
  * 
  * @author Fabian Riede
  *
@@ -11,8 +10,7 @@ package de.vitbund.vitmaze.players;
 public class Sheet {
 
 	/**
-	 * Attribut:
-	 * 
+	 * speichert Anzahl der Sheets nach Aufnahme
 	 */
 	private int sheets;	
 	
@@ -24,7 +22,7 @@ public class Sheet {
 	
 	
 	/**
-	 * Konstruktor 
+	 * Konstruktor mit Uebergabeparameter sheets
 	 * 
 	 * @param sheets
 	 */
@@ -45,11 +43,8 @@ public class Sheet {
 	}
 	
 	
-	/**
-	 * Getter und Setter 
-	 * 
-	 * 
-	 */
+	//getter und setter
+	
 	public int getSheets() {
 		return sheets;
 	}

@@ -14,33 +14,50 @@ import java.util.List;
 public class Karte {
 
 	/**
-	 * Attribute:
-	 * 
-	 * sizeX und sizeY geben die Informationen wie gross das Maze ist
-	 * durch posX und posY wird die Startposition des Bots bekanntgegeben und die PlayerId
-	 * das Feld-Array map wird gebraucht um die Map mit Feldern zu befuellen
-	 * in der String Array-List werden die moeglichen Zuege des Bots zwischengespeichert 
-	 * und Sheet speichert die Anzahl der sheets
+	 * Groesse X des Labyrinths
 	 */
 	private int sizeX;
+	/**
+	 * Groesse Y des Labyrinths
+	 */
 	private int sizeY;
+	/**
+	 * X-Koordinate der Position des Bots
+	 */
 	private int posX;
+	/**
+	 * Y-Koordinate der Position des Bots
+	 */
 	private int posY;
+	/**
+	 * Spieler-Id, die von System.In ubergeben wird
+	 */
 	private int playerId;
+	/**
+	 * Attribut map mit dem Datentyp Feld in Form eines 2-dimensionalen Arrays (befüllt mit Instanzen von Feld), weclhes die Map abbilden soll
+	 */
 	private Feld[][] map;
+	/**
+	 * ArrayList, welche die moeglichen Zuege speichert und in berechneWeg auswertet
+	 */
 	private List<String> moeglicheZuege = new ArrayList<>();
+	/**
+	 * Attribut form mit Datentyp Formular, um auf die Methoden in der Klasse Formular zuzugreifen
+	 */
 	private Formular form;
+	/**
+	 * Attribut sheets mit Datentyp Sheet, um auf Methoden in der Klasse Sheet zuzugreifen
+	 */
 	private Sheet sheets;
 
 	/**
-	 * Konstruktor
-	 * 
-	 * 
-	 * @param sizeX
-	 * @param sizeY
-	 * 
+	 * Konstruktor mit Uebergabeparametern sizeX und sizeY: 
 	 * generiert in der for-Schleife Feldinstanzen mit Standardwerten fuer die Map
 	 * die Array-Position entspricht den Koordinaten der Map
+	 * 
+	 * @param sizeX - uebergibt X-Groesse des Labyrinths
+	 * @param sizeY - uebergibt Y-Groesse des Labyrinths
+	 * 
 	 */
 	public Karte(int sizeX, int sizeY) {
 		this.sizeX = sizeX;
@@ -61,8 +78,7 @@ public class Karte {
 	 * an der Stelle Finish (Sachbearbeiter) wird ein Z für Ziel eingesetzt, 
 	 * fuer Formulare wird ein "F" eingefuegt, fuer einen Gang "  ", fuer eine Wand " W ", fuer ein Sheet " S " und fuer Gegner ein " ! "
 	 * 
-	 * @param x
-	 * @param y
+	 * @param form - wird uebergeben, um auf die Getter und Setter in Formular zuzugreifen
 	 */
 	public void printMap(Formular form) {
 		for (int y = 0; y < sizeY; y++) {
@@ -89,9 +105,9 @@ public class Karte {
 	}
 
 	/**
-	 * updatet die Spielerposition je nach letztem Zug
+	 * updatet die Spielerposition je nach letztem Zug (wird in der Main-Klasse ubergeben)
 	 * 
-	 * @param lastAction
+	 * @param lastAction - wird in der Main-Klasse uebergeben
 	 */
 	public void botPosition(String lastAction) {
 		if (lastAction.equals("OK")) {
@@ -119,7 +135,7 @@ public class Karte {
 	 * hier werden die Grenzen im Norden ueberprueft um zu schauen, ob eine Wand das Maze abgrenzt oder nicht, 
 	 * wenn nicht soll der Bot von oben nach unten springen
 	 * 
-	 * @return
+	 * @return - zahl aus if-Bedingung wird zurückgegeben
 	 */
 	public int pruefeGrenzeNorden() {
 		int zahl = 0;
@@ -138,7 +154,7 @@ public class Karte {
 	 * hier werden die Grenzen im Sueden ueberprueft um zu schauen, ob eine Wand das Maze abgrenzt oder nicht, 
 	 * wenn nicht soll der Bot von unten nach oben springen
 	 * 
-	 * @return
+	 * @return - zahl aus if-Bedingung wird zurückgegeben
 	 */
 	public int pruefeGrenzeSueden() {
 		int zahl = 0;
@@ -157,7 +173,7 @@ public class Karte {
 	 * hier werden die Grenzen im Westen ueberprueft um zu schauen, ob eine Wand das Maze abgrenzt oder nicht, 
 	 * wenn nicht soll der Bot von links nach rechts springen
 	 * 
-	 * @return
+	 * @return - zahl aus if-Bedingung wird zurückgegeben
 	 */
 	public int pruefeGrenzeWesten() {
 		int zahl = 0;
@@ -176,7 +192,7 @@ public class Karte {
 	 * hier werden die Grenzen im Osten ueberprueft um zu schauen, ob eine Wand das Maze abgrenzt oder nicht, 
 	 * wenn nicht soll der Bot von rechts nach links springen
 	 * 
-	 * @return
+	 * @return - zahl aus if-Bedingung wird zurückgegeben
 	 */
 	public int pruefeGrenzeOsten() {
 		int zahl = 0;
@@ -195,12 +211,12 @@ public class Karte {
 	 * updatet das Umfeld des Bots, also die 4 umliegenden Felder und das Feld auf dem er steht
 	 * bei den X- bzw. Y-Werten, wo sich der Wert, je nach Richtung aendert, wird die jeweilige Methode der Grenzpruefung aufgerufen 
 	 * 
-	 * @param currentPosition
-	 * @param lastPosition
-	 * @param northStatus
-	 * @param eastStatus
-	 * @param southStatus
-	 * @param westStatus
+	 * @param currentPosition - wird in der Main-Klasse uber System.in uebergeben
+	 * @param lastPosition - wird in der Main-Klasse uber System.in uebergeben
+	 * @param northStatus - wird in der Main-Klasse uber System.in uebergeben
+	 * @param eastStatus - wird in der Main-Klasse uber System.in uebergeben
+	 * @param southStatus - wird in der Main-Klasse uber System.in uebergeben
+	 * @param westStatus - wird in der Main-Klasse uber System.in uebergeben
 	 */
 	public void updateUmfeld(String currentPosition, String lastPosition, String northStatus, String eastStatus,
 			String southStatus, String westStatus) {
@@ -228,17 +244,19 @@ public class Karte {
 	}
 
 	/**
-	 * berechnet den Weg des Bots und gibt ihm das Feld mit dem niedrigsten Wert fuer zaehlerBetreten wieder aus
+	 * Berechnet den Weg des Bots und gibt ihm das Feld mit dem niedrigsten Wert fuer zaehlerBetreten wieder aus
 	 * Des Weiteren schaut der Bot, dass er natuerlich nicht in eine Wand laeuft :-)
 	 * Ausserdem wird eine Fallunterscheidung der Level getroffen anhand des Switch Case, weil der Bot je nach Level unterschiedliche Funktionen/Aktionen hat, die er ausfuehren darf bzw. muss 
 	 * 
 	 * Wir haben uns gezielt dagegen entschieden den Bot kicken zu lassen und den Gegnern auszuweichen, wir sind offen fuer Gespraeche mit anderen Bots 
 	 * (Kaffeepausen sind sehr wichtig!) und kicken moechten wir auch nicht fuer mehr Naechstenliebe :-)
 	 * 
+	 * mit moeglicheZuegeNew wird ein voruebergehendes Array erstellt, um Zuege temporaer zu speichern und an moeglicheZuege zu uebergeben
+	 * wird nach jedem Turn weggeworfen und neu erstellt
 	 * 
-	 * @param level
-	 * @param form
-	 * @param sheets
+	 * @param level - wird in der Main-Klasse uber System.in uebergeben
+	 * @param form - wird uebergeben, um auf die Getter und Setter in Formular zuzugreifen
+	 * @param sheets - wird uebergeben, um auf die Getter und Setter in Sheet zuzugreifen
 	 * @return
 	 */
 	public String berechneWeg(int level, Formular form, Sheet sheets) {
@@ -403,11 +421,8 @@ public class Karte {
 
 	}
 
-	/**
-	 * Getter und Setter
-	 * 
-	 * 
-	 */
+	//getter und setter
+	
 	public int getSizeX() {
 		return sizeX;
 	}
