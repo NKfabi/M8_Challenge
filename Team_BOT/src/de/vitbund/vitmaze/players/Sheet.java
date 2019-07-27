@@ -34,7 +34,7 @@ public class Sheet {
 
 	
 	/**
-	 * Methode zum zaehlen der Blaetter, wenn eins aufgenomnmen wurde
+	 * Methode zum zaehlen der Blaetter, wenn eins aufgenommen wurde
 	 * 
 	 * @param lastAction
 	 */

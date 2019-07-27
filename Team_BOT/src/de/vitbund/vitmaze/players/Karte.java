@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Klasse Karte mit saemtlichen Berechnungen ...
- * 
+ * Klasse Karte mit saemtlichen Berechnungen und der Ausgabe der Karte mit Sys.err
+ * Wir haben uns gegen das Kicken entschieden, weil es einen unnoetigen Zug kostet und diesen moechten wir nicht verschwenden
+ * Auch gegen das Ausweichen haben wir uns entschieden, da es ggf. zu Fehlern kommen koennte in kleinen Maps und ggf. noch mehr Zuege kosten wuerde,
+ * als das Gespraech ueber sich ergehen zu lassen
+ *   
  * @author Fabian Riede
  *
  */
@@ -13,6 +16,11 @@ public class Karte {
 
 	/**
 	 * Attribute
+	 * sizeX und sizeY geben die Informationen wie gross das Maze ist
+	 * durch posX und posY wird die Startposition des Bots bekanntgegeben und die PlayerId
+	 * das Feld-Array map wird gebraucht um die Map mit Feldern zu befuellen
+	 * in der String Array-List werden die moeglichen Zuege des Bots zwischengespeichert 
+	 * und Sheet uebergibt die sheets
 	 * 
 	 */
 	private int sizeX;
@@ -31,6 +39,8 @@ public class Karte {
 	 * 
 	 * @param sizeX
 	 * @param sizeY
+	 * 
+	 * generiert in der for-Schleife Standardwerte für die Koordinaten der Map
 	 */
 	public Karte(int sizeX, int sizeY) {
 		this.sizeX = sizeX;
@@ -47,7 +57,10 @@ public class Karte {
 	}
 
 	/**
-	 * Methode zeichnet Map auf Basis der Groesse des Labyrinths
+	 * Methode zeichnet Map auf Basis der Groesse des Labyrinths und beschriftet unbekannte Felder mit einem " ? "
+	 * an der Stelle Finisch (Sachbearbeiter) wird ein Z für Ziel eingesetzt, 
+	 * fuer Formulare wird ein "F" eingefuegt, fuer einen Gang "  ", fuer eine Wand " W ", fuer ein Sheet " S " und fuer 
+	 * Gegner ein " ! "
 	 * 
 	 * @param x
 	 * @param y
@@ -104,7 +117,8 @@ public class Karte {
 	}
 
 	/**
-	 * 
+	 * hier werden die Grenzen im Norden ueberprueft um zu schauen, ob eine Wand das Maze abgrenzt oder nicht, 
+	 * wenn nicht soll der Bot von oben nach unten springen
 	 * 
 	 * @return
 	 */
@@ -122,7 +136,8 @@ public class Karte {
 	}
 
 	/**
-	 * 
+	 * hier werden die Grenzen im Sueden ueberprueft um zu schauen, ob eine Wand das Maze abgrenzt oder nicht, 
+	 * wenn nicht soll der Bot von unten nach oben springen
 	 * 
 	 * @return
 	 */
@@ -140,7 +155,8 @@ public class Karte {
 	}
 
 	/**
-	 * 
+	 * hier werden die Grenzen im Westen ueberprueft um zu schauen, ob eine Wand das Maze abgrenzt oder nicht, 
+	 * wenn nicht soll der Bot von links nach rechts springen
 	 * 
 	 * @return
 	 */
@@ -158,7 +174,8 @@ public class Karte {
 	}
 
 	/**
-	 * 
+	 * hier werden die Grenzen im Osten ueberprueft um zu schauen, ob eine Wand das Maze abgrenzt oder nicht, 
+	 * wenn nicht soll der Bot von rechts nach links springen
 	 * 
 	 * @return
 	 */
@@ -211,8 +228,15 @@ public class Karte {
 	}
 
 	/**
-	 * berechnet den Weg des Bots und laesst in die Richtung, auf den Feldern auf
-	 * denen er am wenigsten stand, gehen
+	 * berechnet den Weg des Bots und gibt ihm das Feld mit dem niedrigsten Wert fuer zaehlerBetreten wieder aus
+	 * des Weiteren schaut der Bot, dass er zunaechst in Felder geht, in denen ein " ? " in den umliegenden Feldern liegt und dass er natuerlich nicht in
+	 * eine Wand laeuft :-)
+	 * Auch wird eine Fallunterscheidung der Level getroffen anhand des Switch Case, weil der Bot je nach Level unterschiedliche Funktionen/Aktionen hat die
+	 * er ausfuehren darf bzw. muss 
+	 * 
+	 * Wir haben uns gezielt dagegen entschieden den Bot kicken zu lassen und den Gegnern auszuweichen, wir sind offen fuer Gespraeche mit anderen Bots 
+	 * (Kaffeepausen sind sehr wichtig!) und kicken moechten wir auch nicht fuer mehr Naechstenliebe :-)
+	 * 
 	 * 
 	 * @param level
 	 * @param form

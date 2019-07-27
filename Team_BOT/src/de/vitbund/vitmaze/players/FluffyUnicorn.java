@@ -7,6 +7,8 @@ public class FluffyUnicorn {
 /**
  * Hauptmethode zum Ausfuehren des Bots
  * 
+ * @author Fabian Riede
+ * 
  * @param args
  */
 	public static void main(String[] args) {
@@ -67,11 +69,15 @@ public class FluffyUnicorn {
 			 * Beenden der zweiten Zeile
 			 */
 			input.nextLine();
-			
+			/**
+			* Neue Instanz der Klassen Karte, Formular und Sheet wird angelegt und die Attribute werden ueberbegen 
+			*/
 			Karte map = new Karte(sizeX, sizeY);
 			Formular form = new Formular(playerId);
 			Sheet sheets = new Sheet(sheet);
-			
+			/**
+			* Der Klasse Map werden die Koordinaten uebergeben und die PlayerId
+			*/
 			map.setPosX(startX);
 			map.setPosY(startY);
 			map.setPlayerId(playerId);
@@ -86,20 +92,29 @@ public class FluffyUnicorn {
 				String eastCellStatus = input.nextLine();
 				String southCellStatus = input.nextLine();
 				String westCellStatus = input.nextLine();
-				
+				/*
+				 * lastActionResult der Runde werden ausgelesen und Sheets, map und form uebergeben
+				 */
 				sheets.sheetStack(lastActionsResult);
 
 				map.botPosition(lastActionsResult);
 			
 				form.formOrder(lastActionsResult);
-					
+				/*
+				 * Die Map (Karte des Maze) wird aktualisiert, anhand der Rundeninformationen und Formulare werden aktualisiert
+				 */
 				map.updateUmfeld(currentCellStatus, lastActionsResult, northCellStatus, eastCellStatus, southCellStatus,
 						westCellStatus);
 				
 				form.leseFormulareGesamt(currentCellStatus, lastActionsResult, northCellStatus, eastCellStatus, southCellStatus, westCellStatus);
-
+				/*
+				 * Ausgabe der Map
+				 */
 				map.printMap(form);
-
+				/*
+				 * Der naechsteZug wird anhand der Methode berechneWeg ermittelt und an den Bot gegeben in Zugausgabe
+				 */
+				
 				String naechsterZug = map.berechneWeg(level, form, sheets);
 
 				// Debug Information ausgeben (optional möglich)

@@ -13,6 +13,7 @@ public class Formular {
 	
 	/**
 	 * Attribute
+	 * mit Zaehler für die Formulare, wieviele insgesamt benoetigt werden und die PlayerId
 	 * 
 	 */
 	private int formularZaehler = 1;
@@ -37,7 +38,7 @@ public class Formular {
 	
 	
 	/**
-	 * Methode für Reihenfolge der Formulare
+	 * Methode für Reihenfolge der Formulare (um sie nachher beim Sachbearbeiter richtig abzugeben)
 	 * 
 	 * @param lastAction
 	 */
@@ -50,7 +51,7 @@ public class Formular {
 	
 	
 	/**
-	 * Methode für das Auslesen der Gesamtformulare vom Sachbearbeiter
+	 * Methode für das Auslesen der Gesamtformulare vom Sachbearbeiter - damit der Bot weiss, wieviele Formulare er einreichen muss
 	 * 
 	 * @param currentPosition
 	 * @param lastPosition
