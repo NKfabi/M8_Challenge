@@ -9,16 +9,18 @@ package de.vitbund.vitmaze.players;
  *
  */
 public class Formular {
-
 	
 	/**
-	 * Attribute:
-	 * 
-	 * mit Zaehler für die Formulare, wieviele insgesamt benoetigt werden und die playerId
-	 * 
+	 * speichert Anzahl der Formulare und zaehlt es in der Methode formOrder um eins hoch (=1, weil das erste Formular den Index 1 hat)
 	 */
 	private int formularZaehler = 1;
+	/**
+	 * Anzahl der Gesamtformulare, die in leseFormulareGesamt ausgelesen wird
+	 */
 	private int formulareGesamt;
+	/**
+	 * Spieler-Id, die in der Main uebergeben wird
+	 */
 	private int playerId;
 	
 	
@@ -31,7 +33,7 @@ public class Formular {
 	/**
 	 * Konstruktor
 	 * 
-	 * @param playerId
+	 * @param playerId - uebergibt den Parameter der playerId
 	 */
 	public Formular(int playerId) {
 		this.playerId = playerId;
@@ -54,12 +56,12 @@ public class Formular {
 	/**
 	 * Methode für das Auslesen der Gesamtformulare vom Sachbearbeiter - damit der Bot weiss, wieviele Formulare er einreichen muss
 	 * 
-	 * @param currentPosition
-	 * @param lastPosition
-	 * @param northStatus
-	 * @param eastStatus
-	 * @param southStatus
-	 * @param westStatus
+	 * @param currentPosition - wird in der Main-Klasse uber System.in uebergeben
+	 * @param lastPosition - wird in der Main-Klasse uber System.in uebergeben
+	 * @param northStatus - wird in der Main-Klasse uber System.in uebergeben
+	 * @param eastStatus - wird in der Main-Klasse uber System.in uebergeben
+	 * @param southStatus - wird in der Main-Klasse uber System.in uebergeben
+	 * @param westStatus - wird in der Main-Klasse uber System.in uebergeben
 	 * @return
 	 */
 	public int leseFormulareGesamt(String currentPosition, String lastPosition, String northStatus, String eastStatus,
@@ -116,11 +118,8 @@ public class Formular {
 	
 	
 	
-	/**
-	 * Getter und Setter 
-	 * 
-	 * 
-	 */
+	//getter und setter
+	
 	public int getFormularZaehler() {
 		return formularZaehler;
 	}

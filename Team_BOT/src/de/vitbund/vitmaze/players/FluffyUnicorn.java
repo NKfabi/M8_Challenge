@@ -5,6 +5,8 @@ import java.util.Scanner;
 /**
  * pink fluffy unicorns !! :D :D:D 
  *
+ * Bot-Klasse mit main-Methode zum Ausfuheren der Methoden der verschiedenen Klassen
+ *
  */
 public class FluffyUnicorn {
 
@@ -19,14 +21,12 @@ public class FluffyUnicorn {
 			/**
 			 * Scanner zum Auslesen der Standardeingabe, welche Initialisierungs- und
 			 * Rundendaten liefert
-			 * 
 			 */
 			Scanner input = new Scanner(System.in);
 
 			/**
 			 * INIT - Auslesen der Initialdaten
 			 * 1. Zeile: Maze Infos
-			 *
 			 *
 			 * X-Groesse des Spielfeldes (Breite)
 			 */
@@ -87,7 +87,9 @@ public class FluffyUnicorn {
 			map.setPlayerId(playerId);
 
 
-			// TURN (Wiederholung je Runde notwendig)
+			/**
+			 * Endlosschleife der Zugausfuehrung
+			 */
 			while (true) {
 				// Rundeninformationen auslesen
 				String lastActionsResult = input.nextLine();

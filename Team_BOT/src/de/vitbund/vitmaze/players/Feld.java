@@ -7,24 +7,26 @@ package de.vitbund.vitmaze.players;
   */
 
 public class Feld {
-
-	/*
-	 * Attribute:
-	 * 
+	
+	/**
 	 * status fuer den Status des Feldes, ob es eine Wand, ein Gang, o.ae. ist
-	 * gesehen dient dazu um dem Bot zu sagen, ob er das Feld schon mal gesehen hat
-	 * und der zaehlerBetreten sagt dem Bot wie oft er das Feld betreten hat
 	 */
 	private String status;
+	/**
+	 *  gesehen dient dazu um dem Bot zu sagen, ob er das Feld schon mal gesehen hat
+	 */
 	private boolean gesehen;
+	/**
+	 * zaehlerBetreten sagt dem Bot wie oft er das Feld betreten hat
+	 */
 	private int zaehlerBetreten;
 	
 	/**
 	 * Konstruktor
 	 * 
-	 * @param status
-	 * @param gesehen
-	 * @param zaehlerBetreten
+	 * @param status - uebergibt den Parameter Status
+	 * @param gesehen - uebergibt den Parameter gesehen
+	 * @param zaehlerBetreten - uebergibt den Parameter zaehlerbetreten
 	 */
 	public Feld(String status,
 			boolean gesehen, int zaehlerBetreten) {
@@ -34,9 +36,8 @@ public class Feld {
 	}
 	
 	
-	/*
-	 * Getter und Setter
-	 */
+	//getter und setter
+	
 	public String getStatus() {
 		return status;
 	}
