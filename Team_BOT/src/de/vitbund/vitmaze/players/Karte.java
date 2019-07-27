@@ -51,7 +51,7 @@ public class Karte {
 	private Sheet sheets;
 
 	/**
-	 * Konstruktor:
+	 * Konstruktor mit Uebergabeparametern sizeX und sizeY: 
 	 * generiert in der for-Schleife Feldinstanzen mit Standardwerten fuer die Map
 	 * die Array-Position entspricht den Koordinaten der Map
 	 * 
@@ -135,7 +135,7 @@ public class Karte {
 	 * hier werden die Grenzen im Norden ueberprueft um zu schauen, ob eine Wand das Maze abgrenzt oder nicht, 
 	 * wenn nicht soll der Bot von oben nach unten springen
 	 * 
-	 * @return
+	 * @return - zahl aus if-Bedingung wird zurückgegeben
 	 */
 	public int pruefeGrenzeNorden() {
 		int zahl = 0;
@@ -154,7 +154,7 @@ public class Karte {
 	 * hier werden die Grenzen im Sueden ueberprueft um zu schauen, ob eine Wand das Maze abgrenzt oder nicht, 
 	 * wenn nicht soll der Bot von unten nach oben springen
 	 * 
-	 * @return
+	 * @return - zahl aus if-Bedingung wird zurückgegeben
 	 */
 	public int pruefeGrenzeSueden() {
 		int zahl = 0;
@@ -173,7 +173,7 @@ public class Karte {
 	 * hier werden die Grenzen im Westen ueberprueft um zu schauen, ob eine Wand das Maze abgrenzt oder nicht, 
 	 * wenn nicht soll der Bot von links nach rechts springen
 	 * 
-	 * @return
+	 * @return - zahl aus if-Bedingung wird zurückgegeben
 	 */
 	public int pruefeGrenzeWesten() {
 		int zahl = 0;
@@ -192,7 +192,7 @@ public class Karte {
 	 * hier werden die Grenzen im Osten ueberprueft um zu schauen, ob eine Wand das Maze abgrenzt oder nicht, 
 	 * wenn nicht soll der Bot von rechts nach links springen
 	 * 
-	 * @return
+	 * @return - zahl aus if-Bedingung wird zurückgegeben
 	 */
 	public int pruefeGrenzeOsten() {
 		int zahl = 0;

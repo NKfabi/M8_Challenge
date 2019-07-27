@@ -2,7 +2,7 @@ package de.vitbund.vitmaze.players;
 
 
 /**
- * Klasse Sheet
+ * Klasse Sheet, um sheets zu zaehlen
  * 
  * @author Fabian Riede
  *
@@ -22,7 +22,7 @@ public class Sheet {
 	
 	
 	/**
-	 * Konstruktor 
+	 * Konstruktor mit Uebergabeparameter sheets
 	 * 
 	 * @param sheets
 	 */

@@ -3,10 +3,11 @@ package de.vitbund.vitmaze.players;
 import java.util.Scanner;
 
 /**
- * pink fluffy unicorns !! :D :D:D 
- *
  * Bot-Klasse mit main-Methode zum Ausfuheren der Methoden der verschiedenen Klassen
  *
+ * pink fluffy unicorns !! :D :D:D 
+ *
+
  */
 public class FluffyUnicorn {
 
