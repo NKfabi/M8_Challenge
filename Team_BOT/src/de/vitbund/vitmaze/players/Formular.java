@@ -65,45 +65,45 @@ public class Formular {
 	public int leseFormulareGesamt(String currentPosition, String lastPosition, String northStatus, String eastStatus,
 			String southStatus, String westStatus) {
 
-		String test;
+		String formulare;
 
 		if (formulareGesamt == 0) {
 			if (currentPosition.length() > 8) {
-				test = currentPosition.substring(0, 8);
+				formulare = currentPosition.substring(0, 8);
 
-				if (test.equals("FINISH " + playerId)) {
+				if (formulare.equals("FINISH " + playerId)) {
 					String[] parts = currentPosition.split(" ", 4);
 					int a = Integer.parseInt(parts[2]);
 					setFormulareGesamt(a);
 				}
 			} else if (northStatus.length() > 8) {
-				test = northStatus.substring(0, 8);
+				formulare = northStatus.substring(0, 8);
 
-				if (test.equals("FINISH " + playerId)) {
+				if (formulare.equals("FINISH " + playerId)) {
 					String[] parts = northStatus.split(" ", 4);
 					int a = Integer.parseInt(parts[2]);
 					setFormulareGesamt(a);
 				}
 			} else if (southStatus.length() > 8) {
-				test = southStatus.substring(0, 8);
+				formulare = southStatus.substring(0, 8);
 
-				if (test.equals("FINISH " + playerId)) {
+				if (formulare.equals("FINISH " + playerId)) {
 					String[] parts = southStatus.split(" ", 4);
 					int a = Integer.parseInt(parts[2]);
 					setFormulareGesamt(a);
 				}
 			} else if (westStatus.length() > 8) {
-				test = westStatus.substring(0, 8);
+				formulare = westStatus.substring(0, 8);
 
-				if (test.equals("FINISH " + playerId)) {
+				if (formulare.equals("FINISH " + playerId)) {
 					String[] parts = westStatus.split(" ", 4);
 					int a = Integer.parseInt(parts[2]);
 					setFormulareGesamt(a);
 				}
 			} else if (eastStatus.length() > 8) {
-				test = eastStatus.substring(0, 8);
+				formulare = eastStatus.substring(0, 8);
 
-				if (test.equals("FINISH " + playerId)) {
+				if (formulare.equals("FINISH " + playerId)) {
 					String[] parts = eastStatus.split(" ", 4);
 					int a = Integer.parseInt(parts[2]);
 					setFormulareGesamt(a);
