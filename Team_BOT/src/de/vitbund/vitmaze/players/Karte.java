@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Klasse Karte mit saemtlichen Berechnungen und der Ausgabe der Karte mit Sys.err
+ * Klasse Karte mit Methoden, um den Weg zu berechnen, das Umfeld zu updaten, die Spielerposition zu updaten, ueber Grenzen hinaus zu laufen und die Karte mit Sys.err auszugeben
  * Wir haben uns gegen das Kicken entschieden, weil es einen unnoetigen Zug kostet und diesen moechten wir nicht verschwenden
- * Auch gegen das Ausweichen haben wir uns entschieden, da es ggf. zu Fehlern kommen koennte in kleinen Maps und ggf. noch mehr Zuege kosten wuerde,
- * als das Gespraech ueber sich ergehen zu lassen
+ * Auch gegen das Ausweichen haben wir uns entschieden, da es ggf. zu grossen Umwegen kommen koennte (in kleinen Maps) und ggf. noch mehr Zuege kosten wuerde,also das Gespraech ueber sich ergehen zu lassen
  *   
  * @author Fabian Riede
  *
@@ -15,13 +14,13 @@ import java.util.List;
 public class Karte {
 
 	/**
-	 * Attribute
+	 * Attribute:
+	 * 
 	 * sizeX und sizeY geben die Informationen wie gross das Maze ist
 	 * durch posX und posY wird die Startposition des Bots bekanntgegeben und die PlayerId
 	 * das Feld-Array map wird gebraucht um die Map mit Feldern zu befuellen
 	 * in der String Array-List werden die moeglichen Zuege des Bots zwischengespeichert 
-	 * und Sheet uebergibt die sheets
-	 * 
+	 * und Sheet speichert die Anzahl der sheets
 	 */
 	private int sizeX;
 	private int sizeY;
@@ -40,7 +39,8 @@ public class Karte {
 	 * @param sizeX
 	 * @param sizeY
 	 * 
-	 * generiert in der for-Schleife Standardwerte für die Koordinaten der Map
+	 * generiert in der for-Schleife Feldinstanzen mit Standardwerten fuer die Map
+	 * die Array-Position entspricht den Koordinaten der Map
 	 */
 	public Karte(int sizeX, int sizeY) {
 		this.sizeX = sizeX;
@@ -58,9 +58,8 @@ public class Karte {
 
 	/**
 	 * Methode zeichnet Map auf Basis der Groesse des Labyrinths und beschriftet unbekannte Felder mit einem " ? "
-	 * an der Stelle Finisch (Sachbearbeiter) wird ein Z für Ziel eingesetzt, 
-	 * fuer Formulare wird ein "F" eingefuegt, fuer einen Gang "  ", fuer eine Wand " W ", fuer ein Sheet " S " und fuer 
-	 * Gegner ein " ! "
+	 * an der Stelle Finish (Sachbearbeiter) wird ein Z für Ziel eingesetzt, 
+	 * fuer Formulare wird ein "F" eingefuegt, fuer einen Gang "  ", fuer eine Wand " W ", fuer ein Sheet " S " und fuer Gegner ein " ! "
 	 * 
 	 * @param x
 	 * @param y
@@ -193,7 +192,8 @@ public class Karte {
 	}
 
 	/**
-	 * updatet das Umfeld des Bots also die 4 umliegenden Felder
+	 * updatet das Umfeld des Bots, also die 4 umliegenden Felder und das Feld auf dem er steht
+	 * bei den X- bzw. Y-Werten, wo sich der Wert, je nach Richtung aendert, wird die jeweilige Methode der Grenzpruefung aufgerufen 
 	 * 
 	 * @param currentPosition
 	 * @param lastPosition
@@ -229,10 +229,9 @@ public class Karte {
 
 	/**
 	 * berechnet den Weg des Bots und gibt ihm das Feld mit dem niedrigsten Wert fuer zaehlerBetreten wieder aus
-	 * des Weiteren schaut der Bot, dass er zunaechst in Felder geht, in denen ein " ? " in den umliegenden Feldern liegt und dass er natuerlich nicht in
+	 * Des Weiteren schaut der Bot, dass er zunaechst in Felder geht, in denen ein " ? " in den umliegenden Feldern liegt und dass er natuerlich nicht in
 	 * eine Wand laeuft :-)
-	 * Auch wird eine Fallunterscheidung der Level getroffen anhand des Switch Case, weil der Bot je nach Level unterschiedliche Funktionen/Aktionen hat die
-	 * er ausfuehren darf bzw. muss 
+	 * Ausserdem wird eine Fallunterscheidung der Level getroffen anhand des Switch Case, weil der Bot je nach Level unterschiedliche Funktionen/Aktionen hat, die er ausfuehren darf bzw. muss 
 	 * 
 	 * Wir haben uns gezielt dagegen entschieden den Bot kicken zu lassen und den Gegnern auszuweichen, wir sind offen fuer Gespraeche mit anderen Bots 
 	 * (Kaffeepausen sind sehr wichtig!) und kicken moechten wir auch nicht fuer mehr Naechstenliebe :-)

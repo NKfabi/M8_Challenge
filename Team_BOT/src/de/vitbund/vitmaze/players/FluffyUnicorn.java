@@ -2,6 +2,10 @@ package de.vitbund.vitmaze.players;
 
 import java.util.Scanner;
 
+/**
+ * pink fluffy unicorns !! :D :D:D 
+ *
+ */
 public class FluffyUnicorn {
 
 /**
@@ -93,31 +97,43 @@ public class FluffyUnicorn {
 				String southCellStatus = input.nextLine();
 				String westCellStatus = input.nextLine();
 				/*
-				 * lastActionResult der Runde werden ausgelesen und Sheets, map und form uebergeben
+				 * lastActionResult wird uebergeben und die Methode sheetStack aus der Klasse Sheet wird aufgerufen
 				 */
 				sheets.sheetStack(lastActionsResult);
 
+				/**
+				 * lastActionResult wird uebergeben und die Methode botPosition aus der Klasse Karte wird aufgerufen
+				 */
 				map.botPosition(lastActionsResult);
 			
+				/**
+				 * lastActionResult wird uebergeben und die Methode formOrder aus der Klasse Formular wird aufgerufen
+				 */
 				form.formOrder(lastActionsResult);
 				/*
-				 * Die Map (Karte des Maze) wird aktualisiert, anhand der Rundeninformationen und Formulare werden aktualisiert
+				 * Die Map (Karte des Maze) wird aktualisiert, anhand der Rundeninformationen
 				 */
 				map.updateUmfeld(currentCellStatus, lastActionsResult, northCellStatus, eastCellStatus, southCellStatus,
 						westCellStatus);
 				
+				/**
+				 * Rundeninformationen werden uebergeben und die Methode leseFormulareGesamt der Klasse Formluar wird aufgerufen 
+				 */
 				form.leseFormulareGesamt(currentCellStatus, lastActionsResult, northCellStatus, eastCellStatus, southCellStatus, westCellStatus);
+				
 				/*
-				 * Ausgabe der Map
+				 * Ausgabe der Map durch Aufruf der Methode printMap aus der Klasse Karte
 				 */
 				map.printMap(form);
-				/*
-				 * Der naechsteZug wird anhand der Methode berechneWeg ermittelt und an den Bot gegeben in Zugausgabe
-				 */
 				
+				/*
+				 * eine neuer String wird erstellt und wird gleich dem Aufruf von berechneWeg aus der Klasse Karte gesetzt und bekommt den besten Zug (String aus der Methode)
+				 */
 				String naechsterZug = map.berechneWeg(level, form, sheets);
 
-				// Debug Information ausgeben (optional möglich)
+				/**
+				 * Debug Information ausgeben
+				 */
 				System.err.println("Ergebnis Vorrunde: " + lastActionsResult);
 				System.err.println("aktueller Status: " + currentCellStatus);
 				System.err.println("Norden: " + northCellStatus);
@@ -125,7 +141,9 @@ public class FluffyUnicorn {
 				System.err.println("Sueden: " + southCellStatus);
 				System.err.println("Westen: " + westCellStatus);
 				
-				// Zugausgabe
+				/**
+				 * Zugausgabe 
+				 */
 				System.out.println(naechsterZug);
 
 			}

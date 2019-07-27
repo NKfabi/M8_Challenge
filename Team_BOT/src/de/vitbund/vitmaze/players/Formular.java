@@ -3,7 +3,7 @@ package de.vitbund.vitmaze.players;
 
 /**
  * 
- * Klasse Formular 
+ * Klasse Formular mit einer Methode zum Zaehlen der Formulare, um zu wissen welches der Bot als naechstes aufheben soll und mit einer Methode zum Auslesen der Anzahl der Gesamtformulare
  * 
  * @author Fabian Riede
  *
@@ -12,8 +12,9 @@ public class Formular {
 
 	
 	/**
-	 * Attribute
-	 * mit Zaehler für die Formulare, wieviele insgesamt benoetigt werden und die PlayerId
+	 * Attribute:
+	 * 
+	 * mit Zaehler für die Formulare, wieviele insgesamt benoetigt werden und die playerId
 	 * 
 	 */
 	private int formularZaehler = 1;

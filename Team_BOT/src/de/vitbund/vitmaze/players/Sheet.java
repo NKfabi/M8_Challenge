@@ -11,7 +11,7 @@ package de.vitbund.vitmaze.players;
 public class Sheet {
 
 	/**
-	 * Attribut
+	 * Attribut:
 	 * 
 	 */
 	private int sheets;	
@@ -34,7 +34,7 @@ public class Sheet {
 
 	
 	/**
-	 * Methode zum zaehlen der Blaetter, wenn eins aufgenommen wurde
+	 * Methode zum zaehlen der Blaetter, wenn eins aufgenommen wurde (eines hochzaehlen nach Aufnahme eines Blattes)
 	 * 
 	 * @param lastAction
 	 */
