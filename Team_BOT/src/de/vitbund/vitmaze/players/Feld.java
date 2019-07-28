@@ -2,6 +2,7 @@ package de.vitbund.vitmaze.players;
 
 /**
  * Klasse Feld als Teil der Karte
+ * 
  * @author Fabian Riede
  *
  */
@@ -34,7 +35,6 @@ public class Feld {
 	}
 
 	// getter und setter
-
 	public String getStatus() {
 		return status;
 	}

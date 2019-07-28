@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Klasse Karte mit Methoden, um den Weg zu berechnen, das Umfeld zu updaten, die Spielerposition zu updaten, ueber Grenzen hinaus zu laufen und die Karte mit Sys.err auszugeben
- * Wir haben uns gegen das Kicken entschieden, weil es einen unnoetigen Zug kostet und diesen moechten wir nicht verschwenden
- * Auch gegen das Ausweichen haben wir uns entschieden, da es ggf. zu grossen Umwegen kommen koennte (in kleinen Maps) und ggf. noch mehr Zuege kosten wuerde,also das Gespraech ueber sich ergehen zu lassen
- *   
+ * Klasse Karte mit Methoden, um den Weg zu berechnen, das Umfeld zu updaten,
+ * die Spielerposition zu updaten, ueber Grenzen hinaus zu laufen und die Karte
+ * mit Sys.err auszugeben Wir haben uns gegen das Kicken entschieden, weil es
+ * einen unnoetigen Zug kostet und diesen moechten wir nicht verschwenden Auch
+ * gegen das Ausweichen haben wir uns entschieden, da es ggf. zu grossen Umwegen
+ * kommen koennte (in kleinen Maps) und ggf. noch mehr Zuege kosten wuerde,also
+ * das Gespraech ueber sich ergehen zu lassen
+ * 
  * @author Fabian Riede
  *
  */
@@ -34,7 +38,8 @@ public class Karte {
 	 */
 	private int playerId;
 	/**
-	 * Attribut map mit dem Datentyp Feld in Form eines 2-dimensionalen Arrays (befüllt mit Instanzen von Feld), weclhes die Map abbilden soll
+	 * Attribut map mit dem Datentyp Feld in Form eines 2-dimensionalen Arrays
+	 * (befüllt mit Instanzen von Feld), weclhes die Map abbilden soll
 	 */
 	private Feld[][] map;
 	/**
@@ -42,18 +47,20 @@ public class Karte {
 	 */
 	private List<String> moeglicheZuege = new ArrayList<>();
 	/**
-	 * Attribut form mit Datentyp Formular, um auf die Methoden in der Klasse Formular zuzugreifen
+	 * Attribut form mit Datentyp Formular, um auf die Methoden in der Klasse
+	 * Formular zuzugreifen
 	 */
 	private Formular form;
 	/**
-	 * Attribut sheets mit Datentyp Sheet, um auf Methoden in der Klasse Sheet zuzugreifen
+	 * Attribut sheets mit Datentyp Sheet, um auf Methoden in der Klasse Sheet
+	 * zuzugreifen
 	 */
 	private Sheet sheets;
 
 	/**
-	 * Konstruktor mit Uebergabeparametern sizeX und sizeY: 
-	 * generiert in der for-Schleife Feldinstanzen mit Standardwerten fuer die Map
-	 * die Array-Position entspricht den Koordinaten der Map
+	 * Konstruktor mit Uebergabeparametern sizeX und sizeY: generiert in der
+	 * for-Schleife Feldinstanzen mit Standardwerten fuer die Map die Array-Position
+	 * entspricht den Koordinaten der Map
 	 * 
 	 * @param sizeX - uebergibt X-Groesse des Labyrinths
 	 * @param sizeY - uebergibt Y-Groesse des Labyrinths
@@ -74,11 +81,14 @@ public class Karte {
 	}
 
 	/**
-	 * Methode zeichnet Map auf Basis der Groesse des Labyrinths und beschriftet unbekannte Felder mit einem " ? "
-	 * an der Stelle Finish (Sachbearbeiter) wird ein Z für Ziel eingesetzt, 
-	 * fuer Formulare wird ein "F" eingefuegt, fuer einen Gang "  ", fuer eine Wand " W ", fuer ein Sheet " S " und fuer Gegner ein " ! "
+	 * Methode zeichnet Map auf Basis der Groesse des Labyrinths und beschriftet
+	 * unbekannte Felder mit einem " ? " an der Stelle Finish (Sachbearbeiter) wird
+	 * ein Z für Ziel eingesetzt, fuer Formulare wird ein "F" eingefuegt, fuer einen
+	 * Gang " ", fuer eine Wand " W ", fuer ein Sheet " S " und fuer Gegner ein " !
+	 * "
 	 * 
-	 * @param form - wird uebergeben, um auf die Getter und Setter in Formular zuzugreifen
+	 * @param form - wird uebergeben, um auf die Getter und Setter in Formular
+	 *             zuzugreifen
 	 */
 	public void printMap(Formular form) {
 		for (int y = 0; y < sizeY; y++) {
@@ -105,7 +115,8 @@ public class Karte {
 	}
 
 	/**
-	 * updatet die Spielerposition je nach letztem Zug (wird in der Main-Klasse ubergeben)
+	 * updatet die Spielerposition je nach letztem Zug (wird in der Main-Klasse
+	 * ubergeben)
 	 * 
 	 * @param lastAction - wird in der Main-Klasse uebergeben
 	 */
@@ -132,8 +143,9 @@ public class Karte {
 	}
 
 	/**
-	 * hier werden die Grenzen im Norden ueberprueft um zu schauen, ob eine Wand das Maze abgrenzt oder nicht, 
-	 * wenn nicht soll der Bot von oben nach unten springen
+	 * hier werden die Grenzen im Norden ueberprueft um zu schauen, ob eine Wand das
+	 * Maze abgrenzt oder nicht, wenn nicht soll der Bot von oben nach unten
+	 * springen
 	 * 
 	 * @return - zahl aus if-Bedingung wird zurückgegeben
 	 */
@@ -151,8 +163,9 @@ public class Karte {
 	}
 
 	/**
-	 * hier werden die Grenzen im Sueden ueberprueft um zu schauen, ob eine Wand das Maze abgrenzt oder nicht, 
-	 * wenn nicht soll der Bot von unten nach oben springen
+	 * hier werden die Grenzen im Sueden ueberprueft um zu schauen, ob eine Wand das
+	 * Maze abgrenzt oder nicht, wenn nicht soll der Bot von unten nach oben
+	 * springen
 	 * 
 	 * @return - zahl aus if-Bedingung wird zurückgegeben
 	 */
@@ -170,8 +183,9 @@ public class Karte {
 	}
 
 	/**
-	 * hier werden die Grenzen im Westen ueberprueft um zu schauen, ob eine Wand das Maze abgrenzt oder nicht, 
-	 * wenn nicht soll der Bot von links nach rechts springen
+	 * hier werden die Grenzen im Westen ueberprueft um zu schauen, ob eine Wand das
+	 * Maze abgrenzt oder nicht, wenn nicht soll der Bot von links nach rechts
+	 * springen
 	 * 
 	 * @return - zahl aus if-Bedingung wird zurückgegeben
 	 */
@@ -189,8 +203,9 @@ public class Karte {
 	}
 
 	/**
-	 * hier werden die Grenzen im Osten ueberprueft um zu schauen, ob eine Wand das Maze abgrenzt oder nicht, 
-	 * wenn nicht soll der Bot von rechts nach links springen
+	 * hier werden die Grenzen im Osten ueberprueft um zu schauen, ob eine Wand das
+	 * Maze abgrenzt oder nicht, wenn nicht soll der Bot von rechts nach links
+	 * springen
 	 * 
 	 * @return - zahl aus if-Bedingung wird zurückgegeben
 	 */
@@ -208,15 +223,16 @@ public class Karte {
 	}
 
 	/**
-	 * updatet das Umfeld des Bots, also die 4 umliegenden Felder und das Feld auf dem er steht
-	 * bei den X- bzw. Y-Werten, wo sich der Wert, je nach Richtung aendert, wird die jeweilige Methode der Grenzpruefung aufgerufen 
+	 * updatet das Umfeld des Bots, also die 4 umliegenden Felder und das Feld auf
+	 * dem er steht bei den X- bzw. Y-Werten, wo sich der Wert, je nach Richtung
+	 * aendert, wird die jeweilige Methode der Grenzpruefung aufgerufen
 	 * 
 	 * @param currentPosition - wird in der Main-Klasse uber System.in uebergeben
-	 * @param lastPosition - wird in der Main-Klasse uber System.in uebergeben
-	 * @param northStatus - wird in der Main-Klasse uber System.in uebergeben
-	 * @param eastStatus - wird in der Main-Klasse uber System.in uebergeben
-	 * @param southStatus - wird in der Main-Klasse uber System.in uebergeben
-	 * @param westStatus - wird in der Main-Klasse uber System.in uebergeben
+	 * @param lastPosition    - wird in der Main-Klasse uber System.in uebergeben
+	 * @param northStatus     - wird in der Main-Klasse uber System.in uebergeben
+	 * @param eastStatus      - wird in der Main-Klasse uber System.in uebergeben
+	 * @param southStatus     - wird in der Main-Klasse uber System.in uebergeben
+	 * @param westStatus      - wird in der Main-Klasse uber System.in uebergeben
 	 */
 	public void updateUmfeld(String currentPosition, String lastPosition, String northStatus, String eastStatus,
 			String southStatus, String westStatus) {
@@ -244,20 +260,28 @@ public class Karte {
 	}
 
 	/**
-	 * Berechnet den Weg des Bots und gibt ihm das Feld mit dem niedrigsten Wert fuer zaehlerBetreten wieder aus
-	 * Des Weiteren schaut der Bot, dass er natuerlich nicht in eine Wand laeuft :-)
-	 * Ausserdem wird eine Fallunterscheidung der Level getroffen anhand des Switch Case, weil der Bot je nach Level unterschiedliche Funktionen/Aktionen hat, die er ausfuehren darf bzw. muss 
+	 * Berechnet den Weg des Bots und gibt ihm das Feld mit dem niedrigsten Wert
+	 * fuer zaehlerBetreten wieder aus Des Weiteren schaut der Bot, dass er
+	 * natuerlich nicht in eine Wand laeuft :-) Ausserdem wird eine
+	 * Fallunterscheidung der Level getroffen anhand des Switch Case, weil der Bot
+	 * je nach Level unterschiedliche Funktionen/Aktionen hat, die er ausfuehren
+	 * darf bzw. muss
 	 * 
-	 * Wir haben uns gezielt dagegen entschieden den Bot kicken zu lassen und den Gegnern auszuweichen, wir sind offen fuer Gespraeche mit anderen Bots 
-	 * (Kaffeepausen sind sehr wichtig!) und kicken moechten wir auch nicht fuer mehr Naechstenliebe :-)
+	 * Wir haben uns gezielt dagegen entschieden den Bot kicken zu lassen und den
+	 * Gegnern auszuweichen, wir sind offen fuer Gespraeche mit anderen Bots
+	 * (Kaffeepausen sind sehr wichtig!) und kicken moechten wir auch nicht fuer
+	 * mehr Naechstenliebe :-)
 	 * 
-	 * mit moeglicheZuegeNew wird ein voruebergehendes Array erstellt, um Zuege temporaer zu speichern und an moeglicheZuege zu uebergeben
-	 * wird nach jedem Turn weggeworfen und neu erstellt
+	 * mit moeglicheZuegeNew wird ein voruebergehendes Array erstellt, um Zuege
+	 * temporaer zu speichern und an moeglicheZuege zu uebergeben wird nach jedem
+	 * Turn weggeworfen und neu erstellt
 	 * 
-	 * @param level - wird in der Main-Klasse uber System.in uebergeben
-	 * @param form - wird uebergeben, um auf die Getter und Setter in Formular zuzugreifen
-	 * @param sheets - wird uebergeben, um auf die Getter und Setter in Sheet zuzugreifen
-	 * @return
+	 * @param level  - wird in der Main-Klasse uber System.in uebergeben
+	 * @param form   - wird uebergeben, um auf die Getter und Setter in Formular
+	 *               zuzugreifen
+	 * @param sheets - wird uebergeben, um auf die Getter und Setter in Sheet
+	 *               zuzugreifen
+	 * @return - returned den besten / niedrigsten Zug (string)
 	 */
 	public String berechneWeg(int level, Formular form, Sheet sheets) {
 
@@ -284,6 +308,7 @@ public class Karte {
 		moeglicheZuege = moeglicheZuegeNew;
 
 		switch (level) {
+		// fuer Level 1
 		case 1:
 			if (map[posY][posX].getStatus().equals("FINISH " + playerId + " " + form.getFormulareGesamt())) {
 				niedrigsterZug = "finish";
@@ -339,6 +364,7 @@ public class Karte {
 			}
 			return niedrigsterZug;
 
+		// fuer alle Labyrinthe ab Level 2
 		default:
 
 			if (map[posY][posX].getStatus().contains("SHEET")) {
@@ -421,8 +447,8 @@ public class Karte {
 
 	}
 
-	//getter und setter
-	
+	// getter und setter
+
 	public int getSizeX() {
 		return sizeX;
 	}

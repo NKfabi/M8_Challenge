@@ -1,6 +1,5 @@
 package de.vitbund.vitmaze.players;
 
-
 /**
  * Klasse Sheet, um sheets zu zaehlen
  * 
@@ -12,39 +11,38 @@ public class Sheet {
 	/**
 	 * speichert Anzahl der Sheets nach Aufnahme
 	 */
-	private int sheets;	
-	
+	private int sheets;
+
 	/**
 	 * Standardkonstruktor
 	 * 
 	 */
-	public Sheet() {}
-	
-	
+	public Sheet() {
+	}
+
 	/**
 	 * Konstruktor mit Uebergabeparameter sheets
 	 * 
-	 * @param sheets
+	 * @param sheets - wird in Main uebergeben
 	 */
 	public Sheet(int sheets) {
 		this.sheets = sheets;
 	}
 
-	
 	/**
-	 * Methode zum zaehlen der Blaetter, wenn eins aufgenommen wurde (eines hochzaehlen nach Aufnahme eines Blattes)
+	 * Methode zum zaehlen der Blaetter, wenn eins aufgenommen wurde (eines
+	 * hochzaehlen nach Aufnahme eines Blattes)
 	 * 
-	 * @param lastAction
+	 * @param lastAction - wird in der Main uebergeben
 	 */
 	public void sheetStack(String lastAction) {
 		if (lastAction.equals("OK SHEET")) {
 			setSheets(getSheets() + 1);
 		}
 	}
-	
-	
-	//getter und setter
-	
+
+	// getter und setter
+
 	public int getSheets() {
 		return sheets;
 	}
@@ -52,6 +50,5 @@ public class Sheet {
 	public void setSheets(int sheets) {
 		this.sheets = sheets;
 	}
-	
-	
+
 }
