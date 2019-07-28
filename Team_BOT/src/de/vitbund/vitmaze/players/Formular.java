@@ -45,7 +45,7 @@ public class Formular {
 	 * Methode für Reihenfolge der Formulare (um sie nachher beim Sachbearbeiter
 	 * richtig abzugeben)
 	 * 
-	 * @param lastAction
+	 * @param lastAction - wird in der Main uebergeben
 	 */
 	public void formOrder(String lastAction) {
 		if (lastAction.equals("OK FORM")) {
@@ -64,7 +64,8 @@ public class Formular {
 	 * @param eastStatus      - wird in der Main-Klasse uber System.in uebergeben
 	 * @param southStatus     - wird in der Main-Klasse uber System.in uebergeben
 	 * @param westStatus      - wird in der Main-Klasse uber System.in uebergeben
-	 * @return
+	 * @return - returned wird die maximale Anzahl der Formulare durch Aufruf des
+	 *         Getters
 	 */
 	public int leseFormulareGesamt(String currentPosition, String lastPosition, String northStatus, String eastStatus,
 			String southStatus, String westStatus) {
